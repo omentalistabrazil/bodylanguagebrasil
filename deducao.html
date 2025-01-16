@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dedução</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff4500;
+        }
+
+        .question-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+        }
+
+        .options button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .options button:hover {
+            background-color: #555;
+        }
+
+        .options button.correct {
+            background-color: #4caf50;
+        }
+
+        .options button.wrong {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dedução</h1>
+
+<div class="question-container" id="question1">
+    <div class="question">
+        1. Você encontra uma sala bagunçada e uma janela aberta. Qual é a dedução mais lógica?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O vento bagunçou a sala.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. Alguém entrou pela janela.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O dono da sala a bagunçou.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. Foi uma explosão acidental.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question2">
+    <div class="question">
+        2. Você encontra pegadas na lama e um guarda-chuva. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. A pessoa saiu apressada na chuva.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A pessoa estava brincando na lama.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A pessoa estava jardinando.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. Alguém deixou o guarda-chuva lá de propósito.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question3">
+    <div class="question">
+        3. Você vê um prato quebrado no chão perto de uma cadeira. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O prato foi quebrado intencionalmente por raiva.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. Alguém derrubou o prato acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O prato estava velho e quebrou sozinho.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O prato foi deixado de propósito no chão.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question4">
+    <div class="question">
+        4. Você encontra um bilhete amassado no bolso de um casaco. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. A nota foi feita por alguém para se lembrar de algo importante.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O bilhete foi amassado por ser de pouco valor.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O bilhete foi amassado de propósito para esconder algo.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O bilhete foi perdido e depois recolhido.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question5">
+    <div class="question">
+        5. Você vê um cachorro correndo atrás de um carro. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O cachorro está tentando se proteger do carro.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. O cachorro está tentando pegar o carro porque está excitado.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O cachorro está sendo treinado para correr atrás de carros.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O cachorro está apenas brincando.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question6">
+    <div class="question">
+        6. Você encontra uma chave em cima de uma mesa. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A chave foi deixada de propósito para você.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A chave foi esquecida por alguém.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A chave pertence a uma casa abandonada.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A chave caiu de uma gaveta aberta.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question7">
+    <div class="question">
+        7. Você vê um prato quebrado no chão perto de uma cadeira. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. Alguém derrubou o prato acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O prato foi quebrado intencionalmente por raiva.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O prato estava velho e quebrou sozinho.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O prato foi deixado de propósito no chão.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question8">
+    <div class="question">
+        8. Você encontra um bilhete amassado no bolso de um casaco. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O bilhete foi perdido e depois recolhido.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. O bilhete foi amassado de propósito para esconder algo.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O bilhete foi amassado por ser de pouco valor.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O bilhete foi feito por alguém para se lembrar de algo importante.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question9">
+    <div class="question">
+        9. Você encontra um copo com água derramado em uma mesa. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. Alguém derrubou o copo sem querer.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O copo foi derramado de propósito para chamar atenção.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O copo derramou devido a um movimento brusco.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O copo estava mal posicionado e caiu sozinho.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question10">
+    <div class="question">
+        10. Você encontra uma vela apagada com cera derretida em um pires. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. A vela foi acesa e apagada depois de algum tempo.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A vela foi acesa durante muito tempo, mas apagou por si mesma.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A vela foi apagada rapidamente para não fazer fumaça.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A vela foi acesa por um longo período, mas foi apagada por acidente.</button></li>
+    </ul>
+</div>
+  <div class="question-container" id="question11">
+    <div class="question">
+        11. Você encontra um óculos de sol no banco de um parque. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O óculos foi deixado de propósito por alguém.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. Alguém esqueceu o óculos após usar no sol.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O óculos foi perdido acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O óculos foi deixado lá como parte de uma pegadinha.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question12">
+    <div class="question">
+        12. Você encontra um livro fechado em cima de uma mesa. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O livro foi deixado lá intencionalmente para esconder algo.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O livro está sendo usado para apoiar outro objeto.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. Alguém estava lendo e deixou o livro ali para fazer outra coisa.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O livro foi deixado aberto e alguém o fechou depois.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question13">
+    <div class="question">
+        13. Você encontra um papel em branco com uma caneta ao lado. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A caneta foi deixada por acidente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O papel foi deixado ali para alguém escrever algo importante.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. Alguém desistiu de escrever e deixou tudo ali.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O papel foi deixado ali para ser utilizado mais tarde.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question14">
+    <div class="question">
+        14. Você encontra uma caixa fechada com fita adesiva em cima de uma mesa. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A caixa foi lacrada para manter o conteúdo seguro.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A caixa foi lacrada como parte de uma embalagem.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A caixa foi fechada para ser armazenada.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A caixa foi lacrada para evitar que algo saísse.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question15">
+    <div class="question">
+        15. Você vê uma garrafa de água vazia no chão. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A garrafa foi deixada no chão acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A garrafa foi usada até o fim e ficou no chão após o uso.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A garrafa foi deixada de propósito para ser reciclada.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. Alguém deixou a garrafa no chão por descuido.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question16">
+    <div class="question">
+        16. Você vê um chapéu caído no chão perto de um banco de praça. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. Alguém deixou cair o chapéu enquanto estava sentado.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O chapéu foi deixado de propósito para chamar atenção.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O chapéu foi esquecido por alguém apressado.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O chapéu foi colocado ali para ser encontrado por alguém.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question17">
+    <div class="question">
+        17. Você vê uma maçã mordida no canto de uma mesa. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A maçã foi colocada ali para alguém comer depois.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A maçã foi mordida por alguém e deixada para trás.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. Alguém estava comendo a maçã e a deixou ali acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A maçã foi deixada de propósito para ser jogada fora.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question18">
+    <div class="question">
+        18. Você encontra um pedaço de papel rasgado perto de uma lixeira. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O papel foi rasgado de propósito para esconder informações.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O papel foi deixado ali acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. Alguém rasgou o papel e jogou fora.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O papel foi rasgado para criar algo artístico.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question19">
+    <div class="question">
+        19. Você encontra um boné perdido na rua. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O boné foi jogado no chão de propósito.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. O boné foi deixado por alguém que não percebeu que perdeu.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O boné foi perdido por acidente e alguém o deixou cair.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O boné foi colocado ali como parte de uma brincadeira.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question20">
+    <div class="question">
+        20. Você vê uma luz piscando em um prédio à noite. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. A luz está piscando porque alguém está tentando chamar atenção.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A luz está piscando devido a uma falha elétrica.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A luz está piscando por um motivo técnico relacionado à eletricidade.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A luz foi deixada piscando como parte de um teste de segurança.</button></li>
+    </ul>
+</div>
+<div class="question-container" id="question21">
+    <div class="question">
+        21. Você encontra uma carta jogada no chão com uma assinatura ilegível. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. Alguém escreveu a carta rapidamente e não se preocupou em legibilizar a assinatura.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A carta foi rasgada intencionalmente para esconder a identidade do remetente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A carta foi escrita por alguém que não sabia escrever bem.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A carta foi jogada no chão acidentalmente e a assinatura foi danificada.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question22">
+    <div class="question">
+        22. Você encontra uma chave solta em uma calçada sem identificação. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A chave foi esquecida por alguém e caiu da bolsa ou bolso.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A chave foi deixada de propósito para ser encontrada por outra pessoa.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. A chave foi perdida por alguém que não percebeu que a deixou cair.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A chave foi jogada no chão acidentalmente, sem intenção.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question23">
+    <div class="question">
+        23. Você vê um par de óculos quebrados no chão perto de uma porta. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O dono dos óculos provavelmente entrou correndo e os quebrou.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. Os óculos foram quebrados acidentalmente enquanto alguém estava perto da porta.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A pessoa que usava os óculos provavelmente os deixou cair sem perceber.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. Os óculos foram jogados para fora de propósito, após uma briga.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question24">
+    <div class="question">
+        24. Você encontra um prato de comida completamente intacto sobre a mesa em um restaurante vazio. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O prato foi deixado ali por alguém que não queria mais comer.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. O prato foi deixado ali por um cliente que saiu sem terminar a refeição.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O prato foi deixado ali por engano, sem intenção.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O prato foi deixado por um cliente que estava esperando que alguém o comesse.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question25">
+    <div class="question">
+        25. Você vê uma janela aberta e um ventilador desligado em um quarto fechado. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O ventilador foi desligado por alguém que queria mais calor.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O ventilador foi desligado para evitar um ruído alto.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. A janela foi aberta para ventilar o ambiente, mas alguém esqueceu de ligar o ventilador.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A janela foi aberta por engano e o ventilador não foi ligado por preguiça.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question26">
+    <div class="question">
+        26. Você encontra um par de sapatos muito bem polidos, mas jogados no meio da rua. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. Alguém estava com pressa e deixou os sapatos no meio do caminho.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. Os sapatos foram jogados ali como parte de uma brincadeira.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. Os sapatos foram deixados ali porque alguém quis trocá-los por outros mais confortáveis.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. Os sapatos foram descartados por alguém que não gostava deles mais.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question27">
+    <div class="question">
+        27. Você encontra uma bolsa vazia com dinheiro espalhado ao redor. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. A bolsa foi deixada vazia, e o dinheiro foi perdido ou roubado.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A bolsa foi descartada sem querer e o dinheiro foi jogado fora.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A pessoa jogou a bolsa de propósito e deixou o dinheiro para chamar atenção.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A bolsa foi deixada ali como parte de um plano para enganar alguém.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question28">
+    <div class="question">
+        28. Você vê uma estrada deserta e uma bicicleta caída no meio. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. Alguém caiu da bicicleta e se afastou rapidamente.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A bicicleta foi abandonada por alguém que a usava, provavelmente por um problema técnico.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A bicicleta foi derrubada por acidente e alguém deixou ali para voltar depois.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A bicicleta foi deixada ali como parte de um teste de resistência.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question29">
+    <div class="question">
+        29. Você encontra um celular com a tela quebrada em uma lixeira. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. Alguém quebrou o celular acidentalmente e decidiu jogá-lo fora.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O celular foi descartado por alguém que não queria mais usá-lo.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O celular foi jogado na lixeira porque estava com problemas de bateria.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O celular foi quebrado de propósito para ser descartado como lixo eletrônico.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question30">
+    <div class="question">
+        30. Você encontra uma carta escrita à mão com várias rasuras. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A pessoa que escreveu a carta estava indecisa sobre o que dizer.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A pessoa estava tentando escrever algo importante, mas se sentiu insegura e fez várias correções.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A carta foi escrita de forma rápida, sem muito cuidado.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A carta foi escrita por alguém que não sabia escrever bem e fez muitas correções.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question31">
+    <div class="question">
+        31. Você vê um relógio de pulso parado com o vidro quebrado. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O relógio foi quebrado e deixado parado por engano.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O relógio foi danificado e a pessoa não se importou em consertá-lo.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. O relógio foi parado por causa de um defeito ou dano no mecanismo, e o vidro quebrou acidentalmente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O relógio foi quebrado de propósito por alguém que não queria mais usá-lo.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question32">
+    <div class="question">
+        32. Você encontra uma vela acesa em uma janela e um copo de água ao lado. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. A vela foi acesa por alguém e o copo de água foi colocado ali para apagar a chama quando necessário.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A vela foi deixada acesa para manter a atmosfera e o copo de água está ali por acidente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A vela foi colocada na janela para sinalizar algo, e o copo de água foi esquecido.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A vela foi deixada acesa por um longo período e o copo de água foi colocado para impedir que ela queime demais.</button></li>
+    </ul>
+</div>
+  <div class="question-container" id="question33">
+    <div class="question">
+        33. Em uma noite chuvosa, um detetive chega a uma cena de crime. Há uma janela quebrada, uma poça de água perto da janela, um chapéu molhado e uma carta rasgada no chão. O que o detetive deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O crime ocorreu durante uma tempestade e o criminoso tentou fugir pela janela, mas deixou o chapéu e a carta para trás.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A janela foi quebrada intencionalmente para criar uma distração, e o chapéu molhado foi deixado de propósito para desorientar o detetive.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. O criminoso provavelmente estava tentando escapar pela janela durante a chuva, mas o chapéu molhado e a carta rasgada indicam que algo deu errado durante a fuga.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O crime foi planejado e o criminoso deixou os itens como pistas falsas para enganar a polícia.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question34">
+    <div class="question">
+        34. Em um apartamento, um corpo é encontrado com um bilhete que diz: "Eu vi tudo". No quarto, não há sinais de luta. No entanto, há uma xícara de chá caída perto da cama e uma vela acesa. O que você deduz sobre o que aconteceu?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O assassino deixou o bilhete de propósito para criar confusão, e o chá derramado indica que a vítima foi pega de surpresa.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. A vítima estava descansando, tomando chá, quando foi assassinada de forma silenciosa e sem luta.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O bilhete foi deixado para desviar a atenção do verdadeiro culpado, e a vela indica que o assassinato ocorreu durante um momento de escuridão.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A vítima estava envolvida em algo criminoso e a xícara de chá derramou quando tentou reagir ao ataque do assassino.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question35">
+    <div class="question">
+        35. Um homem é encontrado morto em um parque. Ao redor dele, há marcas de arrasto no chão, mas ninguém viu ninguém se aproximar. O que você deduz sobre o que aconteceu?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. O homem provavelmente foi atacado em outro local e arrastado até o parque depois de ser ferido.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O homem caiu sozinho no parque e tentou arrastar-se até um local seguro antes de sucumbir aos ferimentos.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O homem foi levado até o parque por alguém para ser assassinado, mas as marcas de arrasto são uma tentativa de confundir a polícia.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O homem foi vítima de um ataque surpresa e os arrastamentos foram feitos por um animal que o feriu e depois o deixou ali.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question36">
+    <div class="question">
+        36. Em uma mansão isolada, um colecionador de arte é encontrado morto com um quadro valioso desaparecido. As portas estavam trancadas por dentro, e não havia sinais de arrombamento. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. O assassino provavelmente estava dentro da mansão e matou o colecionador antes de escapar discretamente pela porta trancada, deixando tudo em ordem.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O colecionador morreu de causas naturais e o quadro foi roubado por uma pessoa desconhecida antes de sua morte.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. A cena foi montada para parecer um roubo, mas na realidade, o colecionador cometeu suicídio e o quadro foi levado por um de seus empregados.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O assassino entrou na mansão durante a noite e, antes de ser visto, matou o colecionador e fugiu sem deixar rastros.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question37">
+    <div class="question">
+        37. Uma mulher é encontrada em uma floresta com um bilhete de despedida em mãos e sem sinais de violência. A única pista é uma pegada de sapato perto dela. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. A mulher foi atacada por alguém que a deixou sozinha e escreveu a carta de despedida para parecer que ela estava ciente do que aconteceria.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. A mulher provavelmente tentou se esconder de alguém, mas morreu por causas naturais e o bilhete foi deixado para confundir a polícia.</button></li>
+        <li><button onclick="checkAnswer(this, true)">C. A mulher cometeu suicídio, mas a pegada de sapato indica que alguém pode ter sido responsável por uma ação psicológica antes disso.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. A mulher foi seguida e atacada por alguém que a forçou a escrever o bilhete antes de ser morta na floresta.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question38">
+    <div class="question">
+        38. Um homem é encontrado em seu escritório, com um revólver na mão e uma folha em branco na mesa. A porta estava fechada por dentro. O que você deduz sobre o que aconteceu?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. O homem provavelmente estava prestes a escrever algo importante e se suicidou antes de completar a carta.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O homem foi assassinado por alguém que o fez escrever algo antes de matá-lo, mas ele não conseguiu terminar a carta.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O revólver foi deixado ali como uma pista falsa, e a vítima morreu de causas naturais.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O homem foi morto enquanto estava tentando escrever algo importante, mas o revólver foi colocado em sua mão para enganar a polícia.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question39">
+    <div class="question">
+        39. Em uma casa de campo isolada, um homem é encontrado morto, mas não há sinais de luta. Na mesa, há uma xícara de café com uma colher misturada. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true)">A. O homem provavelmente foi envenenado com o café e morreu sem perceber os sintomas a tempo de reagir.</button></li>
+        <li><button onclick="checkAnswer(this, false)">B. O homem caiu repentinamente e derramou o café enquanto tentava reagir ao ataque de um assassino.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O café foi derramado na tentativa de esconder alguma pista, mas o homem morreu por um acidente.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O homem foi assassinado em outro lugar e colocado na casa com o café derramado para enganar a polícia.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question40">
+    <div class="question">
+        40. Um colecionador de relógios é encontrado morto em sua casa, com um relógio raro ao lado e o vidro quebrado. A janela está aberta, mas sem sinais de arrombamento. O que você deduz sobre o que aconteceu?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false)">A. O assassino entrou pela janela e roubou o relógio, mas o vidro quebrou acidentalmente durante a fuga.</button></li>
+        <li><button onclick="checkAnswer(this, true)">B. O colecionador provavelmente foi morto por alguém conhecido, que sabia onde o relógio estava, e o vidro foi quebrado após a morte dele.</button></li>
+        <li><button onclick="checkAnswer(this, false)">C. O colecionador foi assassinado em um assalto, mas o vidro foi quebrado por alguém tentando esconder a identidade do criminoso.</button></li>
+        <li><button onclick="checkAnswer(this, false)">D. O colecionador foi vítima de um acidente envolvendo o relógio, e o vidro foi quebrado na tentativa de desarma-lo.</button></li>
+    </ul>
+</div>
+<div class="question-container" id="question-51" style="display: none;">
+    <div class="question">
+        51. Em uma reunião, você percebe que a pessoa à sua frente começa a se inclinar ligeiramente para frente e a mexer com os dedos na mesa. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 51)">A. A pessoa provavelmente está interessada e engajada no que está sendo discutido.</button></li>
+        <li><button onclick="checkAnswer(this, false, 51)">B. A pessoa está apenas distraída e tentando manter a postura.</button></li>
+        <li><button onclick="checkAnswer(this, false, 51)">C. A pessoa quer demonstrar superioridade e domínio da conversa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 51)">D. A pessoa está tentando se preparar mentalmente para fazer uma afirmação importante.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-52" style="display: none;">
+    <div class="question">
+        52. Você está em uma conversa com alguém e a pessoa começa a rir de forma forçada e olhar rapidamente para o relógio. O que você deduz sobre a pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 52)">A. A pessoa pode estar tentando esconder desconforto ou impaciência.</button></li>
+        <li><button onclick="checkAnswer(this, false, 52)">B. A pessoa está apenas tentando aliviar a tensão de forma natural.</button></li>
+        <li><button onclick="checkAnswer(this, false, 52)">C. A pessoa está demonstrando prazer, mas não quer que a conversa continue.</button></li>
+        <li><button onclick="checkAnswer(this, false, 52)">D. A pessoa está fazendo isso para tentar criar uma conexão com você.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-53" style="display: none;">
+    <div class="question">
+        53. Durante uma negociação, você percebe que o negociador mantém os braços abertos e as palmas das mãos voltadas para cima. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 53)">A. O negociador pode estar tentando transmitir transparência e abertura.</button></li>
+        <li><button onclick="checkAnswer(this, false, 53)">B. O negociador está desconfortável e tentando se proteger.</button></li>
+        <li><button onclick="checkAnswer(this, false, 53)">C. O negociador está tentando controlar a conversa de forma agressiva.</button></li>
+        <li><button onclick="checkAnswer(this, false, 53)">D. O negociador está tentando parecer menos autoritário e mais amigável.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-54" style="display: none;">
+    <div class="question">
+        54. Você observa uma pessoa no trabalho que, ao falar sobre um projeto, começa a mover a cabeça repetidamente para os lados, como se estivesse negando. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 54)">A. A pessoa pode estar insegura ou desacreditando no projeto que está sendo discutido.</button></li>
+        <li><button onclick="checkAnswer(this, false, 54)">B. A pessoa está expressando ceticismo sobre a opinião de outra pessoa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 54)">C. A pessoa está apenas confirmando internamente suas próprias ideias.</button></li>
+        <li><button onclick="checkAnswer(this, false, 54)">D. A pessoa está apenas tentando se manter focada e não está realmente negando nada.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-55" style="display: none;">
+    <div class="question">
+        55. Você está conversando com alguém que, ao responder, começa a apontar para si mesmo com o dedo indicador. O que você deduz sobre esse comportamento?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 55)">A. A pessoa pode estar tentando afirmar sua posição ou se mostrar confiante em sua resposta.</button></li>
+        <li><button onclick="checkAnswer(this, false, 55)">B. A pessoa está tentando desviar a atenção de uma questão desconfortável.</button></li>
+        <li><button onclick="checkAnswer(this, false, 55)">C. A pessoa está sinalizando insegurança e querendo confirmar sua própria ideia.</button></li>
+        <li><button onclick="checkAnswer(this, false, 55)">D. A pessoa está apenas querendo chamar a atenção de todos para o que está dizendo.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-56" style="display: none;">
+    <div class="question">
+        56. Em um evento de networking, você nota que uma pessoa mantém o corpo ligeiramente voltado para a porta, com um pé ligeiramente levantado. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 56)">A. A pessoa pode estar interessada em sair ou não está totalmente engajada na conversa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 56)">B. A pessoa está tentando manter um espaço pessoal adequado durante a conversa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 56)">C. A pessoa está se preparando para falar mais, sem estar realmente preocupada em sair.</button></li>
+        <li><button onclick="checkAnswer(this, false, 56)">D. A pessoa está demonstrando entusiasmo e expectativa para a próxima interação.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-57" style="display: none;">
+    <div class="question">
+        57. Durante uma reunião, você percebe que uma pessoa está se afastando da mesa e olhando para o relógio enquanto a conversa continua. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 57)">A. A pessoa provavelmente está ficando impaciente ou com pressa para terminar a reunião.</button></li>
+        <li><button onclick="checkAnswer(this, false, 57)">B. A pessoa está apenas conferindo o horário por distração.</button></li>
+        <li><button onclick="checkAnswer(this, false, 57)">C. A pessoa está desinteressada no tema, mas tentando manter a compostura.</button></li>
+        <li><button onclick="checkAnswer(this, false, 57)">D. A pessoa está se preparando para tomar uma decisão importante.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-58" style="display: none;">
+    <div class="question">
+        58. Você percebe que alguém, ao se apresentar, toca levemente o ombro do outro, enquanto olha diretamente nos olhos. O que você deduz desse comportamento?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 58)">A. A pessoa está tentando estabelecer uma conexão pessoal e demonstrar confiança.</button></li>
+        <li><button onclick="checkAnswer(this, false, 58)">B. A pessoa está apenas cumprimentando de forma amigável, sem qualquer intenção adicional.</button></li>
+        <li><button onclick="checkAnswer(this, false, 58)">C. A pessoa está se sentindo insegura, mas tenta parecer confiante.</button></li>
+        <li><button onclick="checkAnswer(this, false, 58)">D. A pessoa está tentando transmitir superioridade ao olhar diretamente nos olhos.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-59" style="display: none;">
+    <div class="question">
+        59. Em uma conversa com um colega, você nota que ele começa a se afastar um pouco e cruza as pernas enquanto fala. O que você deduz sobre esse comportamento?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 59)">A. A pessoa pode estar tentando criar um espaço pessoal ou demonstrar desconforto com o assunto.</button></li>
+        <li><button onclick="checkAnswer(this, false, 59)">B. A pessoa está tentando se acomodar de maneira mais confortável.</button></li>
+        <li><button onclick="checkAnswer(this, false, 59)">C. A pessoa está demonstrando interesse no assunto, mas de forma reservada.</button></li>
+        <li><button onclick="checkAnswer(this, false, 59)">D. A pessoa está tentando manter uma postura relaxada, mas atenta ao que está sendo dito.</button></li>
+    </ul>
+</div>
+<div class="question-container" id="question-60" style="display: none;">
+    <div class="question">
+        60. Em uma festa, você se aproxima de uma pessoa que está isolada em um canto. Ela está com os braços cruzados e olhando para o chão, evitando o contato visual. O que você deduz sobre essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 60)">A. A pessoa pode estar desconfortável e não querendo interagir.</button></li>
+        <li><button onclick="checkAnswer(this, false, 60)">B. A pessoa está apenas cansada e esperando o momento certo para conversar.</button></li>
+        <li><button onclick="checkAnswer(this, false, 60)">C. A pessoa está apenas distraída com seus próprios pensamentos.</button></li>
+        <li><button onclick="checkAnswer(this, false, 60)">D. A pessoa está tentando controlar suas emoções, mas está relaxada.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-61" style="display: none;">
+    <div class="question">
+        61. Durante uma reunião de trabalho, você nota que um colega de trabalho está com a expressão facial neutra, não faz gestos e se mantém em silêncio durante as discussões. O que você deduz sobre ele?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 61)">A. Ele pode estar se mantendo emocionalmente distante, talvez não se sentindo confortável ou não interessado.</button></li>
+        <li><button onclick="checkAnswer(this, false, 61)">B. Ele está apenas tentando demonstrar autoridade e foco no conteúdo discutido.</button></li>
+        <li><button onclick="checkAnswer(this, false, 61)">C. Ele está esperando sua vez de falar e se concentrando nos outros colegas.</button></li>
+        <li><button onclick="checkAnswer(this, false, 61)">D. Ele pode estar distraído, mas tentando manter uma postura profissional.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-62" style="display: none;">
+    <div class="question">
+        62. Durante uma conversa com um amigo, você percebe que ele não faz contato visual e mantêm as mãos fechadas enquanto fala, além de evitar expressões faciais. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 62)">A. Ele pode estar tentando se proteger emocionalmente e não se sente confortável compartilhando seus sentimentos.</button></li>
+        <li><button onclick="checkAnswer(this, false, 62)">B. Ele está apenas cansado e não tem muita energia para demonstrar emoções.</button></li>
+        <li><button onclick="checkAnswer(this, false, 62)">C. Ele está simplesmente focado na conversa e não quer se distrair com expressões.</button></li>
+        <li><button onclick="checkAnswer(this, false, 62)">D. Ele está tentando esconder sua irritação, mas não quer mostrar de forma aberta.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-63" style="display: none;">
+    <div class="question">
+        63. Em uma entrevista de emprego, o entrevistador não sorri e mantém uma postura rígida, sem demonstrar muitas emoções durante a conversa. O que você pode deduzir sobre esse comportamento?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 63)">A. O entrevistador pode estar tentando manter uma postura profissional, sem se deixar envolver emocionalmente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 63)">B. O entrevistador está com raiva e tentando não demonstrar suas emoções.</button></li>
+        <li><button onclick="checkAnswer(this, false, 63)">C. O entrevistador está apenas preocupado com o conteúdo da entrevista e não quer se distrair.</button></li>
+        <li><button onclick="checkAnswer(this, false, 63)">D. O entrevistador está desconfortável e não sabe como reagir à conversa.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-64" style="display: none;">
+    <div class="question">
+        64. Em um jantar de negócios, um dos participantes está com os ombros tensos e as mãos agarrando o copo com força. Ele não fala muito e observa os outros de maneira distante. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 64)">A. A pessoa pode estar se sentindo desconfortável ou fora de seu ambiente, tentando se proteger.</button></li>
+        <li><button onclick="checkAnswer(this, false, 64)">B. A pessoa está tentando impressionar os outros, mas não sabe como agir.</button></li>
+        <li><button onclick="checkAnswer(this, false, 64)">C. A pessoa está apenas ansiosa para terminar o jantar e sair logo.</button></li>
+        <li><button onclick="checkAnswer(this, false, 64)">D. A pessoa está tentando manter uma postura séria e profissional, sem demonstrar suas emoções.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-65" style="display: none;">
+    <div class="question">
+        65. Durante um evento social, você percebe que uma pessoa está de braços cruzados e evita falar com os outros. Ela parece estar olhando para o nada. O que você deduz sobre essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 65)">A. A pessoa pode estar desconectada da situação e tentando se manter emocionalmente distante.</button></li>
+        <li><button onclick="checkAnswer(this, false, 65)">B. A pessoa está simplesmente cansada e não tem energia para interagir.</button></li>
+        <li><button onclick="checkAnswer(this, false, 65)">C. A pessoa está entediada, mas não quer ser rude e decide se afastar um pouco.</button></li>
+        <li><button onclick="checkAnswer(this, false, 65)">D. A pessoa está preocupada com algo, mas tenta não mostrar sua ansiedade.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-66" style="display: none;">
+    <div class="question">
+        66. Você se encontra com alguém em um ambiente mais formal e percebe que essa pessoa mantém um sorriso sem brilho e os braços fechados. O que você deduz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 66)">A. A pessoa pode estar tentando ocultar sua insatisfação ou desconforto, mas ainda tenta ser educada.</button></li>
+        <li><button onclick="checkAnswer(this, false, 66)">B. A pessoa está apenas tentando manter a compostura e ser educada, mesmo sem se sentir à vontade.</button></li>
+        <li><button onclick="checkAnswer(this, false, 66)">C. A pessoa está apenas tentando esconder sua frustração para não parecer rude.</button></li>
+        <li><button onclick="checkAnswer(this, false, 66)">D. A pessoa está satisfeita, mas tenta evitar mostrar muita emoção em público.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-67" style="display: none;">
+    <div class="question">
+        67. Durante uma apresentação, um participante não faz gestos e permanece com os pés firmemente plantados no chão, olhando para o apresentador sem expressar emoções. O que você deduz sobre esse comportamento?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 67)">A. A pessoa pode estar tentando se manter focada, sem deixar suas emoções interferirem na situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 67)">B. A pessoa está desinteressada e não se importa com o que está sendo discutido.</button></li>
+        <li><button onclick="checkAnswer(this, false, 67)">C. A pessoa está tentando controlar suas reações e manter uma postura profissional.</button></li>
+        <li><button onclick="checkAnswer(this, false, 67)">D. A pessoa está apenas tentando se proteger de críticas ou julgamentos.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-68" style="display: none;">
+    <div class="question">
+        68. Em uma discussão em grupo, uma pessoa evita qualquer tipo de reação facial, e seus braços estão cruzados enquanto ela observa os outros falarem. O que você deduz sobre essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 68)">A. A pessoa pode estar guardando sua opinião para si mesma ou tentando não se envolver emocionalmente na conversa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 68)">B. A pessoa está simplesmente entediada com a conversa e não quer mais participar.</button></li>
+        <li><button onclick="checkAnswer(this, false, 68)">C. A pessoa está concentrada nas discussões, mas não quer interferir com suas ideias.</button></li>
+        <li><button onclick="checkAnswer(this, false, 68)">D. A pessoa está tentando manter a calma e não deixar suas emoções influenciarem sua opinião.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-69" style="display: none;">
+    <div class="question">
+        69. Em um ambiente profissional, você nota que alguém não sorri e mantém uma postura rígida, com os pés afastados. O que você deduz sobre essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 69)">A. A pessoa pode estar tentando manter uma postura controlada e não demonstrar emoções excessivas.</button></li>
+        <li><button onclick="checkAnswer(this, false, 69)">B. A pessoa está se sentindo entediada e quer terminar logo a situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 69)">C. A pessoa está tentando impressionar, mas se sente desconfortável na situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 69)">D. A pessoa está tentando evitar interações e não quer parecer muito envolvida.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-70" style="display: none;">
+    <div class="question">
+      
+<!-- Continue reordenando as respostas corretamente nas perguntas seguintes -->
+    <script>
+        let currentQuestion = 0;
+        const questions = document.querySelectorAll('.question-container');
+
+        // Exibe a primeira pergunta
+        questions[currentQuestion].style.display = 'block';
+
+        function checkAnswer(button, isCorrect) {
+            if (isCorrect) {
+                button.classList.add("correct");
+            } else {
+                button.classList.add("wrong");
+            }
+
+            // Desativa todas as opções após a resposta
+            const buttons = button.parentNode.querySelectorAll("button");
+            buttons.forEach(btn => btn.disabled = true);
+
+            // Espera 1 segundo antes de mostrar a próxima pergunta
+            setTimeout(showNextQuestion, 1000);
+        }
+
+        function showNextQuestion() {
+            // Oculta a pergunta atual
+            questions[currentQuestion].style.display = 'none';
+
+            // Avança para a próxima pergunta
+            currentQuestion++;
+
+            // Exibe a próxima pergunta, se houver
+            if (currentQuestion < questions.length) {
+                questions[currentQuestion].style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+    

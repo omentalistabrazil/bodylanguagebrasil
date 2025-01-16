@@ -17,7 +17,7 @@ header {
     text-align: center;
     padding: 10px 0;
     background: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente */
-    position: fixed; /* Fixa no topo da página */
+    position: left; /* Fixa no topo da página */
     top: 0;
     left: 0;
     z-index: 1000; /* Garante que fique sobre os outros elementos */
@@ -26,7 +26,7 @@ header {
 
 /* Logo com animação */
 header img {
-    width: 80px;
+    width: 50px;
     height: auto;
     border-radius: 10px; /* Arredonda as bordas da logo */
     position: relative;
@@ -63,7 +63,7 @@ header img::before {
 
 /* Título com sombra e profundidade */
 header h1 {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin: 10px 0 0;
     color: #fff;
@@ -461,15 +461,15 @@ button:hover {
 .video {
     width: 100%; /* Faz com que o vídeo ocupe 100% da largura disponível no contêiner */
     max-width: 200px; /* Limita a largura do vídeo para que ele não ocupe a tela inteira */
-    border-radius: 10px;
+    border-radius: 7px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }
 
 /* Estilo da descrição do vídeo */
 .video-description {
-    background-color: #fafafa;
-    border-radius: 50px;
+    background-color: #000000;
+    border-radius: 7px;
     padding: 15px;
     text-align: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -486,7 +486,7 @@ button:hover {
 .video-description p {
     font-size: 1.1em;
     line-height: 1.6;
-    color: #555;
+    color: #fff;
 }
 
 /* Adicionando efeitos ao vídeo e descrição quando o mouse passa por cima */
@@ -496,4 +496,4 @@ button:hover {
 }
 
 .video-description:hover {
-    background-color: #f7f7f7;
+    background-color: #000000;

@@ -1,3 +1,10 @@
+// Função para embaralhar o array de perguntas
+function embaralhar(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // Gera um índice aleatório
+    [array[i], array[j]] = [array[j], array[i]]; // Troca as posições dos elementos
+  }
+}
 const quizData = [
   {
     question: "Quando uma pessoa cruza os braços, geralmente isso indica:",
@@ -804,6 +811,11 @@ quizData.push({
     correct: "Encontrar pontos em comum para criar uma conexão emocional genuína",
   }
 );
+// Embaralhar as perguntas logo após definir o quizData
+embaralhar(quizData);
+
+// Agora as perguntas estão embaralhadas!
+console.log(quizData); // Você pode verificar no console se as perguntas estão embaralhadas
 const quizContainer = document.getElementById("quiz");
 const submitButton = document.getElementById("submit");
 const resultContainer = document.getElementById("result");
@@ -996,4 +1008,52 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-});
+});function checkAnswer() {
+    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+    const feedback = document.getElementById("feedback");
+
+    if (!selectedAnswer) {
+        feedback.textContent = "Por favor, selecione uma resposta.";
+        feedback.className = "error";
+        return;
+    }
+
+    // Resposta correta (exemplo: "alegria")
+    const correctAnswer = "alegria";
+
+    if (selectedAnswer.value === correctAnswer) {
+        feedback.textContent = "Correto! Essa expressão facial demonstra Alegria.";
+        feedback.className = "success";
+    } else {
+        feedback.textContent = "Resposta incorreta. Tente novamente!";
+        feedback.className = "error";
+    }
+
+    feedback.classList.remove("hidden");
+}// Função para verificar a resposta do usuário
+function checkAnswer(selectedAnswer) {
+    const correctAnswer = 'desprezo'; // Resposta correta para a emoção do vídeo
+
+    const feedback = document.getElementById('feedback');
+    const nextQuestionButton = document.getElementById('next-question');
+    
+    if (selectedAnswer === correctAnswer) {
+        feedback.textContent = "Correto! Esta expressão facial demonstra Desprezo.";
+        feedback.className = "feedback correct";  // Classe para estilo de feedback correto
+    } else {
+        feedback.textContent = "Errado! Tente novamente.";
+        feedback.className = "feedback incorrect";  // Classe para estilo de feedback incorreto
+    }
+
+    feedback.classList.remove('hidden');
+    nextQuestionButton.classList.remove('hidden');  // Mostrar o botão "Próxima Pergunta"
+    disableOptions(); // Desabilitar as opções após responder
+}
+
+// Desabilitar as opções de resposta após o clique
+function disableOptions() {
+    const options = document.querySelectorAll('.answer-btn');
+    options.forEach(option => {
+        option.disabled = true;
+    });
+}
