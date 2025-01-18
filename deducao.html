@@ -70,6 +70,670 @@
 </head>
 <body>
     <h1>Dedução</h1>
+    <div class="question-container" id="question-1" style="display: none;">
+    <div class="question">
+        1. Uma pessoa senta em um café com a postura ereta, seus olhos frequentemente analisam o ambiente ao redor, e ela parece notar detalhes que outros ignoram, como movimentos ou conversas discretas. O que essa pessoa provavelmente faz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 1)">A. Escritor</button></li>
+        <li><button onclick="checkAnswer(this, true, 1)">B. Detetive particular</button></li>
+        <li><button onclick="checkAnswer(this, false, 1)">C. Jornalista</button></li>
+        <li><button onclick="checkAnswer(this, false, 1)">D. Psicólogo</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-2" style="display: none;">
+    <div class="question">
+        2. Você observa alguém em uma fila. A pessoa mantém as mãos sempre limpas, suas unhas estão perfeitamente cuidadas, e ela evita tocar superfícies desnecessariamente. Qual é a profissão mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 2)">A. Arquiteto</button></li>
+        <li><button onclick="checkAnswer(this, false, 2)">B. Advogado</button></li>
+        <li><button onclick="checkAnswer(this, true, 2)">C. Médico cirurgião</button></li>
+        <li><button onclick="checkAnswer(this, false, 2)">D. Chef de cozinha</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-3" style="display: none;">
+    <div class="question">
+        3. Uma pessoa está sentada em um banco de praça lendo um livro, mas ao mesmo tempo mantém os pés firmemente no chão e parece estar atenta aos sons e movimentos ao redor. Qual é a ocupação dela?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 3)">A. Cientista social</button></li>
+        <li><button onclick="checkAnswer(this, false, 3)">B. Professor</button></li>
+        <li><button onclick="checkAnswer(this, true, 3)">C. Militar</button></li>
+        <li><button onclick="checkAnswer(this, false, 3)">D. Psicólogo</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-4" style="display: none;">
+    <div class="question">
+        4. Você nota uma pessoa gesticulando muito enquanto conversa e frequentemente toca os lábios ou o queixo, demonstrando pensar antes de responder. O que ela provavelmente faz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 4)">A. Advogado</button></li>
+        <li><button onclick="checkAnswer(this, false, 4)">B. Político</button></li>
+        <li><button onclick="checkAnswer(this, false, 4)">C. Professor</button></li>
+        <li><button onclick="checkAnswer(this, false, 4)">D. Ator</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-5" style="display: none;">
+    <div class="question">
+        5. Alguém está em um restaurante com um grupo de amigos. Durante a conversa, a pessoa frequentemente desenha esquemas ou gráficos em um guardanapo enquanto explica algo. Qual é a profissão mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 5)">A. Cientista de dados</button></li>
+        <li><button onclick="checkAnswer(this, false, 5)">B. Designer gráfico</button></li>
+        <li><button onclick="checkAnswer(this, true, 5)">C. Engenheiro</button></li>
+        <li><button onclick="checkAnswer(this, false, 5)">D. Arquiteto</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-6" style="display: none;">
+    <div class="question">
+        6. Você percebe uma pessoa em um transporte público que mantém uma postura relaxada, mas seus olhos seguem rapidamente cada detalhe, como quem entra e sai, e seus dedos batem em um padrão repetitivo no banco. Qual é a profissão dela?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 6)">A. Escritor</button></li>
+        <li><button onclick="checkAnswer(this, true, 6)">B. Segurança ou vigilante</button></li>
+        <li><button onclick="checkAnswer(this, false, 6)">C. Psicólogo</button></li>
+        <li><button onclick="checkAnswer(this, false, 6)">D. Músico</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-7" style="display: none;">
+    <div class="question">
+        7. Uma pessoa caminha em um parque, para em várias árvores e parece examiná-las cuidadosamente, tocando nas folhas e olhando para o chão ao redor. O que essa pessoa provavelmente faz?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 7)">A. Botânico</button></li>
+        <li><button onclick="checkAnswer(this, false, 7)">B. Fotógrafo</button></li>
+        <li><button onclick="checkAnswer(this, false, 7)">C. Veterinário</button></li>
+        <li><button onclick="checkAnswer(this, false, 7)">D. Arqueólogo</button></li>
+    </ul>
+</div>
+    <div class="question-container" id="question-1" style="display: none;">
+    <div class="question">
+        1. Uma pessoa usa um terno bem alinhado, sapatos sociais brilhantes e carrega uma maleta de couro. Qual é a profissão mais provável dessa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 1)">A. Médico</button></li>
+        <li><button onclick="checkAnswer(this, false, 1)">B. Policial</button></li>
+        <li><button onclick="checkAnswer(this, false, 1)">C. Programador</button></li>
+        <li><button onclick="checkAnswer(this, true, 1)">D. Advogado</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-2" style="display: none;">
+    <div class="question">
+        2. Alguém está vestindo um uniforme com manchas de tinta, carregando pincéis e uma paleta de cores. Qual é a profissão mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 2)">A. Designer gráfico</button></li>
+        <li><button onclick="checkAnswer(this, false, 2)">B. Chef de cozinha</button></li>
+        <li><button onclick="checkAnswer(this, true, 2)">C. Artista plástico</button></li>
+        <li><button onclick="checkAnswer(this, false, 2)">D. Carpinteiro</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-3" style="display: none;">
+    <div class="question">
+        3. Você observa uma pessoa vestida com roupas esportivas, incluindo shorts, uma camiseta leve e um apito pendurado no pescoço. Quem é essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 3)">A. Personal trainer</button></li>
+        <li><button onclick="checkAnswer(this, true, 3)">B. Professor de educação física</button></li>
+        <li><button onclick="checkAnswer(this, false, 3)">C. Jogador de futebol</button></li>
+        <li><button onclick="checkAnswer(this, false, 3)">D. Médico</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-4" style="display: none;">
+    <div class="question">
+        4. Uma pessoa está usando um chapéu de segurança, colete refletivo e botas resistentes. Qual é a ocupação dessa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 4)">A. Engenheiro civil</button></li>
+        <li><button onclick="checkAnswer(this, false, 4)">B. Arquiteto</button></li>
+        <li><button onclick="checkAnswer(this, false, 4)">C. Motorista de caminhão</button></li>
+        <li><button onclick="checkAnswer(this, false, 4)">D. Operador de máquinas</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-5" style="display: none;">
+    <div class="question">
+        5. Alguém está vestindo um uniforme branco, com uma touca na cabeça e luvas descartáveis. Quem pode ser essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 5)">A. Cirurgião</button></li>
+        <li><button onclick="checkAnswer(this, true, 5)">B. Chef de cozinha</button></li>
+        <li><button onclick="checkAnswer(this, false, 5)">C. Veterinário</button></li>
+        <li><button onclick="checkAnswer(this, false, 5)">D. Dentista</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-6" style="display: none;">
+    <div class="question">
+        6. Uma pessoa usa roupas de couro resistentes, luvas grossas e carrega ferramentas em um cinto. Qual é a profissão dessa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 6)">A. Mecânico</button></li>
+        <li><button onclick="checkAnswer(this, false, 6)">B. Operador de máquinas</button></li>
+        <li><button onclick="checkAnswer(this, false, 6)">C. Motociclista</button></li>
+        <li><button onclick="checkAnswer(this, false, 6)">D. Trabalhador da construção</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-7" style="display: none;">
+    <div class="question">
+        7. Você observa uma pessoa com roupas pretas discretas, um crachá pendurado no pescoço e um fone de ouvido pequeno em uma das orelhas. Quem é essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 7)">A. Promotor de eventos</button></li>
+        <li><button onclick="checkAnswer(this, true, 7)">B. Segurança ou vigilante</button></li>
+        <li><button onclick="checkAnswer(this, false, 7)">C. Detetive</button></li>
+        <li><button onclick="checkAnswer(this, false, 7)">D. Atendente de loja</button></li>
+    </ul>
+</div>
+    <div class="question-container" id="question-165" style="display: none;">
+    <div class="question">
+        165. Uma pessoa está em pé com a postura relaxada, mãos nos bolsos e olhando ao redor com interesse, sem pressa de mover-se. Qual profissão ela pode ter?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 165)">A. Dentista.</button></li>
+        <li><button onclick="checkAnswer(this, true, 165)">B. Publicitário.</button></li>
+        <li><button onclick="checkAnswer(this, false, 165)">C. Veterinário.</button></li>
+        <li><button onclick="checkAnswer(this, false, 165)">D. Técnico de TI.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-166" style="display: none;">
+    <div class="question">
+        166. Alguém está sentado em uma mesa, fazendo anotações rapidamente enquanto olha para gráficos e números em um computador, com um olhar atento. Qual é a profissão dessa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 166)">A. Analista financeiro.</button></li>
+        <li><button onclick="checkAnswer(this, false, 166)">B. Designer de moda.</button></li>
+        <li><button onclick="checkAnswer(this, false, 166)">C. Chef de cozinha.</button></li>
+        <li><button onclick="checkAnswer(this, false, 166)">D. Psicólogo.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-167" style="display: none;">
+    <div class="question">
+        167. Uma pessoa se inclina levemente para frente enquanto fala, com as mãos abertas e gesticulando levemente. Sua linguagem corporal indica que ela provavelmente é o que?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 167)">A. Psicoterapeuta.</button></li>
+        <li><button onclick="checkAnswer(this, true, 167)">B. Motivador ou coach.</button></li>
+        <li><button onclick="checkAnswer(this, false, 167)">C. Engenheiro de software.</button></li>
+        <li><button onclick="checkAnswer(this, false, 167)">D. Médico cirurgião.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-168" style="display: none;">
+    <div class="question">
+        168. Alguém está com uma postura ereta, olhos fixos em um ponto distante, mãos no bolso e parece ter uma atitude mais reservada. Qual profissão pode estar associada a essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 168)">A. Ator de teatro.</button></li>
+        <li><button onclick="checkAnswer(this, false, 168)">B. Cientista ou pesquisador.</button></li>
+        <li><button onclick="checkAnswer(this, false, 168)">C. Enfermeiro.</button></li>
+        <li><button onclick="checkAnswer(this, true, 168)">D. Escritório ou analista.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-169" style="display: none;">
+    <div class="question">
+        169. Uma pessoa tem uma postura descontraída, com as mãos atrás da cabeça, olhos relaxados e um sorriso tranquilo, como se estivesse confortável e não tivesse pressa. O que isso sugere sobre sua profissão?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 169)">A. Advogado.</button></li>
+        <li><button onclick="checkAnswer(this, true, 169)">B. Artista ou designer.</button></li>
+        <li><button onclick="checkAnswer(this, false, 169)">C. Médico.</button></li>
+        <li><button onclick="checkAnswer(this, false, 169)">D. Professor de matemática.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-170" style="display: none;">
+    <div class="question">
+        170. Uma pessoa está constantemente olhando para um relógio e mexendo as mãos de maneira agitada enquanto fala com outras pessoas, como se estivesse sempre apressada. Qual é a ocupação mais provável dessa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 170)">A. Motorista de caminhão.</button></li>
+        <li><button onclick="checkAnswer(this, true, 170)">B. Executivo ou gerente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 170)">C. Jornalista.</button></li>
+        <li><button onclick="checkAnswer(this, false, 170)">D. Trabalhador autônomo.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-171" style="display: none;">
+    <div class="question">
+        171. Uma pessoa permanece muito imóvel durante conversas, observando as expressões faciais das outras com uma atenção extrema, e faz anotações. Qual profissão mais se encaixa com essa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 171)">A. Fotógrafo de moda.</button></li>
+        <li><button onclick="checkAnswer(this, true, 171)">B. Investigador ou detetive.</button></li>
+        <li><button onclick="checkAnswer(this, false, 171)">C. Professor universitário.</button></li>
+        <li><button onclick="checkAnswer(this, false, 171)">D. Arquivista.</button></li>
+    </ul>
+</div>
+    <div class="question-container" id="question-158" style="display: none;">
+    <div class="question">
+        158. Uma pessoa mantém uma postura ereta, caminha com passos firmes e segura um pequeno caderno com anotações frequentes, enquanto observa o ambiente ao redor. Qual a profissão mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 158)">A. Designer gráfico.</button></li>
+        <li><button onclick="checkAnswer(this, true, 158)">B. Gerente ou supervisor.</button></li>
+        <li><button onclick="checkAnswer(this, false, 158)">C. Professor de história.</button></li>
+        <li><button onclick="checkAnswer(this, false, 158)">D. Cientista de laboratório.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-159" style="display: none;">
+    <div class="question">
+        159. Você nota uma pessoa gesticulando amplamente com as mãos, utilizando palavras de impacto e mantendo contato visual direto enquanto conversa com um grupo. Qual pode ser sua ocupação?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 159)">A. Programador.</button></li>
+        <li><button onclick="checkAnswer(this, false, 159)">B. Palestrante ou vendedor.</button></li>
+        <li><button onclick="checkAnswer(this, false, 159)">C. Arquiteto.</button></li>
+        <li><button onclick="checkAnswer(this, true, 159)">D. Fotógrafo.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-160" style="display: none;">
+    <div class="question">
+        160. Uma pessoa está sentada com as costas curvadas, olhando fixamente para um monitor, com um dedo tocando levemente no queixo, ocasionalmente anotando algo. O que essa linguagem corporal sugere sobre sua profissão?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 160)">A. Ator de teatro.</button></li>
+        <li><button onclick="checkAnswer(this, false, 160)">B. Professor de educação física.</button></li>
+        <li><button onclick="checkAnswer(this, true, 160)">C. Analista ou pesquisador.</button></li>
+        <li><button onclick="checkAnswer(this, false, 160)">D. Chef de cozinha.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-161" style="display: none;">
+    <div class="question">
+        161. Uma pessoa está em pé, com as mãos nos quadris, analisando detalhadamente um mapa, e ocasionalmente apontando para detalhes específicos. Qual a profissão mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 161)">A. Engenheiro civil ou arquiteto.</button></li>
+        <li><button onclick="checkAnswer(this, false, 161)">B. Cantor profissional.</button></li>
+        <li><button onclick="checkAnswer(this, false, 161)">C. Advogado.</button></li>
+        <li><button onclick="checkAnswer(this, false, 161)">D. Escritor.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-162" style="display: none;">
+    <div class="question">
+        162. Você percebe alguém com uma postura firme, usando expressões faciais neutras, observando atentamente as pessoas ao redor e mantendo as mãos próximas ao corpo. Qual profissão combina mais com essa linguagem corporal?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 162)">A. Chef de cozinha.</button></li>
+        <li><button onclick="checkAnswer(this, false, 162)">B. Médico.</button></li>
+        <li><button onclick="checkAnswer(this, false, 162)">C. Escritor freelancer.</button></li>
+        <li><button onclick="checkAnswer(this, true, 162)">D. Segurança ou policial.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-163" style="display: none;">
+    <div class="question">
+        163. Alguém está usando um uniforme, com manchas nas roupas, mãos calejadas e gestos rápidos enquanto ajusta ferramentas ao seu redor. O que isso indica?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 163)">A. Artista plástico.</button></li>
+        <li><button onclick="checkAnswer(this, false, 163)">B. Mecânico ou técnico.</button></li>
+        <li><button onclick="checkAnswer(this, true, 163)">C. Analista de TI.</button></li>
+        <li><button onclick="checkAnswer(this, false, 163)">D. Advogado.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-164" style="display: none;">
+    <div class="question">
+        164. Durante uma conversa, você nota que alguém faz perguntas objetivas, toma notas rapidamente e mantém um tom de voz firme e direto. Qual profissão se encaixa melhor?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 164)">A. Jornalista ou repórter.</button></li>
+        <li><button onclick="checkAnswer(this, false, 164)">B. Ator de TV.</button></li>
+        <li><button onclick="checkAnswer(this, false, 164)">C. Professor de artes.</button></li>
+        <li><button onclick="checkAnswer(this, false, 164)">D. Biólogo marinho.</button></li>
+    </ul>
+</div>
+<div class="question-container" id="question-151" style="display: none;">
+    <div class="question">
+        151. Em uma cafeteria, uma pessoa mantém o olhar fixo na porta enquanto brinca nervosamente com uma colher. O que isso pode sugerir?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 151)">A. A pessoa está apenas distraída e sem pensar em nada.</button></li>
+        <li><button onclick="checkAnswer(this, false, 151)">B. A pessoa está relaxada e gostando do ambiente.</button></li>
+        <li><button onclick="checkAnswer(this, true, 151)">C. A pessoa está ansiosa, talvez esperando por alguém.</button></li>
+        <li><button onclick="checkAnswer(this, false, 151)">D. A pessoa está tentando evitar interação social.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-152" style="display: none;">
+    <div class="question">
+        152. Durante uma conversa, alguém cruza os braços e se inclina ligeiramente para trás, mantendo os pés apontados para a porta. Qual seria a dedução mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 152)">A. A pessoa está desconfortável ou quer sair da conversa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 152)">B. A pessoa está se sentindo superior na interação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 152)">C. A pessoa está interessada e engajada no diálogo.</button></li>
+        <li><button onclick="checkAnswer(this, false, 152)">D. A pessoa está apenas cansada, sem relação com a interação.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-153" style="display: none;">
+    <div class="question">
+        153. Em um parque, uma pessoa está sentada com as pernas balançando rapidamente, mexendo nos dedos e olhando para os lados. O que isso indica?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 153)">A. A pessoa está totalmente relaxada e curtindo o ambiente.</button></li>
+        <li><button onclick="checkAnswer(this, true, 153)">B. A pessoa está ansiosa ou desconfortável com algo ao seu redor.</button></li>
+        <li><button onclick="checkAnswer(this, false, 153)">C. A pessoa está distraída, pensando em outro lugar.</button></li>
+        <li><button onclick="checkAnswer(this, false, 153)">D. A pessoa está se aquecendo para começar a caminhar.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-154" style="display: none;">
+    <div class="question">
+        154. Uma pessoa em uma reunião fica ajustando continuamente os punhos da camisa, mantendo um sorriso rígido. O que isso pode revelar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 154)">A. A pessoa está confiante e à vontade.</button></li>
+        <li><button onclick="checkAnswer(this, false, 154)">B. A pessoa está tentando demonstrar autoridade.</button></li>
+        <li><button onclick="checkAnswer(this, true, 154)">C. A pessoa está ansiosa e tentando esconder seu nervosismo.</button></li>
+        <li><button onclick="checkAnswer(this, false, 154)">D. A pessoa está apenas distraída com sua própria aparência.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-155" style="display: none;">
+    <div class="question">
+        155. Durante uma entrevista de emprego, o candidato evita contato visual, toca frequentemente no rosto e gagueja levemente. Qual é a melhor interpretação?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 155)">A. O candidato está muito confiante.</button></li>
+        <li><button onclick="checkAnswer(this, true, 155)">B. O candidato está nervoso ou inseguro.</button></li>
+        <li><button onclick="checkAnswer(this, false, 155)">C. O candidato está desinteressado na vaga.</button></li>
+        <li><button onclick="checkAnswer(this, false, 155)">D. O candidato está distraído e pensando em outra coisa.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-156" style="display: none;">
+    <div class="question">
+        156. Em um bar, uma pessoa está inclinada para frente, gesticulando amplamente enquanto fala com alguém, mas mantém um sorriso forçado. Qual a dedução mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 156)">A. A pessoa está genuinamente animada e feliz.</button></li>
+        <li><button onclick="checkAnswer(this, false, 156)">B. A pessoa está tentando encerrar a conversa rapidamente.</button></li>
+        <li><button onclick="checkAnswer(this, true, 156)">C. A pessoa está tentando parecer interessada, mas na verdade está desconfortável.</button></li>
+        <li><button onclick="checkAnswer(this, false, 156)">D. A pessoa está distraída com algo no ambiente.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-157" style="display: none;">
+    <div class="question">
+        157. Você observa uma pessoa em uma fila, constantemente mudando o peso de um pé para o outro e olhando ao redor. O que isso pode sugerir?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 157)">A. A pessoa está totalmente relaxada e aproveitando o momento.</button></li>
+        <li><button onclick="checkAnswer(this, false, 157)">B. A pessoa está apenas distraída e curiosa sobre o ambiente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 157)">C. A pessoa está planejando sua próxima tarefa.</button></li>
+        <li><button onclick="checkAnswer(this, true, 157)">D. A pessoa está impaciente e quer sair da fila.</button></li>
+    </ul>
+</div>
+    <div class="question-container" id="question-137" style="display: none;">
+    <div class="question">
+        137. Você observa uma pessoa sentada com os braços cruzados e pernas cruzadas, olhando fixamente para o chão em um ambiente social. O que isso pode sugerir sobre o estado emocional dessa pessoa?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 137)">A. A pessoa está descontraída e se sentindo confortável com a situação.</button></li>
+        <li><button onclick="checkAnswer(this, true, 137)">B. A pessoa pode estar se sentindo fechada, defensiva ou desconfortável.</button></li>
+        <li><button onclick="checkAnswer(this, false, 137)">C. A pessoa está apenas pensando em algo profundo e sem relação com o ambiente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 137)">D. A pessoa está demonstrando autoridade e confiança.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-138" style="display: none;">
+    <div class="question">
+        138. Em uma reunião de trabalho, você percebe que uma pessoa está inclinada para frente, com as mãos no queixo e os olhos focados no orador. Qual seria a interpretação mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 138)">A. A pessoa está entediada e distraída.</button></li>
+        <li><button onclick="checkAnswer(this, true, 138)">B. A pessoa está atenta e genuinamente interessada no que está sendo dito.</button></li>
+        <li><button onclick="checkAnswer(this, false, 138)">C. A pessoa está ansiosa e quer que a reunião termine logo.</button></li>
+        <li><button onclick="checkAnswer(this, false, 138)">D. A pessoa está avaliando criticamente o orador.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-139" style="display: none;">
+    <div class="question">
+        139. Você nota que uma pessoa está andando rapidamente, com os punhos cerrados e a mandíbula tensionada. O que isso provavelmente indica?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 139)">A. A pessoa está com raiva ou frustrada.</button></li>
+        <li><button onclick="checkAnswer(this, false, 139)">B. A pessoa está apenas com pressa para chegar a um destino.</button></li>
+        <li><button onclick="checkAnswer(this, false, 139)">C. A pessoa está se sentindo confiante e decidida.</button></li>
+        <li><button onclick="checkAnswer(this, false, 139)">D. A pessoa está tentando esconder um sentimento de tristeza.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-140" style="display: none;">
+    <div class="question">
+        140. Em um ambiente de festa, você percebe alguém mexendo constantemente no cabelo e olhando ao redor da sala, sem se fixar em ninguém. O que isso pode indicar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 140)">A. A pessoa está totalmente confiante e dominando o ambiente.</button></li>
+        <li><button onclick="checkAnswer(this, true, 140)">B. A pessoa pode estar nervosa ou desconfortável.</button></li>
+        <li><button onclick="checkAnswer(this, false, 140)">C. A pessoa está procurando um amigo específico na festa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 140)">D. A pessoa está tentando atrair atenção de maneira sutil.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-141" style="display: none;">
+    <div class="question">
+        141. Em uma entrevista de emprego, o candidato mantém contato visual constante, sorri levemente e gesticula com as mãos enquanto fala. O que isso indica?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 141)">A. O candidato está nervoso e tentando impressionar.</button></li>
+        <li><button onclick="checkAnswer(this, true, 141)">B. O candidato está confiante e confortável na situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 141)">C. O candidato está tentando esconder inseguranças.</button></li>
+        <li><button onclick="checkAnswer(this, false, 141)">D. O candidato está distraído e preocupado com outra coisa.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-142" style="display: none;">
+    <div class="question">
+        142. Você observa duas pessoas conversando, e uma delas inclina o corpo na direção da outra, enquanto mantém os pés apontados diretamente para ela. O que isso provavelmente indica?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 142)">A. A pessoa está desconfiada ou desconfortável com a conversa.</button></li>
+        <li><button onclick="checkAnswer(this, true, 142)">B. A pessoa está interessada e envolvida na conversa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 142)">C. A pessoa está tentando terminar a conversa educadamente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 142)">D. A pessoa está distraída e apenas fingindo interesse.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-143" style="display: none;">
+    <div class="question">
+        143. Uma pessoa em um parque está sentada com os ombros caídos, olhando fixamente para o horizonte e sem movimentos evidentes. O que isso pode sugerir?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 143)">A. A pessoa pode estar se sentindo triste ou desmotivada.</button></li>
+        <li><button onclick="checkAnswer(this, false, 143)">B. A pessoa está apenas relaxando após um dia estressante.</button></li>
+        <li><button onclick="checkAnswer(this, false, 143)">C. A pessoa está concentrada em um problema que precisa resolver.</button></li>
+        <li><button onclick="checkAnswer(this, false, 143)">D. A pessoa está tentando atrair atenção discretamente.</button></li>
+    </ul>
+</div>
+    <div class="question-container" id="question-126" style="display: none;">
+    <div class="question">
+        126. Durante um interrogatório sobre um assalto, o suspeito inicialmente nega envolvimento, mas começa a piscar rapidamente, tocar no pescoço e hesitar antes de responder. O que isso pode sugerir?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 126)">A. O suspeito está apenas desconfortável com a pressão do interrogatório.</button></li>
+        <li><button onclick="checkAnswer(this, true, 126)">B. O suspeito pode estar mentindo ou escondendo informações importantes.</button></li>
+        <li><button onclick="checkAnswer(this, false, 126)">C. O suspeito está reagindo de forma defensiva, mas não necessariamente culpado.</button></li>
+        <li><button onclick="checkAnswer(this, false, 126)">D. O suspeito está tentando se lembrar de detalhes para responder com precisão.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-127" style="display: none;">
+    <div class="question">
+        127. Durante uma investigação de sequestro, a testemunha frequentemente olha para a porta, evita contato visual com os investigadores e começa a mexer em objetos próximos. O que isso pode indicar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 127)">A. A testemunha está apenas distraída e desconfortável com a situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 127)">B. A testemunha está confusa e tentando organizar as ideias.</button></li>
+        <li><button onclick="checkAnswer(this, true, 127)">C. A testemunha pode estar escondendo informações ou envolvimento no crime.</button></li>
+        <li><button onclick="checkAnswer(this, false, 127)">D. A testemunha está nervosa, mas não tem relação direta com o caso.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-128" style="display: none;">
+    <div class="question">
+        128. Durante um julgamento de homicídio, o réu ajusta constantemente sua gravata, evita contato visual com os promotores e começa a falar em tom mais baixo quando pressionado. O que esse comportamento pode revelar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 128)">A. O réu está apenas tentando se acalmar diante do ambiente tenso.</button></li>
+        <li><button onclick="checkAnswer(this, false, 128)">B. O réu está nervoso porque teme ser julgado injustamente.</button></li>
+        <li><button onclick="checkAnswer(this, true, 128)">C. O réu pode estar demonstrando sinais de ansiedade, possivelmente relacionados à culpa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 128)">D. O réu está confuso com as perguntas feitas pelos promotores.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-129" style="display: none;">
+    <div class="question">
+        129. Durante uma confissão parcial de roubo, o suspeito evita dar detalhes precisos, toca no rosto repetidamente e balança os pés sob a mesa. Qual seria a interpretação mais provável?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 129)">A. O suspeito pode estar parcialmente envolvido e tenta minimizar sua participação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 129)">B. O suspeito está apenas nervoso por estar em uma situação de alta pressão.</button></li>
+        <li><button onclick="checkAnswer(this, false, 129)">C. O suspeito está confuso e tentando lembrar os detalhes exatos do evento.</button></li>
+        <li><button onclick="checkAnswer(this, false, 129)">D. O suspeito está apenas reagindo ao estresse natural da confissão.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-130" style="display: none;">
+    <div class="question">
+        130. Durante um interrogatório sobre um caso de corrupção, a investigada começa a sorrir de forma forçada, gesticular exageradamente e desviar a atenção para questões irrelevantes. O que isso pode indicar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 130)">A. A investigada está apenas tentando parecer cooperativa e calma.</button></li>
+        <li><button onclick="checkAnswer(this, true, 130)">B. A investigada pode estar tentando esconder informações relevantes através de distrações.</button></li>
+        <li><button onclick="checkAnswer(this, false, 130)">C. A investigada está nervosa por não confiar nos investigadores.</button></li>
+        <li><button onclick="checkAnswer(this, false, 130)">D. A investigada está confusa e tentando organizar suas respostas.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-131" style="display: none;">
+    <div class="question">
+        131. Durante um depoimento sobre tráfico de pessoas, o suspeito ri em momentos inadequados, coça a cabeça constantemente e evita responder perguntas relacionadas ao local onde esteve na noite do crime. O que isso pode significar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 131)">A. O suspeito está apenas reagindo ao estresse da situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 131)">B. O suspeito está tentando se lembrar de informações relevantes.</button></li>
+        <li><button onclick="checkAnswer(this, true, 131)">C. O suspeito pode estar ocultando informações importantes e demonstrando sinais de nervosismo.</button></li>
+        <li><button onclick="checkAnswer(this, false, 131)">D. O suspeito está distraído com outros problemas pessoais.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-132" style="display: none;">
+    <div class="question">
+        132. Durante uma investigação de fraude bancária, a testemunha cruza os braços, olha para o chão e responde apenas com monossílabos às perguntas mais específicas. O que pode ser concluído?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 132)">A. A testemunha está apenas desconfortável com o ambiente da investigação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 132)">B. A testemunha está nervosa, mas não está relacionada ao caso.</button></li>
+        <li><button onclick="checkAnswer(this, true, 132)">C. A testemunha pode estar escondendo informações ou envolvimento no crime.</button></li>
+        <li><button onclick="checkAnswer(this, false, 132)">D. A testemunha está tentando organizar seus pensamentos antes de responder.</button></li>
+    </ul>
+</div>
+    <div class="question-container" id="question-119" style="display: none;">
+    <div class="question">
+        119. Durante um interrogatório sobre um desaparecimento, o suspeito começa a tocar o rosto repetidamente, olhar para o teto e respirar de forma irregular. O que isso pode indicar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 119)">A. O suspeito pode estar demonstrando sinais de estresse, possivelmente relacionados à ocultação da verdade.</button></li>
+        <li><button onclick="checkAnswer(this, false, 119)">B. O suspeito está tentando se acalmar, mas não está envolvido no caso.</button></li>
+        <li><button onclick="checkAnswer(this, false, 119)">C. O suspeito está apenas cansado e distraído com os detalhes do ambiente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 119)">D. O suspeito está nervoso porque não confia nos investigadores.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-120" style="display: none;">
+    <div class="question">
+        120. Durante uma investigação de fraude, a acusada cruza os braços, muda frequentemente de posição na cadeira e dá respostas vagas. O que isso pode indicar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 120)">A. A acusada está tentando manter o controle diante da pressão.</button></li>
+        <li><button onclick="checkAnswer(this, true, 120)">B. A acusada pode estar ocultando informações e tentando evitar o confronto direto.</button></li>
+        <li><button onclick="checkAnswer(this, false, 120)">C. A acusada está apenas desconfortável com a situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 120)">D. A acusada está distraída com outros problemas e não focada na pergunta.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-121" style="display: none;">
+    <div class="question">
+        121. Durante um depoimento sobre um roubo, a testemunha evita olhar diretamente para o investigador, move as mãos constantemente e demora para responder. O que pode ser deduzido?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 121)">A. A testemunha está apenas nervosa com o ambiente do depoimento.</button></li>
+        <li><button onclick="checkAnswer(this, false, 121)">B. A testemunha está confusa e tenta organizar seus pensamentos antes de responder.</button></li>
+        <li><button onclick="checkAnswer(this, true, 121)">C. A testemunha pode estar escondendo informações importantes ou envolvimento no roubo.</button></li>
+        <li><button onclick="checkAnswer(this, false, 121)">D. A testemunha está tentando aliviar a tensão causada pelo interrogatório.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-122" style="display: none;">
+    <div class="question">
+        122. Durante um julgamento, o réu começa a gesticular exageradamente, fala muito rápido e evita responder perguntas diretamente. O que isso pode indicar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 122)">A. O réu está tentando se concentrar e organizar suas respostas.</button></li>
+        <li><button onclick="checkAnswer(this, false, 122)">B. O réu está apenas reagindo ao estresse do tribunal.</button></li>
+        <li><button onclick="checkAnswer(this, false, 122)">C. O réu está tentando disfarçar o nervosismo, mas não está envolvido no caso.</button></li>
+        <li><button onclick="checkAnswer(this, true, 122)">D. O réu pode estar tentando ocultar a verdade, o que é evidente pelo comportamento defensivo.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-123" style="display: none;">
+    <div class="question">
+        123. Durante uma investigação de assassinato, a testemunha ri em momentos inadequados, desvia o olhar constantemente e evita detalhes em suas respostas. O que isso pode significar?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, true, 123)">A. A testemunha pode estar tentando aliviar a tensão ou ocultar informações importantes.</button></li>
+        <li><button onclick="checkAnswer(this, false, 123)">B. A testemunha está apenas reagindo ao nervosismo natural da situação.</button></li>
+        <li><button onclick="checkAnswer(this, false, 123)">C. A testemunha está confusa com as perguntas e não sabe como responder adequadamente.</button></li>
+        <li><button onclick="checkAnswer(this, false, 123)">D. A testemunha está tentando parecer relaxada, mas não tem envolvimento no crime.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-124" style="display: none;">
+    <div class="question">
+        124. Durante um interrogatório, o suspeito de tráfico de drogas esfrega as mãos, respira profundamente e olha frequentemente para a saída. O que pode ser concluído?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 124)">A. O suspeito está apenas desconfortável com o ambiente do interrogatório.</button></li>
+        <li><button onclick="checkAnswer(this, false, 124)">B. O suspeito está tentando manter a calma diante das acusações.</button></li>
+        <li><button onclick="checkAnswer(this, true, 124)">C. O suspeito pode estar demonstrando sinais de nervosismo, possivelmente relacionados à culpa.</button></li>
+        <li><button onclick="checkAnswer(this, false, 124)">D. O suspeito está reagindo ao estresse, mas não tem envolvimento no caso.</button></li>
+    </ul>
+</div>
+
+<div class="question-container" id="question-125" style="display: none;">
+    <div class="question">
+        125. Durante uma investigação de sequestro, o principal suspeito desvia os olhos, ajusta frequentemente sua postura e responde de forma defensiva. O que isso pode sugerir?
+    </div>
+    <ul class="options">
+        <li><button onclick="checkAnswer(this, false, 125)">A. O suspeito está tentando se proteger emocionalmente do interrogatório.</button></li>
+        <li><button onclick="checkAnswer(this, true, 125)">B. O suspeito pode estar tentando ocultar informações relevantes ao caso.</button></li>
+        <li><button onclick="checkAnswer(this, false, 125)">C. O suspeito está apenas nervoso e confuso com as perguntas feitas.</button></li>
+        <li><button onclick="checkAnswer(this, false, 125)">D. O suspeito está cansado e não consegue se concentrar adequadamente.</button></li>
+    </ul>
+</div>
     <div class="question-container" id="question-105" style="display: none;">
     <div class="question">
         105. Durante um interrogatório, o suspeito começa a se balançar para frente e para trás, com as mãos no bolso e um sorriso forçado enquanto tenta responder sobre sua relação com a vítima. O que esse comportamento pode indicar?
@@ -1156,6 +1820,7 @@
         
 <!-- Continue reordenando as respostas corretamente nas perguntas seguintes -->
     <script>
+
         let currentQuestion = 0;
         const questions = document.querySelectorAll('.question-container');
 
@@ -1192,4 +1857,5 @@
     </script>
 </body>
 </html>
+        
     

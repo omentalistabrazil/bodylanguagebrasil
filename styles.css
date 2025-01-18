@@ -448,7 +448,7 @@ button:hover {
 .video-container {
     width: 90%;
     max-width: 600px; /* Limitando a largura máxima do contêiner */
-    background-color: #000000;
+    background-color: #ffffff;
     border-radius: 19px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -486,7 +486,7 @@ button:hover {
 .video-description p {
     font-size: 1.1em;
     line-height: 1.6;
-    color: #fff;
+    color: #000000;
 }
 
 /* Adicionando efeitos ao vídeo e descrição quando o mouse passa por cima */
