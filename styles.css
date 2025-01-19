@@ -22,7 +22,7 @@ body {
     text-align: center;
     background-color: #fff;
     border-radius: 20px;
-    padding: 30px;
+    padding: 20px;
     width: 100%;
     max-width: 375px; /* Ajustado para o design do iPhone */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Sombras mais suaves */
@@ -30,16 +30,16 @@ body {
 
 /* Título do quiz */
 h1 {
-    font-size: 2em;
-    font-weight: 700;
-    margin-bottom: 25px;
+    font-size: 0.1em;
+    font-weight: 500;
+    margin-bottom: 5px;
     color: #1c1c1c;
 }
 
 /* Estilo para a pergunta */
 #question {
     font-size: 1.4em; /* Tamanho confortável */
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     color: #333;
     font-weight: 500;
 }

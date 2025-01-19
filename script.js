@@ -261,9 +261,7 @@ function loadQuestion() {
     questionElement.textContent = questionData.question;
     optionsElement.innerHTML = "";
 
-    // Lê a pergunta em voz alta
-    falar(questionData.question);
-
+  
     questionData.options.forEach((option, index) => {
         const button = document.createElement("button");
         button.textContent = option;
@@ -279,11 +277,9 @@ function checkAnswer(selectedIndex, button) {
     if (selectedIndex === correctAnswer) {
         score += 10;
         button.classList.add("correct");
-        falar("Correto!");  // Fala "Correto" se a resposta for certa
-    } else {
+            } else {
         button.classList.add("wrong");
-        falar("Incorreto!");  // Fala "Incorreto" se a resposta for errada
-    }
+            }
 
     // Desabilitar os botões após a escolha
     const buttons = optionsElement.querySelectorAll("button");
