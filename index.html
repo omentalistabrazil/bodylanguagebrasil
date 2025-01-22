@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linguagem Corporal Teste</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quiz de Linguagem Corporal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
     <style>
+        /* Resetando margens e preenchimentos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Definindo o background escuro e clean */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Helvetica Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
         /* Estilo do menu de três pontinhos */
         .menu-dropdown {
             position: fixed;
@@ -15,8 +36,8 @@
         }
 
         .menu-button {
-            background-color: #333; /* Fundo escuro */
-            color: white; /* Cor do texto */
+            background-color: #333;
+            color: white;
             border: none;
             padding: 10px 15px;
             font-size: 18px;
@@ -25,130 +46,174 @@
         }
 
         .menu-button:hover {
-            background-color: #555; /* Fundo mais claro ao passar o mouse */
+            background-color: #555;
         }
 
         .menu-content {
-            display: none; /* Oculto por padrão */
+            display: none;
             position: absolute;
             right: 0;
-            background-color: white; /* Fundo branco */
+            background-color: #1e1e1e;
             min-width: 150px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .menu-content a {
-            color: #333; /* Texto escuro */
+            color: #e0e0e0;
             padding: 10px 15px;
-            text-decoration: none; /* Remove o sublinhado */
+            text-decoration: none;
             display: block;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #444;
         }
 
         .menu-content a:hover {
-            background-color: #f1f1f1; /* Fundo claro ao passar o mouse */
+            background-color: #333;
         }
 
-        /* Exibe o menu quando o botão é clicado */
         .menu-dropdown:hover .menu-content {
             display: block;
         }
 
-        /* Estilo do restante do site */
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .app-container {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .quiz-card {
-            background-color: #f2f2f7;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        #score-container {
-            margin-top: 20px;
-        }
-
-        /* Estilo do aviso no rodapé */
-        .footer {
-            position: fixed;
-            bottom: 10px;
+        /* Estilo do quiz */
+        .quiz-container {
+            background: #1e1e1e;
+            border-radius: 20px;
             width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 22px;
+            font-weight: bold;
             text-align: center;
-            background-color: #333;
-            color: white;
-            padding: 10px;
+            margin-bottom: 10px;
+            color: #42a5f5;
+        }
+
+        header p {
             font-size: 14px;
-            border-top: 1px solid #555;
+            text-align: center;
+            color: #b0bec5;
         }
 
-        .footer a {
-            color: #ff9500; /* Cor de destaque */
-            text-decoration: none;
+        .question {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #e0e0e0;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .options button {
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 16px;
+            width: 100%;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .options button:hover {
+            background: #555;
+            transform: scale(1.05);
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #e0e0e0;
+        }
+
+        /* Botão de som */
+        #play-music {
+            position: absolute; /* Manter fora do fluxo do layout */
+            bottom: 30px; /* Distância do fundo */
+            left: 50%; /* Centralizar horizontalmente */
+            transform: translateX(-50%); /* Ajuste fino para centralizar */
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px; /* Botão pequeno */
+            height: 40px; /* Botão pequeno */
+            font-size: 24px; /* Tamanho maior para o emoji */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        #play-music:hover {
+            background-color: #555;
+        }
+
+        #play-music:active {
+            background-color: #222;
         }
     </style>
 </head>
 <body>
+    <div class="quiz-container">
+        <header>
+            <h1>Teste seus conhecimentos!</h1>
+            <p>Descubra o que você sabe sobre linguagem corporal.</p>
+        </header>
+        <main>
+            <div id="quiz">
+                <div class="question">
+                    <p id="question-text"></p>
+                </div>
+                <div class="options">
+                    <button class="option" onclick="checkAnswer(this)" data-index="0"></button>
+                    <button class="option" onclick="checkAnswer(this)" data-index="1"></button>
+                    <button class="option" onclick="checkAnswer(this)" data-index="2"></button>
+                    <button class="option" onclick="checkAnswer(this)" data-index="3"></button>
+                </div>
+                <div id="result"></div>
+            </div>
+        </main>
+    </div>
 
-  <!-- Menu com apenas 2 opções -->
-  <div class="menu-dropdown">
-      <button class="menu-button">☰</button>
-      <div class="menu-content">
-          <a href="deducao.html">Sherlock Test</a>
-          <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Criador</a>
-          <a href=microtest.html>Expressão facial Test</a>
-           <a href=efeitosdapsicologia.html> Efeitos da Psicologia</a>
-          <a href="aula.html">Linguagem C. Aula</a>
-      </div>
-  </div>
+    <!-- Menu de opções -->
+    <div class="menu-dropdown">
+        <button class="menu-button">☰</button>
+        <div class="menu-content">
+            <a href="deducao.html">Sherlock Test</a>
+            <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Criador</a>
+            <a href="microtest.html">Expressão facial Test</a>
+            <a href="efeitosdapsicologia.html">Efeitos da Psicologia</a>
+             <a href="galery.index.html">Galeria de gestos</a>
+            <a href="aula.html">Linguagem C. Aula</a>
+        </div>
+    </div>
 
-  <button id="restart-button" style="display: none;">Reiniciar Quiz</button>
-  
-  <div class="app-container">
-      <h1>Linguagem Corporal Teste</h1>
-      <div id="quiz-container" class="quiz-card">
-          <p id="question">Pergunta vai aqui</p>
-          <div id="options">
-              <!-- As opções de resposta vão aqui -->
-          </div>
-      </div>
-      <button id="next-button" class="btn">Próxima Pergunta</button>
-      <div id="score-container">
-          <p>Pontuação: <span id="score">0</span></p>
-      </div>
-  </div>
+    <!-- Música de fundo -->
+    <audio id="background-music" autoplay loop>
+        <source src="foco.mp3" type="audio/mpeg">
+        Seu navegador não suporta a reprodução de áudio.
+    </audio>
 
-  <!-- Aviso no rodapé -->
-  <div id="footer" class="footer">
-      <p>Este site está em desenvolvimento, Se as perguntas não carregarem abra o site no navegador padrão, Pode haver erros. Criado por <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Gabriel Wyo</a></p>
-  </div>
+    <!-- Botão para ativar o som -->
+    <button id="play-music">🔊</button>
 
-  <script src="script.js"></script>
-  
-  <script>
-    // Função para ocultar o rodapé após 4 segundos
-    setTimeout(function() {
-        document.getElementById("footer").style.display = "none";
-    }, 4000);  // O rodapé será ocultado após 4 segundos
-  </script>
-
+    <script>
+        document.getElementById('play-music').addEventListener('click', function () {
+            const music = document.getElementById('background-music');
+            music.play();
+            this.style.display = 'none'; // Esconde o botão após ativar o som
+        });
+    </script>
 </body>
 </html>

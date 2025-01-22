@@ -1,0 +1,200 @@
+/* Resetando margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Definindo o background escuro e clean */
+body {
+    background-color: #121212; /* Cor escura para o fundo */
+    color: #e0e0e0; /* Texto claro para contraste */
+    font-family: 'Helvetica Neue', sans-serif; /* Fonte moderna */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Estilo da tela do quiz (container menor e mais escuro) */
+.quiz-container {
+    background: #1e1e1e; /* Cor de fundo escura */
+    border-radius: 20px; /* Bordas mais suaves */
+    width: 100%;
+    max-width: 400px; /* Ajustado para ser mais compacto */
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Sombra suave e escura */
+}
+
+/* Cabeçalho */
+header h1 {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #42a5f5; /* Cor azul brilhante para destaque */
+}
+
+/* Texto de descrição */
+header p {
+    font-size: 14px;
+    text-align: center;
+    color: #b0bec5; /* Texto claro para suavizar */
+}
+
+/* Pergunta */
+.question {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #e0e0e0; /* Texto claro para contraste */
+}
+
+/* Botões de resposta */
+.options button {
+    background: #333; /* Cor escura de fundo */
+    border: 1px solid #444; /* Borda suave escura */
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 100%;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4); /* Sombras escuras */
+}
+
+/* Efeito de hover nos botões */
+.options button:hover {
+    background: #555; /* Fundo um pouco mais claro */
+    transform: scale(1.05);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5); /* Efeito de sombra mais forte */
+}
+
+/* Resultado */
+#result {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #e0e0e0; /* Texto claro */
+}
+
+/* Links para os grupos do Telegram */
+.telegram-links {
+    margin-top: 30px;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 1s ease;
+    z-index: 1000;
+}
+
+.telegram-button {
+    display: inline-block;
+    background: linear-gradient(145deg, #006699, #00aaff); /* Gradiente de azul */
+    box-shadow: 3px 3px 6px #004466, -3px -3px 6px #00ccff;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    transform: scale(0.95);
+}
+
+/* Efeito de hover nos links do Telegram */
+.telegram-button:hover {
+    background: linear-gradient(145deg, #00aaff, #006699);
+    box-shadow: 3px 3px 12px #004466, -3px -3px 12px #00ccff;
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Efeito de transição do botão */
+.telegram-links.visible {
+    opacity: 1; /* Torna visível após 5 segundos */
+}
+
+/* Botão voltar com o estilo elegante */
+.back-button {
+    text-align: center;
+    margin-top: 30px;
+    display: inline-block;
+    background-color: #ff7f00;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Hover do botão voltar */
+.back-button:hover {
+    background-color: #e67e00;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}<style>
+    /* Estilo do menu de três pontinhos */
+    .menu-dropdown {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+    }
+
+    .menu-button {
+        background-color: #333; /* Fundo escuro */
+        color: white; /* Cor do texto */
+        border: none;
+        padding: 10px 15px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .menu-button:hover {
+        background-color: #555; /* Fundo mais claro ao passar o mouse */
+    }
+
+    .menu-content {
+        display: none; /* Oculto por padrão */
+        position: absolute;
+        right: 0;
+        background-color: white; /* Fundo branco */
+        min-width: 150px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+    }
+
+    .menu-content a {
+        color: #333; /* Texto escuro */
+        padding: 10px 15px;
+        text-decoration: none; /* Remove o sublinhado */
+        display: block;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-content a:hover {
+        background-color: #f1f1f1; /* Fundo claro ao passar o mouse */
+    }
+
+    /* Exibe o menu quando o botão é clicado */
+    .menu-dropdown:hover .menu-content {
+        display: block;
+    }
