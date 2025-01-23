@@ -2,140 +2,113 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=device-dpi">
-    <meta name="theme-color" content="#4e73df">
-    <title>Aviso de Manutenção</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguagem Corporal Teste</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilo geral do corpo */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #4e73df, #1e3c72);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            overflow: hidden;
-        }
-
-        /* Container para o aviso de manutenção */
-        #maintenance-message {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            animation: fadeIn 1s ease-out;
-        }
-
-        #maintenance-message h1 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        }
-
-        #maintenance-message p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        /* Efeito de fade-in para o container */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Botão de voltar */
-        .back-button {
-            padding: 12px 25px;
-            font-size: 1.2em;
-            background-color: #64ffda;
-            color: #333;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: background-color 0.3s ease;
-        }
-
-        .back-button:hover {
-            background-color: #00e5c9;
-            transform: scale(1.05);
-        }
-
-        /* Menu de opções */
+        /* Estilo do menu de três pontinhos */
         .menu-dropdown {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
         }
 
         .menu-button {
-            font-size: 2.5em;
-            background-color: #333;
-            color: white;
+            background-color: #333; /* Fundo escuro */
+            color: white; /* Cor do texto */
             border: none;
-            padding: 15px;
+            padding: 10px 15px;
+            font-size: 18px;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 50%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .menu-button:hover {
-            background-color: #444;
-            transform: scale(1.1);
+            background-color: #555; /* Fundo mais claro ao passar o mouse */
         }
 
         .menu-content {
-            display: none;
-            background-color: #333;
+            display: none; /* Oculto por padrão */
             position: absolute;
-            top: 60px;
             right: 0;
+            background-color: white; /* Fundo branco */
+            min-width: 150px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease-out;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
         }
 
+        .menu-content a {
+            color: #333; /* Texto escuro */
+            padding: 10px 15px;
+            text-decoration: none; /* Remove o sublinhado */
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-content a:hover {
+            background-color: #f1f1f1; /* Fundo claro ao passar o mouse */
+        }
+
+        /* Exibe o menu quando o botão é clicado */
         .menu-dropdown:hover .menu-content {
             display: block;
         }
 
-        .menu-content a {
+        /* Estilo do restante do site */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .app-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .quiz-card {
+            background-color: #f2f2f7;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #score-container {
+            margin-top: 20px;
+        }
+
+        /* Estilo do aviso no rodapé */
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            background-color: #333;
             color: white;
-            padding: 12px 20px;
+            padding: 10px;
+            font-size: 14px;
+            border-top: 1px solid #555;
+        }
+
+        .footer a {
+            color: #ff9500; /* Cor de destaque */
             text-decoration: none;
-            display: block;
-            transition: background-color 0.2s ease;
         }
 
-        .menu-content a:hover {
-            background-color: #444;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(0);
-            }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <!-- Menu de opções -->
+  <!-- Menu de opções -->
     <div class="menu-dropdown">
         <button class="menu-button">☰</button>
         <div class="menu-content">
@@ -147,14 +120,37 @@
             <a href="corporaltreino.html">Dicionário de L.C</a>
             <a href="aula.html">Linguagem C. Aula</a>
         </div>
-    </div>
+  </div>
 
-    <!-- Aviso de manutenção -->
-    <div id="maintenance-message">
-        <h1>Este quiz está fechado temporariamente.</h1>
-        <p>Por favor, volte mais tarde.</p>
-        <a href="index.html" class="back-button">Voltar para a página principal</a>
-    </div>
+  <button id="restart-button" style="display: none;">Reiniciar Quiz</button>
+  
+  <div class="app-container">
+      <h1>Linguagem Corporal Teste</h1>
+      <div id="quiz-container" class="quiz-card">
+          <p id="question">Pergunta vai aqui</p>
+          <div id="options">
+              <!-- As opções de resposta vão aqui -->
+          </div>
+      </div>
+      <button id="next-button" class="btn">Próxima Pergunta</button>
+      <div id="score-container">
+          <p>Pontuação: <span id="score">0</span></p>
+      </div>
+  </div>
+
+  <!-- Aviso no rodapé -->
+  <div id="footer" class="footer">
+      <p>Este site está em desenvolvimento, Se as perguntas não carregarem abra o site no navegador padrão, Pode haver erros. Criado por <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Gabriel Wyo</a></p>
+  </div>
+
+  <script src="script.js"></script>
+  
+  <script>
+    // Função para ocultar o rodapé após 4 segundos
+    setTimeout(function() {
+        document.getElementById("footer").style.display = "none";
+    }, 4000);  // O rodapé será ocultado após 4 segundos
+  </script>
 
 </body>
 </html>

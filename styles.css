@@ -1,0 +1,114 @@
+/* Resetando estilos básicos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7; /* Cor de fundo clara */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container principal do app */
+.app-container {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 375px; /* Ajustado para o design do iPhone */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Sombras mais suaves */
+}
+
+/* Título do quiz */
+h1 {
+    font-size: 0.1em;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #1c1c1c;
+}
+
+/* Estilo para a pergunta */
+#question {
+    font-size: 1.4em; /* Tamanho confortável */
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Estilo das opções */
+#options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+button {
+    padding: 14px 18px;
+    background-color: #007aff; /* Azul característico do iOS */
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1em;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    position: relative;
+    z-index: 1; /* Garantir que o texto fique visível acima da cor de fundo */
+}
+
+/* Efeito de hover nos botões */
+button:hover {
+    background-color: #0051a8; /* Azul mais escuro */
+}
+
+/* Efeito de clique nos botões */
+button:active {
+    transform: translateY(2px) scale(0.98); /* Efeito de clique */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cores para respostas corretas e erradas */
+.correct {
+    background-color: #28a745; /* Verde para respostas corretas */
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+}
+
+.wrong {
+    background-color: #dc3545; /* Vermelho para respostas erradas */
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+/* Estilo do botão de reiniciar */
+#restart-button {
+    background-color: #ff9500; /* Laranja */
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 148, 0, 0.3);
+    margin-top: 20px;
+    display: none;
+}
+
+/* Hover no botão de reiniciar */
+#restart-button:hover {
+    background-color: #d77b00; /* Laranja mais escuro */
+}
+
+/* Contêiner para exibir a pontuação */
+#score-container {
+    font-size: 1.2em;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #333;
+}
