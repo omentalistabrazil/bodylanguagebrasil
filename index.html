@@ -1,190 +1,139 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Linguagem Corporal</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=device-dpi">
+    <meta name="theme-color" content="#4e73df">
+    <title>Aviso de Manutenção</title>
     <style>
-        /* Resetando margens e preenchimentos */
-        * {
+        /* Estilo geral do corpo */
+        body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Definindo o background escuro e clean */
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #4e73df, #1e3c72);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            padding: 20px;
-            position: relative;
+            color: white;
+            overflow: hidden;
         }
 
-        /* Estilo do menu de três pontinhos */
+        /* Container para o aviso de manutenção */
+        #maintenance-message {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        #maintenance-message h1 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        #maintenance-message p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        /* Efeito de fade-in para o container */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Botão de voltar */
+        .back-button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            background-color: #64ffda;
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #00e5c9;
+            transform: scale(1.05);
+        }
+
+        /* Menu de opções */
         .menu-dropdown {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
         }
 
         .menu-button {
+            font-size: 2.5em;
             background-color: #333;
             color: white;
             border: none;
-            padding: 10px 15px;
-            font-size: 18px;
-            border-radius: 5px;
+            padding: 15px;
             cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .menu-button:hover {
-            background-color: #555;
+            background-color: #444;
+            transform: scale(1.1);
         }
 
         .menu-content {
             display: none;
-            position: absolute;
-            right: 0;
-            background-color: #1e1e1e;
-            min-width: 150px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .menu-content a {
-            color: #e0e0e0;
-            padding: 10px 15px;
-            text-decoration: none;
-            display: block;
-            border-bottom: 1px solid #444;
-        }
-
-        .menu-content a:hover {
             background-color: #333;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            border-radius: 5px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
         }
 
         .menu-dropdown:hover .menu-content {
             display: block;
         }
 
-        /* Estilo do quiz */
-        .quiz-container {
-            background: #1e1e1e;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        header h1 {
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-            color: #42a5f5;
-        }
-
-        header p {
-            font-size: 14px;
-            text-align: center;
-            color: #b0bec5;
-        }
-
-        .question {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #e0e0e0;
-        }
-
-        .options button {
-            background: #333;
-            border: 1px solid #444;
-            border-radius: 12px;
+        .menu-content a {
+            color: white;
             padding: 12px 20px;
-            font-size: 16px;
-            width: 100%;
-            margin: 10px 0;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease;
         }
 
-        .options button:hover {
-            background: #555;
-            transform: scale(1.05);
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+        .menu-content a:hover {
+            background-color: #444;
         }
 
-        #result {
-            text-align: center;
-            font-size: 18px;
-            margin-top: 20px;
-            color: #e0e0e0;
-        }
-
-        /* Botão de som */
-        #play-music {
-            position: absolute; /* Manter fora do fluxo do layout */
-            bottom: 30px; /* Distância do fundo */
-            left: 50%; /* Centralizar horizontalmente */
-            transform: translateX(-50%); /* Ajuste fino para centralizar */
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 40px; /* Botão pequeno */
-            height: 40px; /* Botão pequeno */
-            font-size: 24px; /* Tamanho maior para o emoji */
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s;
-        }
-
-        #play-music:hover {
-            background-color: #555;
-        }
-
-        #play-music:active {
-            background-color: #222;
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <header>
-            <h1>Teste seus conhecimentos!</h1>
-            <p>Descubra o que você sabe sobre linguagem corporal.</p>
-        </header>
-        <main>
-            <div id="quiz">
-                <div class="question">
-                    <p id="question-text"></p>
-                </div>
-                <div class="options">
-                    <button class="option" onclick="checkAnswer(this)" data-index="0"></button>
-                    <button class="option" onclick="checkAnswer(this)" data-index="1"></button>
-                    <button class="option" onclick="checkAnswer(this)" data-index="2"></button>
-                    <button class="option" onclick="checkAnswer(this)" data-index="3"></button>
-                </div>
-                <div id="result"></div>
-            </div>
-        </main>
-    </div>
 
     <!-- Menu de opções -->
     <div class="menu-dropdown">
@@ -194,27 +143,18 @@
             <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Criador</a>
             <a href="microtest.html">Expressão facial Test</a>
             <a href="efeitosdapsicologia.html">Efeitos da Psicologia</a>
-            <a href="narrador.html">Narrador de Pdf</a>
-             <a href="galery.index.html">Galeria de gestos</a>
+            <a href="narrador.html">Narrar PDF</a>
+            <a href="corporaltreino.html">Dicionário de L.C</a>
             <a href="aula.html">Linguagem C. Aula</a>
         </div>
     </div>
 
-    <!-- Música de fundo -->
-    <audio id="background-music" autoplay loop>
-        <source src="foco.mp3" type="audio/mpeg">
-        Seu navegador não suporta a reprodução de áudio.
-    </audio>
+    <!-- Aviso de manutenção -->
+    <div id="maintenance-message">
+        <h1>Este quiz está fechado temporariamente.</h1>
+        <p>Por favor, volte mais tarde.</p>
+        <a href="index.html" class="back-button">Voltar para a página principal</a>
+    </div>
 
-    <!-- Botão para ativar o som -->
-    <button id="play-music">🔊</button>
-
-    <script>
-        document.getElementById('play-music').addEventListener('click', function () {
-            const music = document.getElementById('background-music');
-            music.play();
-            this.style.display = 'none'; // Esconde o botão após ativar o som
-        });
-    </script>
 </body>
 </html>
