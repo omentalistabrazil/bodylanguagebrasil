@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> NARRADOR DE LIVROS</title>
+  <style>
+    /* Tema Dark com efeitos 3D */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif; /* Fonte similar ao iPhone */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #121212; /* Dark background */
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      background: linear-gradient(145deg, #1c1c1c, #272727); /* Dark gradient for 3D effect */
+      padding: 20px;
+      border-radius: 20px; /* Rounded corners */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 4px 20px rgba(0, 0, 0, 0.2); /* 3D shadow effect */
+      width: 90%;
+      max-width: 600px;
+      backdrop-filter: blur(10px); /* Background blur effect for a more iPhone-style look */
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px; /* Rounded button */
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease-in-out;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: translateY(-2px); /* Hover effect for button */
+    }
+
+    button:active {
+      transform: translateY(2px); /* Active button effect */
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+      background-color: #444;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      color: white;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    #pdfText {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.5;
+      white-space: pre-line;
+      color: #ddd;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    /* Estilo para a marcação de texto */
+    .highlight {
+      background-color: rgba(255, 255, 0, 0.6); /* Amarelo suave */
+      padding: 0 5px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    #progressBar {
+      width: 100%;
+      height: 10px;
+      background-color: #444;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0;
+      background-color: #4CAF50;
+      border-radius: 5px;
+    }
+
+    /* Escondendo os botões de navegação até o PDF ser carregado */
+    .navigation-buttons {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Narrador de Livros </h1>
+    <input type="file" id="pdfFile" accept="application/pdf">
+    <br>
+    <button onclick="narrarPDF()">Iniciar Narração</button>
+    <p id="status"></p>
+    <div id="pdfText"></div>
+
+    <!-- Barra de Progresso para controle de navegação -->
+    <div id="progressBar">
+      <div id="progress"></div>
+    </div>
+
+    <!-- Botões de navegação - Inicialmente escondidos -->
+    <div class="navigation-buttons">
+      <button onclick="previousPage()">Página Anterior</button>
+      <button onclick="nextPage()">Próxima Página</button>
+    </div>
+  </div>
+
+  <!-- Importando a biblioteca pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+  <script>
+    let utterance;
+    let currentPage = 1;
+    let totalPages;
+    let pdfDoc;
+
+    // Função para iniciar a narração do PDF
+    function narrarPDF() {
+      const fileInput = document.getElementById("pdfFile");
+      if (fileInput.files.length === 0) {
+        alert("Por favor, envie um arquivo PDF.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      document.getElementById("status").textContent = "Carregando PDF...";
+
+      reader.onload = function() {
+        const pdfData = new Uint8Array(reader.result);
+
+        // Usando o pdf.js para carregar o PDF
+        pdfjsLib.getDocument({ data: pdfData }).promise.then(function(pdf) {
+          pdfDoc = pdf;
+          totalPages = pdf.numPages;
+          document.getElementById("status").textContent = "Lendo página " + currentPage;
+          processPage(currentPage);
+
+          // Exibir os botões de navegação após carregar o PDF
+          document.querySelector(".navigation-buttons").style.display = "block";
+        }).catch(error => {
+          document.getElementById("status").textContent = "Erro ao carregar o PDF.";
+          console.error(error);
+        });
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+
+    // Função para processar cada página e narrar o texto
+    function processPage(pageNumber) {
+      const page = pdfDoc.getPage(pageNumber);
+      page.then(function(pageData) {
+        const textContent = pageData.getTextContent();
+        textContent.then(function(textItems) {
+          const pageText = textItems.items.map(item => item.str).join(" ");
+          document.getElementById("pdfText").innerHTML = pageText;
+
+          // Narração do texto
+          narrarTexto(pageText);
+
+          // Destacar o texto enquanto é lido
+          highlightText(pageText);
+        });
+      });
+    }
+
+    // Função para narrar o texto
+    function narrarTexto(texto) {
+      if (!window.speechSynthesis) {
+        document.getElementById("status").textContent = "A API de narração não está disponível.";
+        return;
+      }
+
+      // Se houver uma narração em andamento, ela é cancelada antes de começar uma nova
+      if (utterance && speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+      }
+
+      utterance = new SpeechSynthesisUtterance(texto);
+      utterance.onend = function() {
+        // Ao terminar a narração de uma página, passar para a próxima página automaticamente
+        nextPage();
+      };
+
+      speechSynthesis.speak(utterance);
+    }
+
+    // Função para destacar o texto enquanto é lido
+    function highlightText(texto) {
+      const words = texto.split(" ");
+      let highlightedText = '';
+      words.forEach((word, index) => {
+        highlightedText += `<span class="highlight">${word}</span> `;
+      });
+      document.getElementById("pdfText").innerHTML = highlightedText;
+
+      // Atualizar a barra de progresso com o andamento da narração
+      updateProgressBar();
+    }
+
+    // Função para atualizar a barra de progresso
+    function updateProgressBar() {
+      const progressPercentage = (currentPage / totalPages) * 100;
+      document.getElementById("progress").style.width = progressPercentage + "%";
+    }
+
+    // Função para passar para a próxima página
+    function nextPage() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        document.getElementById("status").textContent = "Lendo página " + currentPage;
+        processPage(currentPage);
+      } else {
+        document.getElementById("status").textContent = "Já está na última página.";
+      }
+    }
+
+    // Função para voltar para a página anterior
+    function previousPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        document.getElementById("status").textContent = "Lendo página " + currentPage;
+        processPage(currentPage);
+      } else {
+        document.getElementById("status").textContent = "Já está na primeira página.";
+      }
+    }
+  </script>
+
+</body>
+</html>
