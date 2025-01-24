@@ -1,299 +1,462 @@
-// Lista de perguntas com as respostas
-const quizData = [
-    {
-        question: "Qual é a emoção associada a um sorriso genuíno?",
-        options: ["Felicidade", "Raiva", "Tristeza", "Surpresa"],
-        answer: 0 // Índice da resposta correta
-    },
-    {
-        question: "Qual postura indica insegurança?",
-        options: ["Braços cruzados", "Postura ereta", "Mãos nos bolsos", "Sorriso largo"],
-        answer: 2
-    },
-    {
-        question: "O que significa uma pessoa manter contato visual constante durante uma conversa?",
-        options: ["Confiança", "Desinteresse", "Mentira", "Desconforto"],
-        answer: 0
-    },
-    {
-        question: "Qual é o significado de uma pessoa tocar o próprio pescoço durante uma conversa?",
-        options: ["Confiança", "Nervosismo", "Alegria", "Tristeza"],
-        answer: 1
-    },
-    {
-        question: "Quando uma pessoa cruza os braços, isso geralmente indica?",
-        options: ["Abertura", "Defensividade", "Atenção", "Sinceridade"],
-        answer: 1
-    },
-    {
-        question: "Quando alguém olha para baixo enquanto fala, isso pode indicar?",
-        options: ["Confiança", "Mentira", "Desinteresse", "Insegurança"],
-        answer: 3
-    },
-    {
-        question: "Qual é o significado de uma pessoa sorrir enquanto fala sobre algo triste?",
-        options: ["Felicidade genuína", "Desconforto", "Mentira", "Confusão"],
-        answer: 2
-    },
-    {
-        question: "O que significa uma pessoa esfregar os olhos durante uma conversa?",
-        options: ["Cansaço", "Mentira", "Desinteresse", "Confusão"],
-        answer: 0
-    },
-    {
-        question: "Qual postura indica confiança em uma pessoa?",
-        options: ["Braços cruzados", "Postura ereta", "Olhos no chão", "Mãos nos bolsos"],
-        answer: 1
-    },
-    {
-        question: "Quando uma pessoa mantém a boca fechada e não sorri, isso pode indicar?",
-        options: ["Desinteresse", "Raiva", "Preocupação", "Felicidade"],
-        answer: 2
-    },
-    {
-        question: "O que significa uma pessoa que está constantemente mexendo as mãos durante uma conversa?",
-        options: ["Atenção", "Desinteresse", "Nervosismo", "Confiança"],
-        answer: 2
-    },
-    {
-        question: "Quando alguém se afasta fisicamente de você durante uma conversa, o que isso geralmente indica?",
-        options: ["Intimidade", "Aversão", "Atenção", "Curiosidade"],
-        answer: 1
-    },
-    {
-        question: "Qual é a interpretação de uma pessoa balançando a perna enquanto fala?",
-        options: ["Nervosismo", "Conforto", "Confiança", "Desinteresse"],
-        answer: 0
-    },
-    {
-        question: "Quando uma pessoa se toca frequentemente, como passar a mão no cabelo, isso pode indicar?",
-        options: ["Conforto", "Atenção", "Nervosismo", "Desinteresse"],
-        answer: 2
-    },
-    {
-        question: "Qual é o significado de uma pessoa inclinar a cabeça para o lado durante uma conversa?",
-        options: ["Confusão", "Desinteresse", "Empatia", "Raiva"],
-        answer: 2
-    }
-];
-// Adicionando as novas perguntas com o método push
-quizData.push(
-    {
-        question: "Quando uma pessoa se afasta e cruza os braços, isso pode indicar?",
-        options: ["Desinteresse", "Aversão", "Desconfiança", "Empatia"],
-        answer: 1
-    },
-    {
-        question: "O que significa uma pessoa olhar para o relógio enquanto está conversando?",
-        options: ["Desinteresse", "Preocupação", "Impressão de autoridade", "Curiosidade"],
-        answer: 0
-    },
-    {
-        question: "Qual é o significado de uma pessoa sorrir enquanto está fazendo algo desconfortável?",
-        options: ["Desconforto disfarçado", "Alegria genuína", "Raiva reprimida", "Confusão"],
-        answer: 0
-    },
-    {
-        question: "O que pode significar uma pessoa com as mãos nos bolsos durante uma conversa?",
-        options: ["Confiança", "Defensividade", "Tristeza", "Preocupação"],
-        answer: 1
-    },
-    {
-        question: "Qual é o sinal de que uma pessoa está empolgada e confiante?",
-        options: ["Postura ereta e braços abertos", "Mãos nos bolsos", "Balanço de pernas", "Sorriso tímido"],
-        answer: 0
-    },
-    {
-        question: "Quando uma pessoa olha para baixo enquanto fala com você, isso pode indicar?",
-        options: ["Insegurança", "Mentira", "Empatia", "Raiva"],
-        answer: 0
-    },
-    {
-        question: "Quando alguém fica com as mãos nos quadris durante uma conversa, o que isso geralmente indica?",
-        options: ["Abertura", "Agressividade", "Atenção", "Desinteresse"],
-        answer: 1
-    },
-    {
-        question: "O que significa uma pessoa apertar a mandíbula ou os dentes durante uma conversa?",
-        options: ["Raiva ou tensão", "Felicidade", "Cansaço", "Atenção"],
-        answer: 0
-    },
-    {
-        question: "Quando alguém fala muito rápido e com entusiasmo, isso pode indicar?",
-        options: ["Ansiedade", "Confiança", "Desinteresse", "Excitação"],
-        answer: 3
-    },
-    {
-        question: "Qual é o significado de uma pessoa olhar para o lado enquanto fala?",
-        options: ["Desinteresse", "Mentira", "Busca por apoio", "Curiosidade"],
-        answer: 2
-    }
-);
-// Adicionando 10 perguntas de linguagem corporal avançada a partir da numeração 25
-quizData.push(
-    {
-        question: "O que significa quando uma pessoa fica olhando para o lado durante uma conversa?",
-        options: ["Desconforto ou evasão", "Interesse", "Pensamento profundo", "Mentira"],
-        answer: 0
-    },
-    {
-        question: "Quando alguém mantém os pés apontados para a saída, isso geralmente significa?",
-        options: ["Desinteresse", "Desejo de sair", "Atenção", "Confiança"],
-        answer: 1
-    },
-    {
-        question: "O que uma pessoa pode estar tentando comunicar quando faz gestos exagerados com as mãos enquanto fala?",
-        options: ["Tentando destacar um ponto importante", "Desinteresse", "Insegurança", "Mentindo"],
-        answer: 0
-    },
-    {
-        question: "Quando uma pessoa se afasta fisicamente de alguém durante uma conversa, o que isso pode indicar?",
-        options: ["Distanciamento emocional", "Interesse", "Atenção", "Empatia"],
-        answer: 0
-    },
-    {
-        question: "Uma pessoa que toca ou esfrega o pescoço enquanto fala pode estar demonstrando?",
-        options: ["Insegurança", "Confiança", "Felicidade", "Desinteresse"],
-        answer: 0
-    },
-    {
-        question: "O que pode significar se uma pessoa tenta esconder as mãos debaixo da mesa enquanto está conversando?",
-        options: ["Esconder emoções", "Falta de confiança", "Segurança", "Mentira"],
-        answer: 0
-    },
-    {
-        question: "O que pode indicar quando uma pessoa cruza os braços enquanto ouve atentamente alguém?",
-        options: ["Resistência ou defesa", "Desinteresse", "Atenção focada", "Concordância"],
-        answer: 0
-    },
-    {
-        question: "Quando uma pessoa olha rapidamente para a esquerda ou direita durante uma conversa, isso pode ser um sinal de?",
-        options: ["Lembrança de algo", "Mentira", "Desinteresse", "Felicidade"],
-        answer: 1
-    },
-    {
-        question: "Quando alguém está sentindo estresse, é provável que sua linguagem corporal inclua?",
-        options: ["Tensão muscular e respiração curta", "Relaxamento e postura aberta", "Sorriso constante", "Postura ereta e relaxada"],
-        answer: 0
-    },
-    {
-        question: "O que significa quando uma pessoa fica batendo os dedos ou as mãos de forma rítmica durante uma conversa?",
-        options: ["Impaciência ou ansiedade", "Felicidade", "Senso de controle", "Desinteresse"],
-        answer: 0
-    }
-);
+const quizData = {
+    questions: [
+        // Perguntas 1 a 26 (já existentes)
+        {
+            question: "Quando um pé está apontando para a direção da saída, isso pode indicar:",
+            image: "imagens/imagem1.jpg",
+            options: [
+                "A pessoa está com interesse",
+                "A pessoa tem intenção de sair",
+                "A pessoa está relaxada",
+                "A pessoa está ansiosa"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Agarrar os joelhos e posicionar os pés em arranque indica que a pessoa está:",
+            image: "imagens/imagem2.jpg",
+            options: [
+                "Pronta para partir",
+                "Confortável",
+                "Insegura",
+                "Confiante"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "O que significa quando alguém está com as pernas cruzadas em uma conversa?",
+            image: "imagens/imagem3.jpg",
+            options: [
+                "Conforto e relaxamento",
+                "Insegurança",
+                "Falta de interesse",
+                "Intenção de dominar a conversa"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Quando alguém afasta o joelho durante uma conversa, isso pode significar:",
+            image: "imagens/imagem4.jpg",
+            options: [
+                "Sinal de fechamento",
+                "Sinal de abertura e conforto",
+                "Ansiedade",
+                "Confiança excessiva"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Limpar as mãos nas pernas é um comportamento frequentemente associado a:",
+            image: "imagens/imagem5.jpg",
+            options: [
+                "Confiança",
+                "Estresse ou ansiedade",
+                "Falta de interesse",
+                "Controle da situação"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "O encolhimento parcial dos ombros pode indicar:",
+            image: "imagens/imagem6.jpg",
+            options: [
+                "Falta de interesse",
+                "Confiança",
+                "Insegurança ou dúvida",
+                "Desejo de se afastar"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "Quando alguém encolhe completamente os ombros, isso geralmente significa:",
+            image: "imagens/imagem7.jpg",
+            options: [
+                "Falta de interesse",
+                "Falta de compromisso",
+                "A pessoa não sabe ou não tem certeza",
+                "A pessoa está afirmando algo com confiança"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "Esparramar-se é mais aceitável:",
+            image: "imagens/imagem8.jpg",
+            options: [
+                "Quando a pessoa está em seu próprio espaço",
+                "Quando se está tentando controlar a conversa",
+                "Quando a pessoa está tentando agradar alguém",
+                "Durante uma reunião de negócios"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Os braços esparramados sobre outras cadeiras podem indicar que a pessoa está:",
+            image: "imagens/imagem9.jpg",
+            options: [
+                "Insegura",
+                "Confortável e confiante",
+                "Tentando controlar a situação",
+                "Ansiosa ou nervosa"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Colocar as mãos na cintura com os polegares para trás é um sinal de:",
+            image: "imagens/imagem10.jpg",
+            options: [
+                "Conforto",
+                "Autoridade e domínio",
+                "Falta de interesse",
+                "Dúvida"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Quando alguém coloca os polegares para frente na cintura, a postura é mais:",
+            image: "imagens/imagem11.jpg",
+            options: [
+                "Autoritária",
+                "Questionadora ou inquisidora",
+                "Relaxada",
+                "Desinteressada"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Colocar as mãos entrelaçadas atrás da cabeça é uma demonstração de:",
+            image: "imagens/imagem12.jpg",
+            options: [
+                "Insegurança",
+                "Conforto e domínio",
+                "Desinteresse",
+                "Tentativa de se afastar"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Plantar os dedos espalhados sobre uma superfície é um claro sinal de:",
+            image: "imagens/imagem13.jpg",
+            options: [
+                "Confiança e autoridade",
+                "Conforto",
+                "Ansiedade",
+                "Falta de respeito"
+            ],
+            correctAnswer: 0
+        },
 
-console.log(quizData); // As novas perguntas difíceis foram adicionadas ao quizData a partir da numeração 25
-console.log(quizData); // As perguntas foram adicionadas ao quizData
-let currentQuestion = 0;
-let score = 0;
+        // Perguntas 14 a 26 (já existentes)
 
-const questionElement = document.getElementById("question");
-const optionsElement = document.getElementById("options");
-const scoreContainer = document.getElementById("score-container");
-const restartButton = document.getElementById("restart-button");
+        {
+            question: "O que a postura de 'torre com as mãos' demonstra?",
+            image: "imagens/imagem14.jpg",
+            options: [
+                "Nervosismo",
+                "Falta de interesse",
+                "Insegurança",
+                "Confiança e foco"
+            ],
+            correctAnswer: 3
+        },
+        {
+            question: "Os polegares para cima são associados a...?",
+            image: "imagens/imagem15.jpg",
+            options: [
+                "Indecisão",
+                "Confiança naquele momento",
+                "Desinteresse",
+                "Dúvida"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "O que significa os polegares apontando para baixo em uma conversa?",
+            image: "imagens/imagem16.jpg",
+            options: [
+                "Falta de confiança e/ou ênfase",
+                "Foco",
+                "Entusiasmo",
+                "Confiança"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Quando alguém esconde os polegares, qual é a mensagem transmitida?",
+            image: "imagens/imagem17.jpg",
+            options: [
+                "Interesse na conversa",
+                "Distração",
+                "Insegurança",
+                "Confiança e credibilidade"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "Esfregar as mãos rapidamente é um sinal de...?",
+            image: "imagens/imagem18.jpg",
+            options: [
+                "Alívio do estresse",
+                "Desinteresse",
+                "Nervosismo",
+                "Confiança"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Confranger as mãos é uma demonstração de...?",
+            image: "imagens/imagem19.jpg",
+            options: [
+                "Interesse no assunto",
+                "Entusiasmo",
+                "Preocupação ou ansiedade",
+                "Confiança"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "Esfregar os dedos entrelaçados e esticados pode significar...?",
+            image: "imagens/imagem20.jpg",
+            options: [
+                "Autoconfiança",
+                "Concentração",
+                "Alto nível de ansiedade ou desconforto",
+                "Entusiasmo"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "Inclinar a cabeça indica...?",
+            image: "imagens/imagem21.jpg",
+            options: [
+                "Receptividade e conforto",
+                "Desconfiança",
+                "Dúvida",
+                "Insegurança"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Tocar no pescoço demonstra o quê?",
+            image: "imagens/imagem22.jpg",
+            options: [
+                "Dúvida ou insegurança",
+                "Conforto emocional",
+                "Confiança",
+                "Interesse"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Cobrir a covinha do pescoço pode significar...?",
+            image: "imagens/imagem23.jpg",
+            options: [
+                "Medo ou insegurança",
+                "Interesse na conversa",
+                "Concentração",
+                "Felicidade"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "O que os gestos de bloquear os olhos geralmente indicam?",
+            image: "imagens/imagem24.jpg",
+            options: [
+                "Alegria",
+                "Concentração",
+                "Interesse",
+                "Desagrado ou desconforto"
+            ],
+            correctAnswer: 3
+        },
+        {
+            question: "Tocar nos olhos durante uma conversa pode significar...?",
+            image: "imagens/imagem25.jpg",
+            options: [
+                "Confiança",
+                "Necessidade de pacificar sentimentos negativos",
+                "Concentração",
+                "Interesse"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Pálpebras que demoram a abrir sugerem...?",
+            image: "imagens/imagem26.jpg",
+            options: [
+                "Confiança",
+                "Interesse profundo",
+                "Ocultação de emoções negativas",
+                "Dúvida"
+            ],
+            correctAnswer: 2
+        },
+
+        // Perguntas 27 a 36
+        {
+            question: "Pálpebras comprimidas podem ser um sinal de:",
+            image: "imagens/imagem27.jpg",
+            options: [
+                "Curiosidade",
+                "Sentimentos negativos ou perda",
+                "Felicidade",
+                "Alegria genuína"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Quando os olhos se entortam junto com o franzir da testa, isso pode indicar:",
+            image: "imagens/imagem28.jpg",
+            options: [
+                "Confiança",
+                "Desconforto ou frustração",
+                "Prazer",
+                "Tristeza"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "O arquear das sobrancelhas é um sinal de:",
+            image: "imagens/imagem29.jpg",
+            options: [
+                "Surpresa positiva ou reconhecimento",
+                "Confusão",
+                "Medo",
+                "Indiferença"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "O gesto de franzir o nariz é um indicativo de:",
+            image: "imagens/imagem30.jpg",
+            options: [
+                "Desprazer ou repulsa",
+                "Felicidade",
+                "Desinteresse",
+                "Foco"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "O sorriso verdadeiro é caracterizado por:",
+            image: "imagens/imagem31.jpg",
+            options: [
+                "Apenas os lábios sorrindo, sem envolvimento dos olhos",
+                "Aumento da dilatação das pupilas e envolvimento dos músculos ao redor dos olhos",
+                "Lábios pressionados e ausência de expressão nos olhos",
+                "Sorriso forçado e sem emoção nos olhos"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "O que pode indicar lábios pressionados em uma pessoa?",
+            image: "imagens/imagem32.jpg",
+            options: [
+                "Relaxamento",
+                "Satisfação",
+                "Estresse ou desconforto",
+                "Confiança"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "Lábios em vias de desaparecer são geralmente associados a:",
+            image: "imagens/imagem33.jpg",
+            options: [
+                "Satisfação ou felicidade",
+                "Estresse ou ansiedade",
+                "Confiança",
+                "Empolgação"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Quando alguém empurra os cantos da boca para baixo como um U invertido, o que isso geralmente representa?",
+            image: "imagens/imagem34.jpg",
+            options: [
+                "Felicidade extrema",
+                "Desprezo",
+                "Tristeza ou angústia",
+                "Confusão"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "O olhar escarninho (olhos revirados) costuma ser um sinal de:",
+            image: "imagens/imagem35.jpg",
+            options: [
+                "Desprezo ou desrespeito",
+                "Confiança",
+                "Alegria genuína",
+                "Surpresa"
+            ],
+            correctAnswer: 0
+        },
+        {
+            question: "Compor a roupa, como ajustar a gravata ou o colarinho, pode indicar:",
+            image: "imagens/imagem36.jpg",
+            options: [
+                "Estabilidade emocional",
+                "Insegurança ou desejo de autopacificação",
+                "Felicidade",
+                "Foco"
+            ],
+            correctAnswer: 1
+        }
+    ]
+};
+
+// O código do quiz segue a estrutura já discutida, com a função de exibir e verificar respostas.
+let currentQuestionIndex = 0;
 
 function loadQuestion() {
-    const questionData = quizData[currentQuestion];
-    
-    // Adicionando a numeração da pergunta
-    questionElement.innerHTML = `Pergunta ${currentQuestion + 1}: ${questionData.question}`;
-    
-    optionsElement.innerHTML = "";
+    const question = quizData.questions[currentQuestionIndex];
+    document.getElementById('question-text').textContent = question.question;
+    document.getElementById('question-image').src = question.image;
 
-    questionData.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.addEventListener("click", () => checkAnswer(index, button));
-        optionsElement.appendChild(button);
+    const options = document.querySelectorAll('.option');
+    options.forEach((option, index) => {
+        option.textContent = question.options[index];
     });
+
+    document.getElementById('result-container').style.display = 'none';
 }
 
-function checkAnswer(selectedIndex, button) {
-    const correctAnswer = quizData[currentQuestion].answer;
-    
-    if (selectedIndex === correctAnswer) {
-        score += 10;
-        button.classList.add("correct");
+function checkAnswer(selectedIndex) {
+    const question = quizData.questions[currentQuestionIndex];
+    const resultText = document.getElementById('result-text');
+    if (selectedIndex === question.correctAnswer) {
+        resultText.textContent = "Resposta correta!";
     } else {
-        button.classList.add("wrong");
+        resultText.textContent = "Resposta errada!";
     }
 
-    // Desabilitar os botões após a escolha
-    const buttons = optionsElement.querySelectorAll("button");
-    buttons.forEach(button => button.disabled = true);
-
-    setTimeout(() => {
-        currentQuestion++;
-        if (currentQuestion < quizData.length) {
-            loadQuestion();
-        } else {
-            scoreContainer.textContent = `Você terminou o quiz! Sua pontuação é: ${score}`;
-            restartButton.style.display = "block"; // Mostrar o botão de reiniciar
-        }
-    }, 1000);
+    document.getElementById('result-container').style.display = 'block';
 }
 
-function restartQuiz() {
-    currentQuestion = 0;
-    score = 0;
-    scoreContainer.textContent = "";
-    restartButton.style.display = "none"; // Esconder o botão de reiniciar
-    loadQuestion();
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.questions.length) {
+        loadQuestion();
+    } else {
+        alert("Você completou o quiz!");
+    }
 }
 
-// Iniciar o quiz
-loadQuestion();
+window.onload = loadQuestion;
+// Obtém o botão e o elemento de música
+let music = document.getElementById('background-music');
+let musicButton = document.getElementById('music-button');
 
-// Adicionar o evento de reiniciar o quiz
-restartButton.addEventListener("click", restartQuiz);
-// Função para ler texto usando a API de síntese de fala
-function falar(texto) {
-    const synth = window.speechSynthesis; // Instancia o sintetizador de fala
-    const utterance = new SpeechSynthesisUtterance(texto); // Cria uma "enunciação" para a fala
-    utterance.lang = 'pt-BR'; // Define o idioma (português brasileiro)
-    synth.speak(utterance); // Faz o sintetizador falar o texto
+// Função para alternar entre tocar e pausar a música
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+        musicButton.textContent = '🔊'; // Ícone de som ativado
+    } else {
+        music.pause();
+        musicButton.textContent = '🔇'; // Ícone de som desativado
+    }
 }
 
-// Função para carregar uma nova pergunta
-function loadQuestion() {
-    const questionData = quizData[currentQuestion];
-    questionElement.textContent = questionData.question;
-    optionsElement.innerHTML = "";
-
-  
-    questionData.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.addEventListener("click", () => checkAnswer(index, button));
-        optionsElement.appendChild(button);
-    });
-}
-
-// Função para verificar a resposta e dar feedback
-function checkAnswer(selectedIndex, button) {
-    const correctAnswer = quizData[currentQuestion].answer;
-
-    if (selectedIndex === correctAnswer) {
-        score += 10;
-        button.classList.add("correct");
-            } else {
-        button.classList.add("wrong");
-            }
-
-    // Desabilitar os botões após a escolha
-    const buttons = optionsElement.querySelectorAll("button");
-    buttons.forEach(button => button.disabled = true);
-
-    setTimeout(() => {
-        currentQuestion++;
-        if (currentQuestion < quizData.length) {
-            loadQuestion();
-        } else {
-            scoreContainer.textContent = `Você terminou o quiz! Sua pontuação é: ${score}`;
-            restartButton.style.display = "block"; // Mostrar o botão de reiniciar
-        }
-    }, 1000);
-}
-
-// Restante do código para o quiz e reiniciar...
+// Adiciona o evento de clique ao botão de música
+musicButton.addEventListener('click', toggleMusic);

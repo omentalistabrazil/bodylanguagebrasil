@@ -1,114 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linguagem Corporal Teste</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quiz de Adivinhações - Linguagem Corporal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script> <!-- Incluindo o script.js -->
     <style>
-        /* Estilo do menu de três pontinhos */
+        /* Estilos para o menu dropdown fixo no topo */
         .menu-dropdown {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 0%;
+            z-index: 10; /* Garante que o menu fique acima de outros elementos */
+            background-color: #333;
         }
 
         .menu-button {
-            background-color: #333; /* Fundo escuro */
-            color: white; /* Cor do texto */
+            background-color: #000000;
+            color: white;
+            padding: 5px;
+            font-size: 24px;
             border: none;
-            padding: 10px 15px;
-            font-size: 18px;
-            border-radius: 5px;
             cursor: pointer;
+            border-radius: 5px;
         }
 
         .menu-button:hover {
-            background-color: #555; /* Fundo mais claro ao passar o mouse */
+            background-color: #555;
         }
 
         .menu-content {
-            display: none; /* Oculto por padrão */
+            display: none;
             position: absolute;
-            right: 0;
-            background-color: white; /* Fundo branco */
-            min-width: 150px;
-            border: 1px solid #ccc;
+            background-color: #333;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
             border-radius: 5px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
         }
 
         .menu-content a {
-            color: #333; /* Texto escuro */
-            padding: 10px 15px;
-            text-decoration: none; /* Remove o sublinhado */
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
             display: block;
-            border-bottom: 1px solid #eee;
         }
 
         .menu-content a:hover {
-            background-color: #f1f1f1; /* Fundo claro ao passar o mouse */
+            background-color: #555;
         }
 
-        /* Exibe o menu quando o botão é clicado */
         .menu-dropdown:hover .menu-content {
             display: block;
         }
 
-        /* Estilo do restante do site */
-        body {
-            font-family: Arial, sans-serif;
+        /* Estilos para o conteúdo do quiz */
+        #quiz-container {
+            margin-top: 60px; /* Adiciona espaço para o menu fixo */
         }
 
-        .app-container {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .quiz-card {
-            background-color: #f2f2f7;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        #score-container {
-            margin-top: 20px;
-        }
-
-        /* Estilo do aviso no rodapé */
-        .footer {
+        /* Estilo para o botão de música */
+        #music-button {
             position: fixed;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            background-color: #333;
+            bottom: 20px;
+            right: 20px;
+            background-color: #000;
             color: white;
             padding: 10px;
-            font-size: 14px;
-            border-top: 1px solid #555;
+            border-radius: 50%;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
         }
 
-        .footer a {
-            color: #ff9500; /* Cor de destaque */
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
+        #music-button:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
-
-  <!-- Menu de opções -->
+    <!-- Menu de opções -->
     <div class="menu-dropdown">
         <button class="menu-button">☰</button>
         <div class="menu-content">
@@ -120,37 +94,29 @@
             <a href="corporaltreino.html">Dicionário de L.C</a>
             <a href="aula.html">Linguagem C. Aula</a>
         </div>
-  </div>
+    </div>
 
-  <button id="restart-button" style="display: none;">Reiniciar Quiz</button>
-  
-  <div class="app-container">
-      <h1>Linguagem Corporal Teste</h1>
-      <div id="quiz-container" class="quiz-card">
-          <p id="question">Pergunta vai aqui</p>
-          <div id="options">
-              <!-- As opções de resposta vão aqui -->
-          </div>
-      </div>
-      <button id="next-button" class="btn">Próxima Pergunta</button>
-      <div id="score-container">
-          <p>Pontuação: <span id="score">0</span></p>
-      </div>
-  </div>
+    <div id="quiz-container">
+        <div id="question-container">
+            <p id="question-text"></p>
+            <img id="question-image" src="" alt="Imagem da pergunta" />
+        </div>
 
-  <!-- Aviso no rodapé -->
-  <div id="footer" class="footer">
-      <p>Este site está em desenvolvimento, Se as perguntas não carregarem abra o site no navegador padrão, Pode haver erros. Criado por <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Gabriel Wyo</a></p>
-  </div>
+        <div id="options-container">
+            <button class="option" onclick="checkAnswer(0)"></button>
+            <button class="option" onclick="checkAnswer(1)"></button>
+            <button class="option" onclick="checkAnswer(2)"></button>
+            <button class="option" onclick="checkAnswer(3)"></button>
+        </div>
 
-  <script src="script.js"></script>
-  
-  <script>
-    // Função para ocultar o rodapé após 4 segundos
-    setTimeout(function() {
-        document.getElementById("footer").style.display = "none";
-    }, 4000);  // O rodapé será ocultado após 4 segundos
-  </script>
+        <div id="result-container">
+            <p id="result-text"></p>
+            <button onclick="nextQuestion()">Próxima Pergunta</button>
+        </div>
+    </div>
 
+    <!-- Música de fundo e controle -->
+    <audio id="background-music" src="foco.mp3" loop></audio>
+    <button id="music-button">🔊</button>
 </body>
 </html>
