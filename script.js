@@ -404,8 +404,176 @@ const quizData = {
         }
     ]
 };
-
-// O código do quiz segue a estrutura já discutida, com a função de exibir e verificar respostas.
+// Adicionando as questões 37, 38, 39 e 40 ao quiz
+quizData.questions.push(
+    {
+        question: "Qual é a abordagem mais adequada para os homens ao cumprimentar outros homens?",
+        image: "imagens/imagem37.jpg",
+        options: [
+            "Abordar diretamente de frente",
+            "Abordar em ângulos, movendo-se ligeiramente para o lado"
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "O que acontece quando dois indivíduos estão falando frente a frente e seus pés estão apontados um para o outro?",
+        image: "imagens/imagem38.jpg",
+        options: [
+            "Eles provavelmente não querem ser interrompidos",
+            "Eles estão prontos para incluir outra pessoa na conversa"
+        ],
+        correctAnswer: 0
+    },
+    {
+        question: "Qual comportamento descreve um 'aperto de mão à político'?",
+        image: "imagens/imagem39.jpg",
+        options: [
+            "A pessoa aperta a mão de forma firme e discreta",
+            "A pessoa agarra a mão do outro com ambas as suas mãos"
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "Qual é a maneira adequada de reforçar um aperto de mão?",
+        image: "imagens/imagem40.jpg",
+        options: [
+            "Tocar no braço ou no ombro da pessoa com a outra mão",
+            "Cobrir a mão da pessoa com a sua"
+        ],
+        correctAnswer: 0
+    }
+);
+// Adicionando as questões 41, 42, 43 e 44 ao quiz
+quizData.questions.push(
+    {
+        question: "Quando uma pessoa de elevado estatuto, como um professor universitário ou advogado, aperta a mão de alguém e mantém a outra mão no bolso do casaco com o polegar para fora, ela está transmitindo qual mensagem?",
+        image: "imagens/imagem41.jpg",
+        options: [
+            "Somos iguais, não há diferenças entre nós.",
+            "Estou desconfortável com o contato físico.",
+            "Não somos iguais; sou superior a você.",
+            "Estou disponível para interações sociais mais próximas."
+        ],
+        correctAnswer: 2
+    },
+    {
+        question: "Uma inclinação para a frente entre duas pessoas significa o quê?",
+        image: "imagens/imagem42.jpg",
+        options: [
+            "Confirmação de um desacordo.",
+            "Desconforto e desejo de sair.",
+            "Conforto e sincronia.",
+            "Distância emocional."
+        ],
+        correctAnswer: 2
+    },
+    {
+        question: "Quando nos inclinamos para trás em relação a pessoas ou situações, isso indica:",
+        image: "imagens/imagem43.jpg",
+        options: [
+            "Confiança e interesse.",
+            "Desprezo e desejo de afastamento.",
+            "Empatia e sintonia.",
+            "Apreço e aceitação."
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "O que a expiração com as bochechas cheias normalmente indica?",
+        image: "imagens/imagem44.jpg",
+        options: [
+            "Fadiga extrema.",
+            "Alívio ou pacificação após um evento estressante.",
+            "Raiva ou frustração.",
+            "Ansiedade crescente."
+        ],
+        correctAnswer: 1
+    }
+);
+// Adicionando as questões 45, 46, 47 e 48 ao quiz
+quizData.questions.push(
+    {
+        question: "O que a postura de um homem projetando o peito para a frente, elevando o queixo e exibindo um sorriso indica, mesmo que não seja genuíno?",
+        image: "imagens/imagem45.jpg",
+        options: [
+            "Ele está demonstrando raiva e frustração.",
+            "Ele está em uma posição de inferioridade.",
+            "Ele está demonstrando autoconfiança e tentando criar uma boa impressão.",
+            "Ele está desconfortável e tentando disfarçar."
+        ],
+        correctAnswer: 2
+    },
+    {
+        question: "O que a postura de um homem projetando o peito para dentro indica?",
+        image: "imagens/imagem46.jpg",
+        options: [
+            "Ele está calmo e relaxado.",
+            "Ele está demonstrando entusiasmo e energia.",
+            "Ele está se preparando para uma atividade física.",
+            "Ele está sentindo insegurança ou desconforto."
+        ],
+        correctAnswer: 3
+    },
+    {
+        question: "Os gestos ilustradores são usados principalmente para:",
+        image: "imagens/imagem47.jpg",
+        options: [
+            "Exibir raiva e agressividade.",
+            "Complementar a mensagem verbal.",
+            "Demonstrar desinteresse ou indiferença.",
+            "Ajudar a aliviar o estresse."
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "O que os gestos manipuladores, adaptadores e pacificadores geralmente indicam?",
+        image: "imagens/imagem48.jpg",
+        options: [
+            "Estado emocional calmo.",
+            "Comportamento altamente extrovertido.",
+            "Sentimento de autossuficiência.",
+            "Estado emocional mais ansioso ou de desconforto."
+        ],
+        correctAnswer: 3
+    }
+);
+// Adicionando as questões 49, 50 e 51 ao quiz
+quizData.questions.push(
+    {
+        question: "Quando pode ocorrer a manipulação de vestimenta?",
+        image: "imagens/imagem49.jpg",
+        options: [
+            "Quando estamos nervosos e tentando nos autopacificar.",
+            "Quando estamos confiantes e calmos.",
+            "Quando queremos impressionar os outros.",
+            "Quando estamos relaxados em um ambiente confortável."
+        ],
+        correctAnswer: 0  // Resposta correta está na primeira opção
+    },
+    {
+        question: "O que direcionar o corpo para algo demonstra?",
+        image: "imagens/imagem50.jpg",
+        options: [
+            "Interesse da pessoa em determinada coisa.",
+            "Tentativa de evitar a interação.",
+            "Desconforto com a situação atual.",
+            "Falta de interesse na interação."
+        ],
+        correctAnswer: 0  // Resposta correta está na primeira opção
+    },
+    {
+        question: "O que o espelhamento na linguagem não verbal indica?",
+        image: "imagens/imagem51.jpg",
+        options: [
+            "Tentativa de manipular a conversa.",
+            "Desconforto emocional.",
+            "Grande conexão empática entre as pessoas.",
+            "Falta de interesse na interação."
+        ],
+        correctAnswer: 2  // Resposta correta está na terceira opção
+    }
+);
+// Funções do Quiz (mantidas)
 let currentQuestionIndex = 0;
 
 function loadQuestion() {
@@ -443,20 +611,19 @@ function nextQuestion() {
 }
 
 window.onload = loadQuestion;
-// Obtém o botão e o elemento de música
+
+// Música de fundo
 let music = document.getElementById('background-music');
 let musicButton = document.getElementById('music-button');
 
-// Função para alternar entre tocar e pausar a música
 function toggleMusic() {
     if (music.paused) {
         music.play();
-        musicButton.textContent = '🔊'; // Ícone de som ativado
+        musicButton.textContent = '🔊';
     } else {
         music.pause();
-        musicButton.textContent = '🔇'; // Ícone de som desativado
+        musicButton.textContent = '🔇';
     }
 }
 
-// Adiciona o evento de clique ao botão de música
 musicButton.addEventListener('click', toggleMusic);
