@@ -10,21 +10,21 @@
       line-height: 1.8;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background-attachment: fixed;
       color: #333;
     }
 
     .container {
       max-width: 800px;
       margin: 20px auto;
-      background: white;
+      background: linear-gradient(135deg, #3a7bd5, #3a6073);
       padding: 30px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       font-family: 'Arial', sans-serif;
     }
 
-    /* Estilizando o cabeçalho */
     h1 {
       text-align: center;
       font-size: 32px;
@@ -36,7 +36,6 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 
-    /* Estilizando a barra de escolher arquivo */
     input[type="file"] {
       display: none;
     }
@@ -61,10 +60,9 @@
     #fileName {
       font-size: 16px;
       margin-top: 10px;
-      color: #555;
+      color: #000000;
     }
 
-    /* Estilo dos botões */
     button {
       display: inline-block;
       padding: 10px 20px;
@@ -86,16 +84,16 @@
     #status {
       font-size: 16px;
       margin-top: 10px;
-      color: #666;
+      color: #000000;
     }
 
     .button-container {
       text-align: center;
-      display: none; /* Inicialmente escondido */
+      display: none;
     }
 
     .button-container.active {
-      display: block; /* Exibe os controles quando o PDF for carregado */
+      display: block;
     }
 
     #viewerContainer {
@@ -115,7 +113,6 @@
     canvas {
       display: block;
     }
-
   </style>
 </head>
 <body>
@@ -126,14 +123,15 @@
     <div id="fileName"></div>
     <button onclick="iniciarNarracao()">Iniciar Narração</button>
     <button onclick="toggleFullscreen()">Tela Cheia</button>
-    <div class="button-container" id="controlsContainer">
-      <!-- Removido o botão Play/Pause -->
-    </div>
+    <div class="button-container" id="controlsContainer"></div>
     <div id="status"></div>
     <div id="viewerContainer" ontouchstart="touchStart(event)" ontouchend="touchEnd(event)"></div>
   </div>
 
-  <!-- Incluindo a biblioteca PDF.js -->
+  <audio id="audioPlayer" loop>
+    <source src="foco2.mp3" type="audio/mp3">
+  </audio>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
   <script>
     let pdfDoc = null;
@@ -141,10 +139,15 @@
     let totalPages = 0;
     let utterance = null;
     let isPaused = false;
-    let currentText = ""; // Variável para armazenar o texto atual
+    let currentText = "";
 
     let touchStartX = 0;
     let touchEndX = 0;
+
+    // Iniciar a música de fundo com volume de 40%
+    const audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.volume = 0.4;
+    audioPlayer.play();
 
     function mostrarNomeArquivo() {
       const fileInput = document.getElementById('pdfFile');
@@ -166,7 +169,7 @@
       const reader = new FileReader();
 
       document.getElementById('status').textContent = 'Carregando PDF...';
-      document.getElementById('controlsContainer').classList.add('active'); // Exibe os controles
+      document.getElementById('controlsContainer').classList.add('active');
 
       reader.onload = function () {
         const pdfData = new Uint8Array(reader.result);
@@ -186,38 +189,37 @@
     }
 
     function renderizarPagina(pageNumber) {
-  pdfDoc.getPage(pageNumber).then(function (page) {
-    const viewerContainer = document.getElementById('viewerContainer');
-    const containerWidth = viewerContainer.clientWidth;
-    const containerHeight = viewerContainer.clientHeight;
+      pdfDoc.getPage(pageNumber).then(function (page) {
+        const viewerContainer = document.getElementById('viewerContainer');
+        const containerWidth = viewerContainer.clientWidth;
+        const containerHeight = viewerContainer.clientHeight;
 
-    const viewport = page.getViewport({ scale: 1 });
-    const scale = Math.min(containerWidth / viewport.width, containerHeight / viewport.height);
-    
-    // Aumenta a escala para melhorar a qualidade (tornar mais nítido)
-    const hdScale = 2.5;  // Aumento de escala para maior qualidade
-    const scaledViewport = page.getViewport({ scale: scale * hdScale });
+        const viewport = page.getViewport({ scale: 1 });
+        const scale = Math.min(containerWidth / viewport.width, containerHeight / viewport.height);
+        
+        const hdScale = 6.5;
+        const scaledViewport = page.getViewport({ scale: scale * hdScale });
 
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    canvas.width = scaledViewport.width;
-    canvas.height = scaledViewport.height;
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
 
-    // Ajusta o tamanho do canvas
-    canvas.style.width = `${scaledViewport.width / hdScale}px`;  // Ajuste de acordo com a escala
-    canvas.style.height = `${scaledViewport.height / hdScale}px`;
+        canvas.style.width = `${scaledViewport.width / hdScale}px`;
+        canvas.style.height = `${scaledViewport.height / hdScale}px`;
 
-    const renderContext = {
-      canvasContext: context,
-      viewport: scaledViewport
-    };
+        const renderContext = {
+          canvasContext: context,
+          viewport: scaledViewport
+        };
 
-    page.render(renderContext).promise.then(() => {
-      viewerContainer.innerHTML = ''; // Limpa a visualização anterior
-      viewerContainer.appendChild(canvas);
-    });
-  });
-}
+        page.render(renderContext).promise.then(() => {
+          viewerContainer.innerHTML = '';
+          viewerContainer.appendChild(canvas);
+        });
+      });
+    }
+
     function lerPagina(pageNumber) {
       pdfDoc.getPage(pageNumber).then(function (page) {
         page.getTextContent().then(function (textContent) {
@@ -233,8 +235,26 @@
       if ('speechSynthesis' in window) {
         if (utterance) speechSynthesis.cancel();
 
+        const voces = speechSynthesis.getVoices();
+        let vozMasculina = null;
+
+        for (let i = 0; i < voces.length; i++) {
+          if (voces[i].name.toLowerCase().includes('google') && voces[i].gender === 'male') {
+            vozMasculina = voces[i];
+            break;
+          }
+        }
+
+        if (!vozMasculina) {
+          vozMasculina = voces[0];
+        }
+
         utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = vozMasculina;
         utterance.lang = 'pt-BR';
+        utterance.volume = 1.0;
+        utterance.rate = 1.2;
+        utterance.pitch = 1.0;
 
         utterance.onend = function () {
           if (!isPaused && currentPage < totalPages) {
@@ -244,6 +264,7 @@
             document.getElementById('status').textContent = `Lendo a página ${currentPage} de ${totalPages}`;
           } else {
             document.getElementById('status').textContent = 'Fim do PDF.';
+            pararMusica();
           }
         };
 
@@ -261,10 +282,8 @@
       touchEndX = event.changedTouches[0].clientX;
 
       if (touchStartX - touchEndX > 50) {
-        // Deslizar para a esquerda (próxima página)
         proximaPagina();
       } else if (touchEndX - touchStartX > 50) {
-        // Deslizar para a direita (página anterior)
         paginaAnterior();
       }
     }
@@ -285,7 +304,9 @@
         lerPagina(currentPage);
         document.getElementById('status').textContent = `Lendo a página ${currentPage} de ${totalPages}`;
       }
-    }function toggleFullscreen() {
+    }
+
+    function toggleFullscreen() {
       const viewerContainer = document.getElementById('viewerContainer');
       if (!document.fullscreenElement) {
         viewerContainer.requestFullscreen().catch(err => {
@@ -296,12 +317,17 @@
       }
     }
 
-    // Detectando se a aba ficou invisível e pausando ou retomando a narração
+    function pararMusica() {
+      audioPlayer.pause();
+    }
+
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         if (utterance) speechSynthesis.pause();
+        audioPlayer.pause();
       } else {
         if (utterance) speechSynthesis.resume();
+        audioPlayer.play();
       }
     });
   </script>
