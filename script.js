@@ -573,7 +573,20 @@ quizData.questions.push(
         correctAnswer: 2  // Resposta correta está na terceira opção
     }
 );
-// Funções do Quiz (mantidas)
+// Áudios de feedback
+const correctSound = new Audio('audios/certa.mp3'); // Som de resposta certa
+const wrongSound = new Audio('audios/errada.mp3'); // Som de resposta errada
+
+// Função para reproduzir o som com base na resposta
+function playFeedbackSound(isCorrect) {
+    if (isCorrect) {
+        correctSound.play(); // Toca o som de resposta certa
+    } else {
+        wrongSound.play(); // Toca o som de resposta errada
+    }
+}
+
+// Funções do Quiz
 let currentQuestionIndex = 0;
 
 function loadQuestion() {
@@ -587,6 +600,12 @@ function loadQuestion() {
     });
 
     document.getElementById('result-container').style.display = 'none';
+
+    // Reproduzir o áudio da pergunta, se disponível
+    if (question.audio) {
+        let questionAudio = new Audio(question.audio); // Cria o objeto de áudio para a pergunta
+        questionAudio.play(); // Reproduz o áudio
+    }
 }
 
 function checkAnswer(selectedIndex) {
@@ -594,8 +613,10 @@ function checkAnswer(selectedIndex) {
     const resultText = document.getElementById('result-text');
     if (selectedIndex === question.correctAnswer) {
         resultText.textContent = "Resposta correta!";
+        playFeedbackSound(true); // Som de resposta certa
     } else {
         resultText.textContent = "Resposta errada!";
+        playFeedbackSound(false); // Som de resposta errada
     }
 
     document.getElementById('result-container').style.display = 'block';
