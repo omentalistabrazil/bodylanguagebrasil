@@ -1,158 +1,209 @@
-/* Corpo da página */
+/* Estilo geral do corpo */
 body {
-    font-family: 'Orbitron', sans-serif;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; /* Ajuste de tamanho de fonte para padrão iPhone */
+    background-color: #1c1c1e;
+    color: #f7f7f7;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-image: url('imagem/background-gods.jpg'); /* Fundo temático de deuses */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-blend-mode: multiply;
+    transition: background-color 0.3s ease;
 }
 
-/* Container principal do quiz */
+/* Estilo do container do quiz */
 #quiz-container {
-    background: linear-gradient(145deg, #212121, #1a1a1a);
-    border: 4px solid #b89b3f; /* Dourado esotérico */
+    background-color: #2c2c2e;
     border-radius: 20px;
-    padding: 20px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.9), inset -3px -3px 10px #131313, inset 3px 3px 15px #2b2b2b;
-    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     width: 85%;
-    max-width: 500px;
-    margin-top: 20px;
+    max-width: 350px; /* Ajuste para tela maior do iPhone 16 */
+    padding: 18px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Estilo da pergunta */
+#quiz-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Sombra mais forte no hover */
+}
+
+/* Estilo do container da pergunta */
 #question-container {
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Ajuste para maior espaçamento */
 }
 
 #question-text {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #d4a017; /* Dourado celestial */
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px; /* Melhor espaçamento */
+    color: #f7f7f7;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Imagem da pergunta */
 #question-image {
-    max-width: 100%;
-    height: auto;
+    max-width: 90%; /* Aumentando a largura para melhor visibilidade */
     border-radius: 15px;
-    border: 3px solid #b89b3f;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
-/* Opções de resposta */
+#question-image:hover {
+    transform: scale(1.05);
+}
+
+/* Estilo do container de opções */
 #options-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaçamento maior entre as opções */
 }
 
-#options-container .option {
-    background: linear-gradient(145deg, #2b2b2b, #1f1f1f);
-    color: #f0f0f0;
-    padding: 12px 10px;
-    border-radius: 10px;
-    border: 2px solid #b89b3f;
-    cursor: pointer;
+/* Estilo dos botões das opções */
+.option {
+    background-color: #007aff;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding: 18px; /* Ajuste para um botão mais espaçoso */
+    border-radius: 12px;
     text-align: center;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-family: 'Orbitron', sans-serif;
-    transition: all 0.4s ease;
-    font-size: 0.7rem;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7), inset 1px 1px 4px #3a3a3a;
-}
-
-#options-container .option:hover {
-    background: #b89b3f; /* Dourado no hover */
-    color: #131313;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(184, 155, 63, 0.8);
-}
-
-#options-container .option:active {
-    transform: translateY(2px);
-    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.7);
-}
-
-/* Estilo do resultado */
-#result-container {
-    display: none;
-    margin-top: 25px;
-}
-
-#result-text {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #d4a017;
-    font-family: 'Orbitron', sans-serif;
-    animation: fadeInResult 1s ease-out;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-    text-transform: uppercase;
-}
-
-/* Botões */
-button {
-    padding: 10px 10px;
-    background: linear-gradient(145deg, #212121, #1a1a1a);
-    color: #d4a017;
-    border: 2px solid #b89b3f;
-    border-radius: 10px;
     cursor: pointer;
-    margin-top: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.8), inset 2px 2px 10px #2b2b2b;
-    font-size: 1.1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-button:hover {
-    background: #b89b3f;
-    color: #131313;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(184, 155, 63, 0.8);
+.option:hover {
+    background-color: #0051a8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px); /* Efeito de levitação no hover */
 }
 
-button:active {
-    transform: translateY(2px);
-    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.8);
+.option:active {
+    background-color: #003f7f;
+    transform: scale(0.98);
 }
 
-/* Botão de música */
+/* Feedback de Resposta */
+.option.correct {
+    background-color: #34c759;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+}
+
+.option.incorrect {
+    background-color: #ff3b30;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+}
+
+/* Estilo do botão "Próxima Pergunta" */
+#result-container button {
+    background-color: #34c759;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#result-container button:hover {
+    background-color: #2d9e47;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+#result-container button:active {
+    background-color: #1d7d36;
+    transform: scale(0.98);
+}
+
+/* Menu com ícones */
+.menu-dropdown {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.menu-button {
+    background-color: transparent;
+    border: none;
+    color: #007aff;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
+.menu-button:hover {
+    transform: rotate(90deg);
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #2c2c2e;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    top: 60px;
+    left: 0;
+    width: 250px; /* Ajuste para mais largura */
+    transition: transform 0.3s ease;
+}
+
+.menu-dropdown:hover .menu-content {
+    display: block;
+    transform: translateY(10px);
+}
+
+.menu-content a {
+    color: #f7f7f7;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    text-align: left;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.2s ease;
+}
+
+.menu-content a:hover {
+    background-color: #444;
+}
+
+/* Ícones no menu */
+.menu-content a::before {
+    content: "⚙️";
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Botão de Música */
 #music-button {
+    background-color: transparent;
+    border: none;
+    color: #007aff;
+    font-size: 28px;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(145deg, #2b2b2b, #1f1f1f);
-    color: #d4a017;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 24px;
-    border: 3px solid #b89b3f;
     cursor: pointer;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8), inset 2px 2px 10px #131313;
+    padding: 10px;
+    z-index: 10;
+    transition: transform 0.3s ease;
 }
 
 #music-button:hover {
-    background-color: #b89b3f;
-    color: #131313;
-    transform: translateY(-5px);
+    transform: scale(1.1);
+}
+
+/* Estilo do áudio */
+audio {
+    display: none;
 }
