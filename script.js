@@ -1,17 +1,7 @@
 const quizData = {
     questions: [
         // Perguntas 1 a 26 (já existentes)
-        {
-            question: "Quando um pé está apontando para a direção da saída, isso pode indicar:",
-            image: "imagens/imagem1.jpg",
-            options: [
-                "A pessoa está com interesse",
-                "A pessoa tem intenção de sair",
-                "A pessoa está relaxada",
-                "A pessoa está ansiosa"
-            ],
-            correctAnswer: 1
-        },
+        
         {
             question: "Agarrar os joelhos e posicionar os pés em arranque indica que a pessoa está:",
             image: "imagens/imagem2.jpg",
@@ -648,30 +638,3 @@ function toggleMusic() {
 }
 
 musicButton.addEventListener('click', toggleMusic);
-// Recuperar o número de acessos do localStorage
-let acessos = localStorage.getItem("contadorDeAcessos");
-
-// Se não existir, inicialize o contador com 0
-if (!acessos) {
-    acessos = 0;
-}
-
-// Incrementar o contador
-acessos++;
-localStorage.setItem("contadorDeAcessos", acessos);
-
-// Criar o elemento do contador e exibi-lo no topo da página
-const contadorElemento = document.createElement("div");
-contadorElemento.textContent = `Acessos: ${acessos}`;
-contadorElemento.style.position = "fixed";
-contadorElemento.style.top = "5px";
-contadorElemento.style.right = "5px";
-contadorElemento.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-contadorElemento.style.color = "white";
-contadorElemento.style.fontSize = "12px";
-contadorElemento.style.padding = "5px 10px";
-contadorElemento.style.borderRadius = "5px";
-contadorElemento.style.zIndex = "1000"; // Para garantir que fique visível
-
-// Adicionar o contador ao corpo da página
-document.body.appendChild(contadorElemento);
