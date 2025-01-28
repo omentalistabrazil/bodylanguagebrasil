@@ -1,8 +1,8 @@
 /* Estilo geral do corpo */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 16px; /* Ajuste de tamanho de fonte para padrão iPhone */
-    background-color: #1c1c1e;
+    font-size: 16px;
+    background: linear-gradient(135deg, #1c1c1e, #2c2c2e); /* Gradiente suave */
     color: #f7f7f7;
     margin: 0;
     padding: 0;
@@ -16,118 +16,120 @@ body {
 /* Estilo do container do quiz */
 #quiz-container {
     background-color: #2c2c2e;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 25px; /* Bordas mais arredondadas */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Sombra mais suave e difusa */
     width: 85%;
-    max-width: 350px; /* Ajuste para tela maior do iPhone 16 */
-    padding: 18px;
+    max-width: 400px; /* Ajuste para um layout mais amplo */
+    padding: 20px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #quiz-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Sombra mais forte no hover */
+    transform: scale(1.03); /* Efeito de escala mais sutil */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* Sombra mais intensa no hover */
 }
 
 /* Estilo do container da pergunta */
 #question-container {
-    margin-bottom: 15px; /* Ajuste para maior espaçamento */
+    margin-bottom: 20px;
 }
 
 #question-text {
-    font-size: 20px;
+    font-size: 22px; /* Fonte um pouco maior */
     font-weight: 600;
-    margin-bottom: 10px; /* Melhor espaçamento */
+    margin-bottom: 15px;
     color: #f7f7f7;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Sombra de texto mais suave */
 }
 
 #question-image {
-    max-width: 90%; /* Aumentando a largura para melhor visibilidade */
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    max-width: 100%;
+    border-radius: 20px; /* Bordas mais arredondadas */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #question-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.03); /* Efeito de escala mais sutil */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra mais intensa no hover */
 }
 
 /* Estilo do container de opções */
 #options-container {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* Espaçamento maior entre as opções */
+    gap: 15px; /* Espaçamento maior entre as opções */
 }
 
 /* Estilo dos botões das opções */
 .option {
-    background-color: #007aff;
+    background: linear-gradient(135deg, #007aff, #0051a8); /* Gradiente nos botões */
     color: white;
     font-size: 16px;
     font-weight: 600;
     border: none;
-    padding: 18px; /* Ajuste para um botão mais espaçoso */
-    border-radius: 12px;
+    padding: 20px; /* Botões mais altos */
+    border-radius: 15px; /* Bordas mais arredondadas */
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
 }
 
 .option:hover {
-    background-color: #0051a8;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px); /* Efeito de levitação no hover */
+    background: linear-gradient(135deg, #0051a8, #003f7f); /* Gradiente mais escuro no hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4); /* Sombra mais intensa no hover */
+    transform: translateY(-3px); /* Efeito de levitação mais pronunciado */
 }
 
 .option:active {
-    background-color: #003f7f;
-    transform: scale(0.98);
+    background: linear-gradient(135deg, #003f7f, #002a5c); /* Gradiente mais escuro no clique */
+    transform: scale(0.98); /* Efeito de clique mais suave */
 }
 
 /* Feedback de Resposta */
 .option.correct {
-    background-color: #34c759;
-    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+    background: linear-gradient(135deg, #34c759, #2d9e47); /* Gradiente para resposta correta */
+    box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3); /* Sombra verde */
 }
 
 .option.incorrect {
-    background-color: #ff3b30;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ff3b30, #d32f2f); /* Gradiente para resposta incorreta */
+    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3); /* Sombra vermelha */
 }
 
 /* Estilo do botão "Próxima Pergunta" */
 #result-container button {
-    background-color: #34c759;
+    background: linear-gradient(135deg, #34c759, #2d9e47); /* Gradiente no botão */
     color: white;
     font-size: 16px;
     font-weight: 600;
-    padding: 18px;
-    border-radius: 12px;
+    padding: 20px;
+    border-radius: 15px;
     border: none;
     cursor: pointer;
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 #result-container button:hover {
-    background-color: #2d9e47;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #2d9e47, #1d7d36); /* Gradiente mais escuro no hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4); /* Sombra mais intensa no hover */
+    transform: translateY(-3px); /* Efeito de levitação */
 }
 
 #result-container button:active {
-    background-color: #1d7d36;
-    transform: scale(0.98);
+    background: linear-gradient(135deg, #1d7d36, #145c28); /* Gradiente mais escuro no clique */
+    transform: scale(0.98); /* Efeito de clique mais suave */
 }
 
 /* Menu com ícones */
 .menu-dropdown {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
     z-index: 10;
 }
 
@@ -135,46 +137,51 @@ body {
     background-color: transparent;
     border: none;
     color: #007aff;
-    font-size: 28px;
+    font-size: 32px; /* Ícone maior */
     cursor: pointer;
-    padding: 10px;
-    transition: transform 0.3s ease;
+    padding: 12px;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .menu-button:hover {
     transform: rotate(90deg);
+    color: #0051a8; /* Cor mais escura no hover */
 }
 
 .menu-content {
     display: none;
     position: absolute;
     background-color: #2c2c2e;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    top: 60px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Sombra mais suave */
+    border-radius: 15px;
+    top: 70px;
     left: 0;
-    width: 250px; /* Ajuste para mais largura */
-    transition: transform 0.3s ease;
+    width: 250px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0; /* Inicialmente invisível */
+    transform: translateY(-10px); /* Efeito de deslizamento */
 }
 
 .menu-dropdown:hover .menu-content {
     display: block;
-    transform: translateY(10px);
+    opacity: 1; /* Torna visível */
+    transform: translateY(0); /* Efeito de deslizamento */
 }
 
 .menu-content a {
     color: #f7f7f7;
-    padding: 12px;
+    padding: 15px;
     text-decoration: none;
     font-size: 16px;
     display: block;
     text-align: left;
     border-bottom: 1px solid #444;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .menu-content a:hover {
     background-color: #444;
+    color: #007aff; /* Cor do texto no hover */
 }
 
 /* Ícones no menu */
@@ -189,18 +196,19 @@ body {
     background-color: transparent;
     border: none;
     color: #007aff;
-    font-size: 28px;
+    font-size: 32px; /* Ícone maior */
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px;
     z-index: 10;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 #music-button:hover {
     transform: scale(1.1);
+    color: #0051a8; /* Cor mais escura no hover */
 }
 
 /* Estilo do áudio */
