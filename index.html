@@ -3,14 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Adivinhações - Linguagem Corporal</title>
+    <title>Body Language Brasil</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script> <!-- Incluindo o script.js -->
+    <script src="script.js" defer></script>
     <style>
-        
+        /* Estilos para a tela inicial */
+        body {
+            font-family: 'San-serif', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .screen {
+            text-align: center;
+            background-color: #1d1d1d;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            width: 80%;
+            max-width: 400px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #fff;
+            animation: textReveal 3s steps(20) forwards;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            width: 0;
+        }
+
+        @keyframes textReveal {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Frases de Mentalismo */
+        .phrase-container {
+            font-size: 18px;
+            color: #ccc;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .phrases {
+            display: none;
+            font-size: 18px;
+            color: #ccc;
+            animation: fadeInText 5s infinite;
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            40% {
+                opacity: 1;
+            }
+            60% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Especifica o atraso de cada frase */
+        .phrases:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .phrases:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .phrases:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        .phrases:nth-child(4) {
+            animation-delay: 15s;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+
+        button {
+            background-color: #007aff;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .instagram-link {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007aff;
+        }
+
+        .instagram-link a {
+            text-decoration: none;
+            color: #007aff;
+            font-weight: bold;
+        }
+
+        /* Menu dropdown */
+        .menu-dropdown {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .menu-button {
+            font-size: 30px;
+            background: transparent;
+            color: yello;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            background-color: #333;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-content a {
+            color: white;
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .menu-content a:hover {
+            background-color: #444;
+        }
+
+        .menu-dropdown:hover .menu-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <!-- Tela Inicial -->
+    <div class="screen">
+        <h1>Body Language Brasil</h1>
+        <p>Vamos começar!</p>
+        <button onclick="startQuiz()">Começar</button>
+
+        <!-- Frases de Mentalismo -->
+        <div class="phrase-container">
+            <div class="phrases">"O corpo fala mais que as palavras."</div>
+            <div class="phrases">"Cada gesto tem seu significado oculto."</div>
+            <div class="phrases">"Observe, o corpo revela a verdade."</div>
+            <div class="phrases">"Os olhos são as janelas da alma."</div>
+        </div>
+
+        <!-- Link para o Instagram -->
+        <div class="instagram-link">
+            <p>Para ideias e feedbacks, me siga no Instagram:</p>
+            <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">@gabriel_wyo</a>
+        </div>
+    </div>
+
     <!-- Menu de opções -->
     <div class="menu-dropdown">
         <button class="menu-button">☰</button>
@@ -25,7 +223,7 @@
         </div>
     </div>
 
-    <div id="quiz-container">
+    <div id="quiz-container" style="display:none;">
         <div id="question-container">
             <p id="question-text"></p>
             <img id="question-image" src="" alt="Imagem da pergunta" />
@@ -47,5 +245,15 @@
     <!-- Música de fundo e controle -->
     <audio id="background-music" src="foco.mp3" loop></audio>
     <button id="music-button">🔊</button>
+
+    <script>
+        function startQuiz() {
+            // Esconde a tela inicial e mostra o quiz
+            document.querySelector('.screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+        }
+
+        
+    </script>
 </body>
 </html>
