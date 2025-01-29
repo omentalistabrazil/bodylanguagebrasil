@@ -209,6 +209,7 @@
         <button onclick="shareOnTwitter()">Compartilhar no Twitter</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         const quizData = [
             { video: "video/local_video1.mp4", correctAnswer: "alegria" },
@@ -235,7 +236,6 @@
             { video: "video/local_video22.mp4", correctAnswer: "alegria" },
             { video: "video/local_video23.mp4", correctAnswer: "nojo" },
             { video: "video/local_video24.mp4", correctAnswer: "desprezo" },
- 
         ];
 
         let currentQuestionIndex = 0;
@@ -256,8 +256,8 @@
             const questionData = quizData[currentQuestionIndex];
             quizContainer.innerHTML = `
                 <div class="video-container active">
-                    <video controls>
-                        <source src="${questionData.video}" type="video/mp4">
+                    <video controls preload="auto" class="lazy">
+                        <source data-src="${questionData.video}" type="video/mp4">
                         Seu navegador não suporta o elemento de vídeo.
                     </video>
                     <div class="question">Qual emoção está sendo expressa?</div>
@@ -272,9 +272,38 @@
                     </div>
                 </div>
             `;
-            nextButton.style.display = 'none'; // Oculta o botão "Próximo" inicialmente
+            nextButton.style.display = 'none';
             updateProgressBar();
             startTimer();
+            lazyLoadVideos();
+        }
+
+        // Função para carregar vídeos de forma preguiçosa (lazy loading)
+        function lazyLoadVideos() {
+            const lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
+
+            if ("IntersectionObserver" in window) {
+                const lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(video) {
+                        if (video.isIntersecting) {
+                            for (var source in video.target.children) {
+                                var videoSource = video.target.children[source];
+                                if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+                                    videoSource.src = videoSource.dataset.src;
+                                }
+                            }
+
+                            video.target.load();
+                            video.target.classList.remove("lazy");
+                            lazyVideoObserver.unobserve(video.target);
+                        }
+                    });
+                });
+
+                lazyVideos.forEach(function(lazyVideo) {
+                    lazyVideoObserver.observe(lazyVideo);
+                });
+            }
         }
 
         // Função para verificar a resposta
@@ -293,8 +322,8 @@
                     playSound('buzz');
                 }
 
-                nextButton.style.display = 'block'; // Mostra o botão "Próximo"
-                clearInterval(timer); // Para o temporizador
+                nextButton.style.display = 'block';
+                clearInterval(timer);
             } else {
                 alert("Por favor, selecione uma resposta antes de prosseguir.");
             }
@@ -305,9 +334,8 @@
             currentQuestionIndex++;
             if (currentQuestionIndex < quizData.length) {
                 loadQuestion();
-                resultsDiv.innerHTML = ''; // Limpa o resultado anterior
+                resultsDiv.innerHTML = '';
             } else {
-                // Fim do quiz
                 quizContainer.innerHTML = '';
                 nextButton.style.display = 'none';
                 restartButton.style.display = 'block';
@@ -333,11 +361,9 @@
             progressBar.style.width = `${progress}%`;
         }
 
-       
-
         // Função para iniciar o temporizador
         function startTimer() {
-            timeLeft = 28;
+            timeLeft = 30;
             timerDisplay.textContent = timeLeft;
             timer = setInterval(() => {
                 timeLeft--;
@@ -354,7 +380,7 @@
             const audio = new Audio(`audios/seleção.mp3`);
             audio.play();
         }
-        
+
         // Inicializa o quiz
         loadQuestion();
 
