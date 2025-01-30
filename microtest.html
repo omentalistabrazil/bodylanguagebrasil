@@ -179,6 +179,22 @@
         .popup.show {
             display: block;
         }
+
+        /* Spinner de carregamento */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007aff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -266,7 +282,8 @@
             const questionData = quizData[currentQuestionIndex];
             quizContainer.innerHTML = `
                 <div class="video-container active">
-                    <video controls preload="auto" class="lazy">
+                    <div class="loader"></div>
+                    <video controls preload="auto" class="lazy" onloadeddata="hideLoader(this)">
                         <source src="${questionData.video}" type="video/mp4">
                         Seu navegador não suporta o elemento de vídeo.
                     </video>
@@ -285,6 +302,14 @@
             nextButton.style.display = 'none';
             updateProgressBar();
             startTimer();
+        }
+
+        // Função para ocultar o spinner quando o vídeo carregar
+        function hideLoader(videoElement) {
+            const loader = videoElement.previousElementSibling;
+            if (loader && loader.classList.contains('loader')) {
+                loader.style.display = 'none';
+            }
         }
 
         // Função para verificar a resposta
@@ -342,7 +367,7 @@
 
         // Função para iniciar o temporizador
         function startTimer() {
-            timeLeft = 60;
+            timeLeft = 100;
             timerDisplay.textContent = timeLeft;
             timer = setInterval(() => {
                 timeLeft--;
