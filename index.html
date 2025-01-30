@@ -9,9 +9,9 @@
     <style>
         /* Estilos para a tela inicial */
         body {
-            font-family: 'San-serif', sans-serif;
-            background-color: #121212;
-            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f7f7f7; /* Fundo claro, típico do iOS */
+            color: #1c1c1e; /* Texto escuro para contraste */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,10 +22,10 @@
 
         .screen {
             text-align: center;
-            background-color: #1d1d1d;
+            background-color: #ffffff; /* Fundo branco */
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            border-radius: 20px; /* Bordas arredondadas */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
             width: 80%;
             max-width: 400px;
             opacity: 0;
@@ -42,10 +42,10 @@
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 28px;
             margin-bottom: 20px;
             font-weight: 700;
-            color: #fff;
+            color: #1c1c1e; /* Texto escuro */
             animation: textReveal 3s steps(20) forwards;
             overflow: hidden;
             white-space: nowrap;
@@ -60,166 +60,224 @@
         }
 
         /* Frases de Mentalismo */
-        .phrase-container {
-            font-size: 18px;
-            color: #ccc;
-            font-family: 'Roboto', sans-serif;
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-        }
+.phrase-container {
+    font-size: 18px;
+    color: #666; /* Texto cinza */
+    font-family: 'Roboto', sans-serif;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: 60px; /* Altura fixa para evitar que o layout "pule" */
+}
 
-        .phrases {
-            display: none;
-            font-size: 18px;
-            color: #ccc;
-            animation: fadeInText 5s infinite;
-        }
+.phrases {
+    display: none;
+    font-size: 18px;
+    color: #666; /* Texto cinza */
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
 
-        @keyframes fadeInText {
-            0% {
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            40% {
-                opacity: 1;
-            }
-            60% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+/* Animação para as frases */
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
-        /* Especifica o atraso de cada frase */
-        .phrases:nth-child(1) {
-            animation-delay: 0s;
-        }
+/* Especifica o atraso de cada frase */
+.phrases:nth-child(1) {
+    animation: fadeInText 8s infinite;
+}
 
-        .phrases:nth-child(2) {
-            animation-delay: 5s;
-        }
+.phrases:nth-child(2) {
+    animation: fadeInText 8s infinite 2s;
+}
 
-        .phrases:nth-child(3) {
-            animation-delay: 10s;
-        }
+.phrases:nth-child(3) {
+    animation: fadeInText 8s infinite 4s;
+}
 
-        .phrases:nth-child(4) {
-            animation-delay: 15s;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            color: #ccc;
-        }
-
+.phrases:nth-child(4) {
+    animation: fadeInText 8s infinite 6s;
+}
         button {
-            background-color: #007aff;
+            background-color: #007aff; /* Azul característico do iOS */
             color: white;
             font-size: 18px;
             padding: 15px 30px;
             border: none;
-            border-radius: 12px;
+            border-radius: 12px; /* Bordas arredondadas */
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #005bb5;
+            background-color: #005bb5; /* Azul mais escuro no hover */
         }
 
         .instagram-link {
             margin-top: 20px;
             font-size: 18px;
-            color: #007aff;
+            color: #007aff; /* Azul característico do iOS */
         }
 
         .instagram-link a {
             text-decoration: none;
-            color: #007aff;
+            color: #007aff; /* Azul característico do iOS */
             font-weight: bold;
         }
 
         /* Menu dropdown */
         .menu-dropdown {
             position: absolute;
-            top: 3px;
-            left: 3px;
+            top: 20px;
+            left: 20px;
         }
 
         .menu-button {
             font-size: 30px;
             background: transparent;
-            color: yello;
+            color: #007aff; /* Azul característico do iOS */
             border: none;
             cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            color: #005bb5; /* Azul mais escuro no hover */
         }
 
         .menu-content {
             display: none;
             position: absolute;
             top: 60px;
-            background-color: #333;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-color: #ffffff; /* Fundo branco */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            width: 200px;
         }
 
         .menu-content a {
-            color: white;
+            color: #1c1c1e; /* Texto escuro */
             padding: 12px 20px;
             display: block;
             text-decoration: none;
+            transition: background-color 0.3s ease;
         }
 
         .menu-content a:hover {
-            background-color: #444;
+            background-color: #f0f0f0; /* Fundo claro no hover */
         }
 
         .menu-dropdown:hover .menu-content {
             display: block;
         }
+
+        /* Configurações de volume */
+        .settings-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .settings-button {
+            font-size: 30px;
+            background: transparent;
+            color: #007aff; /* Azul característico do iOS */
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .settings-button:hover {
+            color: #005bb5; /* Azul mais escuro no hover */
+        }
+
+        .settings-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #ffffff; /* Fundo branco */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            padding: 20px;
+            width: 200px;
+        }
+
+        .settings-content label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #1c1c1e; /* Texto escuro */
+        }
+
+        .settings-content input[type="range"] {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .settings-container:hover .settings-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    
     <!-- Tela Inicial -->
-    <div class="screen">
-        <h1>Body Language Brasil</h1>
-        <p>Vamos começar!</p>
-        <button onclick="startQuiz()">Começar</button>
+<div class="screen">
+    <h1>Body Language Brasil</h1>
+    <p>Vamos começar!</p>
+    <button onclick="startQuiz()">Começar</button>
 
-        <!-- Frases de Mentalismo -->
-        <div class="phrase-container">
-            <div class="phrases">"O corpo fala mais que as palavras."</div>
-            <div class="phrases">"Cada gesto tem seu significado oculto."</div>
-            <div class="phrases">"Observe, o corpo revela a verdade."</div>
-            <div class="phrases">"Os olhos são as janelas da alma."</div>
-        </div>
-
-        <!-- Link para o Instagram -->
-        <div class="instagram-link">
-            <p>Para ideias e feedbacks, me siga no Instagram:</p>
-            <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">@gabriel_wyo</a>
-        </div>
+    <!-- Frases de Mentalismo -->
+    <div class="phrase-container">
+        <div class="phrases">"O corpo fala mais que as palavras."</div>
+        <div class="phrases">"Cada gesto tem seu significado oculto."</div>
+        <div class="phrases">"Observe, o corpo revela a verdade."</div>
+        <div class="phrases">"Os olhos são as janelas da alma."</div>
     </div>
-
+    <!-- Link para o Instagram -->
+    <div class="instagram-link">
+        <p>Para ideias e feedbacks, me siga no Instagram:</p>
+        <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">@gabriel_wyo</a>
+    </div>
+</div>
     <!-- Menu de opções -->
     <div class="menu-dropdown">
         <button class="menu-button">☰</button>
         <div class="menu-content">
             <a href="deducao.html">Dedução</a>
-            <a href="https://www.instagram.com/gabriel_wyo/" target="_blank">Criador</a>
-            <a href="microtest.html">Expressão Facial Teste</a>
-            <a href="efeitosdapsicologia.html">Efeitos da Psicologia</a>
-            <a href="narrador.html">Narrar PDF</a>
+            <a href="microtest.html">Treinamento de Microexpressões faciais</a>
             <a href="corporaltreino.html">Dicionário de L.C</a>
-            <a href="aula.html">Linguagem C. Aula</a>
+        </div>
+    </div>
+
+    <!-- Configurações de volume -->
+    <div class="settings-container">
+        <button class="settings-button">⚙️</button>
+        <div class="settings-content">
+            <label for="music-volume">Volume da Música:</label>
+            <input type="range" id="music-volume" min="0" max="1" step="0.1" value="1">
+            <label for="effects-volume">Volume dos Efeitos:</label>
+            <input type="range" id="effects-volume" min="0" max="1" step="0.1" value="1">
         </div>
     </div>
 
@@ -235,7 +293,7 @@
             <button class="option" onclick="checkAnswer(2)"></button>
             <button class="option" onclick="checkAnswer(3)"></button>
         </div>
-
+        <audio id="question-audio" controls style="display: none;"></audio>
         <div id="result-container">
             <p id="result-text"></p>
             <button onclick="nextQuestion()">Próxima Pergunta</button>
@@ -245,15 +303,5 @@
     <!-- Música de fundo e controle -->
     <audio id="background-music" src="foco.mp3" loop></audio>
     <button id="music-button">🔊</button>
-
-    <script>
-        function startQuiz() {
-            // Esconde a tela inicial e mostra o quiz
-            document.querySelector('.screen').style.display = 'none';
-            document.getElementById('quiz-container').style.display = 'block';
-        }
-
-        
-    </script>
 </body>
 </html>

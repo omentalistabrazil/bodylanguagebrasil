@@ -1,10 +1,28 @@
+// Áudios de feedback
+const correctSound = new Audio('audios/certa.mp3'); // Som de resposta certa
+const wrongSound = new Audio('audios/errada.mp3'); // Som de resposta errada
+
+// Variável global para o áudio da pergunta atual
+let currentQuestionAudio = null;
+
+// Função para reproduzir o som com base na resposta
+function playFeedbackSound(isCorrect) {
+    if (isCorrect) {
+        correctSound.play(); // Toca o som de resposta certa
+    } else {
+        wrongSound.play(); // Toca o som de resposta errada
+    }
+}
+
+// Dados do Quiz (suas perguntas)
 const quizData = {
     questions: [
-        // Perguntas 1 a 26 (já existentes)
+    // Perguntas 1 a 26 (já existentes)
         
         {
             question: "Agarrar os joelhos e posicionar os pés em arranque indica que a pessoa está:",
             image: "imagens/imagem2.jpg",
+            audio: "audios/audio1.mp3",
             options: [
                 "Pronta para partir",
                 "Confortável",
@@ -16,6 +34,7 @@ const quizData = {
         {
             question: "O que significa quando alguém está com as pernas cruzadas em uma conversa?",
             image: "imagens/imagem3.jpg",
+              audio: "audios/audio2.mp3",
             options: [
                 "Conforto e relaxamento",
                 "Insegurança",
@@ -27,6 +46,7 @@ const quizData = {
         {
             question: "Quando alguém afasta o joelho durante uma conversa, isso pode significar:",
             image: "imagens/imagem4.jpg",
+              audio: "audios/audio3.mp3",
             options: [
                 "Sinal de fechamento",
                 "Sinal de abertura e conforto",
@@ -38,6 +58,7 @@ const quizData = {
         {
             question: "Limpar as mãos nas pernas é um comportamento frequentemente associado a:",
             image: "imagens/imagem5.jpg",
+              audio: "audios/audio4.mp3",
             options: [
                 "Confiança",
                 "Estresse ou ansiedade",
@@ -49,6 +70,7 @@ const quizData = {
         {
             question: "O encolhimento parcial dos ombros pode indicar:",
             image: "imagens/imagem6.jpg",
+              audio: "audios/audio5.mp3",
             options: [
                 "Falta de interesse",
                 "Confiança",
@@ -60,6 +82,7 @@ const quizData = {
         {
             question: "Quando alguém encolhe completamente os ombros, isso geralmente significa:",
             image: "imagens/imagem7.jpg",
+              audio: "audios/audio6.mp3",
             options: [
                 "Falta de interesse",
                 "Falta de compromisso",
@@ -71,6 +94,7 @@ const quizData = {
         {
             question: "Esparramar-se é mais aceitável:",
             image: "imagens/imagem8.jpg",
+              audio: "audios/audio7.mp3",
             options: [
                 "Quando a pessoa está em seu próprio espaço",
                 "Quando se está tentando controlar a conversa",
@@ -82,6 +106,7 @@ const quizData = {
         {
             question: "Os braços esparramados sobre outras cadeiras podem indicar que a pessoa está:",
             image: "imagens/imagem9.jpg",
+              audio: "audios/audio8.mp3",
             options: [
                 "Insegura",
                 "Confortável e confiante",
@@ -93,6 +118,7 @@ const quizData = {
         {
             question: "Colocar as mãos na cintura com os polegares para trás é um sinal de:",
             image: "imagens/imagem10.jpg",
+              audio: "audios/audio9.mp3",
             options: [
                 "Conforto",
                 "Autoridade e domínio",
@@ -104,6 +130,7 @@ const quizData = {
         {
             question: "Quando alguém coloca os polegares para frente na cintura, a postura é mais:",
             image: "imagens/imagem11.jpg",
+              audio: "audios/audio10.mp3",
             options: [
                 "Autoritária",
                 "Questionadora ou inquisidora",
@@ -115,6 +142,7 @@ const quizData = {
         {
             question: "Colocar as mãos entrelaçadas atrás da cabeça é uma demonstração de:",
             image: "imagens/imagem12.jpg",
+              audio: "audios/audio11.mp3",
             options: [
                 "Insegurança",
                 "Conforto e domínio",
@@ -126,6 +154,7 @@ const quizData = {
         {
             question: "Plantar os dedos espalhados sobre uma superfície é um claro sinal de:",
             image: "imagens/imagem13.jpg",
+              audio: "audios/audio12.mp3",
             options: [
                 "Confiança e autoridade",
                 "Conforto",
@@ -140,6 +169,7 @@ const quizData = {
         {
             question: "O que a postura de 'torre com as mãos' demonstra?",
             image: "imagens/imagem14.jpg",
+              audio: "audios/audio13.mp3",
             options: [
                 "Nervosismo",
                 "Falta de interesse",
@@ -151,6 +181,7 @@ const quizData = {
         {
             question: "Os polegares para cima são associados a...?",
             image: "imagens/imagem15.jpg",
+              audio: "audios/audio14.mp3",
             options: [
                 "Indecisão",
                 "Confiança naquele momento",
@@ -162,6 +193,7 @@ const quizData = {
         {
             question: "O que significa os polegares apontando para baixo em uma conversa?",
             image: "imagens/imagem16.jpg",
+              audio: "audios/audio15.mp3",
             options: [
                 "Falta de confiança e/ou ênfase",
                 "Foco",
@@ -173,6 +205,7 @@ const quizData = {
         {
             question: "Quando alguém esconde os polegares, qual é a mensagem transmitida?",
             image: "imagens/imagem17.jpg",
+              audio: "audios/audio16.mp3",
             options: [
                 "Interesse na conversa",
                 "Distração",
@@ -184,6 +217,7 @@ const quizData = {
         {
             question: "Esfregar as mãos rapidamente é um sinal de...?",
             image: "imagens/imagem18.jpg",
+              audio: "audios/audio17.mp3",
             options: [
                 "Alívio do estresse",
                 "Desinteresse",
@@ -195,6 +229,7 @@ const quizData = {
         {
             question: "Confranger as mãos é uma demonstração de...?",
             image: "imagens/imagem19.jpg",
+              audio: "audios/audio18.mp3",
             options: [
                 "Interesse no assunto",
                 "Entusiasmo",
@@ -206,6 +241,7 @@ const quizData = {
         {
             question: "Esfregar os dedos entrelaçados e esticados pode significar...?",
             image: "imagens/imagem20.jpg",
+              audio: "audios/audio19.mp3",
             options: [
                 "Autoconfiança",
                 "Concentração",
@@ -217,6 +253,7 @@ const quizData = {
         {
             question: "Inclinar a cabeça indica...?",
             image: "imagens/imagem21.jpg",
+              audio: "audios/audio20.mp3",
             options: [
                 "Receptividade e conforto",
                 "Desconfiança",
@@ -563,18 +600,8 @@ quizData.questions.push(
         correctAnswer: 2  // Resposta correta está na terceira opção
     }
 );
-// Áudios de feedback
-const correctSound = new Audio('audios/certa.mp3'); // Som de resposta certa
-const wrongSound = new Audio('audios/errada.mp3'); // Som de resposta errada
 
-// Função para reproduzir o som com base na resposta
-function playFeedbackSound(isCorrect) {
-    if (isCorrect) {
-        correctSound.play(); // Toca o som de resposta certa
-    } else {
-        wrongSound.play(); // Toca o som de resposta errada
-    }
-}
+
 
 // Funções do Quiz
 let currentQuestionIndex = 0;
@@ -587,45 +614,71 @@ function loadQuestion() {
     const options = document.querySelectorAll('.option');
     options.forEach((option, index) => {
         option.textContent = question.options[index];
+        option.classList.remove('correct', 'incorrect'); // Remove classes de feedback
+        option.disabled = false; // Reabilita os botões
     });
 
     document.getElementById('result-container').style.display = 'none';
 
-    // Reproduzir o áudio da pergunta, se disponível
+    // Parar o áudio anterior, se estiver tocando
+    if (currentQuestionAudio) {
+        currentQuestionAudio.pause();
+        currentQuestionAudio.currentTime = 0; // Reinicia o áudio
+    }
+
+    // Reproduzir o áudio da pergunta atual, se disponível
     if (question.audio) {
-        let questionAudio = new Audio(question.audio); // Cria o objeto de áudio para a pergunta
-        questionAudio.play(); // Reproduz o áudio
+        currentQuestionAudio = new Audio(question.audio); // Cria o objeto de áudio para a pergunta
+        currentQuestionAudio.play(); // Reproduz o áudio
     }
 }
 
 function checkAnswer(selectedIndex) {
     const question = quizData.questions[currentQuestionIndex];
+    const options = document.querySelectorAll('.option');
     const resultText = document.getElementById('result-text');
+
+    // Desabilita todos os botões para evitar múltiplos cliques
+    options.forEach(option => option.disabled = true);
+
+    // Verifica se a resposta selecionada está correta
     if (selectedIndex === question.correctAnswer) {
+        options[selectedIndex].classList.add('correct'); // Adiciona a classe 'correct' ao botão selecionado
         resultText.textContent = "Resposta correta!";
-        playFeedbackSound(true); // Som de resposta certa
+        playFeedbackSound(true); // Toca o som de resposta certa
     } else {
+        options[selectedIndex].classList.add('incorrect'); // Adiciona a classe 'incorrect' ao botão selecionado
         resultText.textContent = "Resposta errada!";
-        playFeedbackSound(false); // Som de resposta errada
+        playFeedbackSound(false); // Toca o som de resposta errada
     }
 
+    // Exibe o feedback e o botão "Próxima Pergunta"
     document.getElementById('result-container').style.display = 'block';
 }
 
 function nextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex < quizData.questions.length) {
-        loadQuestion();
+        loadQuestion(); // Carrega a próxima pergunta
     } else {
+        // Parar o áudio ao finalizar o quiz
+        if (currentQuestionAudio) {
+            currentQuestionAudio.pause();
+            currentQuestionAudio.currentTime = 0;
+        }
         alert("Você completou o quiz!");
     }
 }
 
-window.onload = loadQuestion;
+function startQuiz() {
+    document.querySelector('.screen').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    loadQuestion();
+}
 
 // Música de fundo
-let music = document.getElementById('background-music');
-let musicButton = document.getElementById('music-button');
+const music = document.getElementById('background-music');
+const musicButton = document.getElementById('music-button');
 
 function toggleMusic() {
     if (music.paused) {
@@ -638,3 +691,48 @@ function toggleMusic() {
 }
 
 musicButton.addEventListener('click', toggleMusic);
+
+// Configurações de volume
+const musicVolume = document.getElementById('music-volume');
+const effectsVolume = document.getElementById('effects-volume');
+
+// Ajustar volume da música de fundo
+musicVolume.addEventListener('input', () => {
+    music.volume = musicVolume.value;
+});
+
+// Ajustar volume dos efeitos sonoros
+effectsVolume.addEventListener('input', () => {
+    correctSound.volume = effectsVolume.value;
+    wrongSound.volume = effectsVolume.value;
+});
+
+// Inicializa os volumes
+music.volume = musicVolume.value;
+correctSound.volume = effectsVolume.value;
+wrongSound.volume = effectsVolume.value;
+// Função para exibir as frases de mentalismo
+function showPhrases() {
+    const phrases = document.querySelectorAll('.phrases');
+    let index = 0;
+
+    // Exibe a primeira frase
+    phrases[index].style.display = 'block';
+
+    // Intervalo para trocar as frases
+    setInterval(() => {
+        // Esconde a frase atual
+        phrases[index].style.display = 'none';
+
+        // Avança para a próxima frase
+        index = (index + 1) % phrases.length;
+
+        // Exibe a próxima frase
+        phrases[index].style.display = 'block';
+    }, 5000); // Troca a cada 5 segundos
+}
+
+// Inicia a exibição das frases quando a página carrega
+window.onload = () => {
+    showPhrases();
+};
