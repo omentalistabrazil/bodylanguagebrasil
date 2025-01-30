@@ -51,7 +51,7 @@
             display: block; /* Mostrar apenas o vídeo ativo */
         }
 
-        video {
+        img {
             width: 100%;
             height: auto;
             display: block;
@@ -215,7 +215,7 @@
 
     <!-- Container do Quiz -->
     <div id="quiz-container">
-        <!-- Vídeos e perguntas serão inseridos aqui dinamicamente -->
+        <!-- GIFs e perguntas serão inseridos aqui dinamicamente -->
     </div>
 
     <!-- Botão de Próximo -->
@@ -227,33 +227,32 @@
     <!-- Resultados -->
     <div id="results"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         const quizData = [
-            { video: "video/local_video1.mp4", correctAnswer: "alegria" },
-            { video: "video/local_video2.mp4", correctAnswer: "raiva" },
-            { video: "video/local_video3.mp4", correctAnswer: "tristeza" },
-            { video: "video/local_video4.mp4", correctAnswer: "surpresa" },
-            { video: "video/local_video5.mp4", correctAnswer: "desprezo" },
-            { video: "video/local_video6.mp4", correctAnswer: "medo" },
-            { video: "video/local_video7.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video8.mp4", correctAnswer: "alegria" },
-            { video: "video/local_video9.mp4", correctAnswer: "raiva" },
-            { video: "video/local_video10.mp4", correctAnswer: "tristeza" },
-            { video: "video/local_video11.mp4", correctAnswer: "surpresa" },
-            { video: "video/local_video12.mp4", correctAnswer: "desprezo" },
-            { video: "video/local_video13.mp4", correctAnswer: "medo" },
-            { video: "video/local_video14.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video15.mp4", correctAnswer: "alegria" },
-            { video: "video/local_video16.mp4", correctAnswer: "medo" },
-            { video: "video/local_video17.mp4", correctAnswer: "raiva" },
-            { video: "video/local_video18.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video19.mp4", correctAnswer: "desprezo" },
-            { video: "video/local_video20.mp4", correctAnswer: "surpresa" },
-            { video: "video/local_video21.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video22.mp4", correctAnswer: "alegria" },
-            { video: "video/local_video23.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video24.mp4", correctAnswer: "desprezo" },
+            { gif: "gifs/local_gif1.gif", correctAnswer: "alegria" },
+            { gif: "gifs/local_gif2.gif", correctAnswer: "raiva" },
+            { gif: "gifs/local_gif3.gif", correctAnswer: "tristeza" },
+            { gif: "gifs/local_gif4.gif", correctAnswer: "surpresa" },
+            { gif: "gifs/local_gif5.gif", correctAnswer: "desprezo" },
+            { gif: "gifs/local_gif6.gif", correctAnswer: "medo" },
+            { gif: "gifs/local_gif7.gif", correctAnswer: "nojo" },
+            { gif: "gifs/local_gif8.gif", correctAnswer: "alegria" },
+            { gif: "gifs/local_gif9.gif", correctAnswer: "raiva" },
+            { gif: "gifs/local_gif10.gif", correctAnswer: "tristeza" },
+            { gif: "gifs/local_gif11.gif", correctAnswer: "surpresa" },
+            { gif: "gifs/local_gif12.gif", correctAnswer: "desprezo" },
+            { gif: "gifs/local_gif13.gif", correctAnswer: "medo" },
+            { gif: "gifs/local_gif14.gif", correctAnswer: "nojo" },
+            { gif: "gifs/local_gif15.gif", correctAnswer: "alegria" },
+            { gif: "gifs/local_gif16.gif", correctAnswer: "medo" },
+            { gif: "gifs/local_gif17.gif", correctAnswer: "raiva" },
+            { gif: "gifs/local_gif18.gif", correctAnswer: "nojo" },
+            { gif: "gifs/local_gif19.gif", correctAnswer: "desprezo" },
+            { gif: "gifs/local_gif20.gif", correctAnswer: "surpresa" },
+            { gif: "gifs/local_gif21.gif", correctAnswer: "nojo" },
+            { gif: "gifs/local_gif22.gif", correctAnswer: "alegria" },
+            { gif: "gifs/local_gif23.gif", correctAnswer: "nojo" },
+            { gif: "gifs/local_gif24.gif", correctAnswer: "desprezo" },
         ];
 
         let currentQuestionIndex = 0;
@@ -282,11 +281,7 @@
             const questionData = quizData[currentQuestionIndex];
             quizContainer.innerHTML = `
                 <div class="video-container active">
-                    <div class="loader"></div>
-                    <video controls preload="auto" class="lazy" onloadeddata="hideLoader(this)">
-                        <source src="${questionData.video}" type="video/mp4">
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
+                    <img src="${questionData.gif}" alt="GIF de microexpressão">
                     <div class="question">Qual emoção está sendo expressa?</div>
                     <div class="options">
                         <label><input type="radio" name="q" value="alegria"> Alegria</label>
@@ -304,14 +299,6 @@
             startTimer();
         }
 
-        // Função para ocultar o spinner quando o vídeo carregar
-        function hideLoader(videoElement) {
-            const loader = videoElement.previousElementSibling;
-            if (loader && loader.classList.contains('loader')) {
-                loader.style.display = 'none';
-            }
-        }
-
         // Função para verificar a resposta
         function checkAnswer() {
             const selected = document.querySelector('input[name="q"]:checked');
@@ -322,10 +309,10 @@
                 if (userAnswer === correctAnswer) {
                     score++;
                     resultsDiv.innerHTML = `<span style="color: #34C759;">Correto!</span>`;
-                    playSound('ding');
+                    playSound('audios/seleção.mp3'); // Som de acerto
                 } else {
                     resultsDiv.innerHTML = `<span style="color: #FF3B30;">Incorreto. A resposta correta era ${correctAnswer}.</span>`;
-                    playSound('buzz');
+                    playSound('audios/seleção.mp3'); // Som de erro
                 }
 
                 nextButton.style.display = 'block';
@@ -333,6 +320,12 @@
             } else {
                 alert("Por favor, selecione uma resposta antes de prosseguir.");
             }
+        }
+
+        // Função para tocar sons de feedback
+        function playSound(soundFile) {
+            const audio = new Audio(soundFile);
+            audio.play();
         }
 
         // Função para avançar para a próxima pergunta
@@ -367,7 +360,7 @@
 
         // Função para iniciar o temporizador
         function startTimer() {
-            timeLeft = 100;
+            timeLeft = 30;
             timerDisplay.textContent = timeLeft;
             timer = setInterval(() => {
                 timeLeft--;
@@ -377,12 +370,6 @@
                     nextQuestion();
                 }
             }, 1000);
-        }
-
-        // Função para tocar sons de feedback
-        function playSound(type) {
-            const audio = new Audio(`audios/seleção.mp3`);
-            audio.play();
         }
 
         // Inicializa o quiz
