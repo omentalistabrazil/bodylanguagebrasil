@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microexpressões Faciais</title>
+    <!-- Plyr CSS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <style>
         /* Reset básico */
         * {
@@ -49,12 +51,6 @@
 
         .video-container.active {
             display: block; /* Mostrar apenas o vídeo ativo */
-        }
-
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         .question {
@@ -195,14 +191,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Barra de progresso do vídeo */
-        .video-progress {
-            height: 4px;
-            background-color: #007aff;
-            width: 0%;
-            transition: width 0.1s;
-        }
     </style>
 </head>
 <body>
@@ -212,9 +200,6 @@
     <div class="popup" id="popup">
         Olá, alguns vídeos contém a resposta no final. Então, pause o vídeo para responder.
     </div>
-
-    <!-- Temporizador -->
-    <div id="timer">30</div>
 
     <!-- Barra de Progresso -->
     <div id="progress-bar">
@@ -235,10 +220,8 @@
     <!-- Resultados -->
     <div id="results"></div>
 
-    <!-- Status da Conexão -->
-    <div id="connection-status" style="position: fixed; top: 10px; right: 10px; font-size: 14px;"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Plyr JavaScript -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
         const quizData = [
             { video: "video/local_video1.mp4", correctAnswer: "alegria" },
@@ -269,17 +252,13 @@
 
         let currentQuestionIndex = 0;
         let score = 0;
-        let timer;
-        let timeLeft = 30;
 
         const quizContainer = document.getElementById('quiz-container');
         const nextButton = document.getElementById('next-button');
         const restartButton = document.getElementById('restart-button');
         const resultsDiv = document.getElementById('results');
         const progressBar = document.getElementById('progress');
-        const timerDisplay = document.getElementById('timer');
         const popup = document.getElementById('popup');
-        const connectionStatus = document.getElementById('connection-status');
 
         // Função para mostrar o pop-up
         function showPopup() {
@@ -289,73 +268,13 @@
             }, 5000);
         }
 
-        // Função para pré-carregar o próximo vídeo
-        function preloadNextVideo() {
-            if (currentQuestionIndex + 1 < quizData.length) {
-                const nextVideo = new Audio(quizData[currentQuestionIndex + 1].video);
-                nextVideo.preload = 'auto';
-            }
-        }
-
-        // Função para configurar streaming adaptativo com HLS.js
-        function setupAdaptiveStreaming(videoElement) {
-            if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(videoElement.querySelector('source').src);
-                hls.attachMedia(videoElement);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    videoElement.play();
-                });
-            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-                videoElement.src = videoElement.querySelector('source').src;
-                videoElement.addEventListener('loadedmetadata', () => {
-                    videoElement.play();
-                });
-            }
-        }
-
-        // Função para verificar a velocidade da conexão
-        function checkConnectionSpeed() {
-            const startTime = Date.now();
-            fetch('/path/to/small/file')
-                .then(response => response.blob())
-                .then(data => {
-                    const endTime = Date.now();
-                    const duration = (endTime - startTime) / 1000;
-                    const bitsLoaded = data.size * 8;
-                    const speedMbps = ((bitsLoaded / duration) / 1024 / 1024).toFixed(2);
-                    if (speedMbps < 1) {
-                        connectionStatus.textContent = 'Conexão lenta';
-                        connectionStatus.style.color = 'red';
-                    } else if (speedMbps < 5) {
-                        connectionStatus.textContent = 'Conexão moderada';
-                        connectionStatus.style.color = 'orange';
-                    } else {
-                        connectionStatus.textContent = 'Conexão rápida';
-                        connectionStatus.style.color = 'green';
-                    }
-                });
-        }
-
-        // Função para configurar a barra de progresso do vídeo
-        function setupVideoProgress(videoElement) {
-            const progress = document.createElement('div');
-            progress.className = 'video-progress';
-            videoElement.parentElement.appendChild(progress);
-
-            videoElement.addEventListener('timeupdate', () => {
-                const percent = (videoElement.currentTime / videoElement.duration) * 100;
-                progress.style.width = `${percent}%`;
-            });
-        }
-
         // Função para carregar a pergunta atual
         function loadQuestion() {
             const questionData = quizData[currentQuestionIndex];
             quizContainer.innerHTML = `
                 <div class="video-container active">
                     <div class="loader"></div>
-                    <video controls preload="auto" class="lazy" onloadeddata="hideLoader(this)">
+                    <video id="player" playsinline controls>
                         <source src="${questionData.video}" type="video/mp4">
                         Seu navegador não suporta o elemento de vídeo.
                     </video>
@@ -371,21 +290,20 @@
                     </div>
                 </div>
             `;
-            const videoElement = quizContainer.querySelector('video');
-            setupAdaptiveStreaming(videoElement); // Configura streaming adaptativo
-            setupVideoProgress(videoElement); // Configura barra de progresso do vídeo
+
+            // Inicializar o Plyr
+            const player = new Plyr('#player', {
+                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+                ratio: '16:9',
+            });
+
+            player.on('ready', () => {
+                const loader = document.querySelector('.loader');
+                if (loader) loader.style.display = 'none';
+            });
+
             nextButton.style.display = 'none';
             updateProgressBar();
-            startTimer();
-            preloadNextVideo(); // Pré-carrega o próximo vídeo
-        }
-
-        // Função para ocultar o spinner quando o vídeo carregar
-        function hideLoader(videoElement) {
-            const loader = videoElement.previousElementSibling;
-            if (loader && loader.classList.contains('loader')) {
-                loader.style.display = 'none';
-            }
         }
 
         // Função para verificar a resposta
@@ -405,7 +323,6 @@
                 }
 
                 nextButton.style.display = 'block';
-                clearInterval(timer);
             } else {
                 alert("Por favor, selecione uma resposta antes de prosseguir.");
             }
@@ -441,23 +358,9 @@
             progressBar.style.width = `${progress}%`;
         }
 
-        // Função para iniciar o temporizador
-        function startTimer() {
-            timeLeft = 30;
-            timerDisplay.textContent = timeLeft;
-            timer = setInterval(() => {
-                timeLeft--;
-                timerDisplay.textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    nextQuestion();
-                }
-            }, 1000);
-        }
-
         // Função para tocar sons de feedback
         function playSound(type) {
-            const audio = new Audio(`audios/${type}.mp3`);
+            const audio = new Audio(`audios/seleção.mp3`);
             audio.play();
         }
 
@@ -467,11 +370,8 @@
         // Mostra o pop-up ao carregar a página
         showPopup();
 
-        // Verifica a velocidade da conexão
-        checkConnectionSpeed();
-
         // Adiciona evento de clique nas opções para verificar a resposta
         quizContainer.addEventListener('change', checkAnswer);
     </script>
 </body>
-    </html>
+</html>
