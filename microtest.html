@@ -51,7 +51,7 @@
             display: block; /* Mostrar apenas o vídeo ativo */
         }
 
-        img {
+        video {
             width: 100%;
             height: auto;
             display: block;
@@ -195,6 +195,14 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Barra de progresso do vídeo */
+        .video-progress {
+            height: 4px;
+            background-color: #007aff;
+            width: 0%;
+            transition: width 0.1s;
+        }
     </style>
 </head>
 <body>
@@ -215,7 +223,7 @@
 
     <!-- Container do Quiz -->
     <div id="quiz-container">
-        <!-- GIFs e perguntas serão inseridos aqui dinamicamente -->
+        <!-- Vídeos e perguntas serão inseridos aqui dinamicamente -->
     </div>
 
     <!-- Botão de Próximo -->
@@ -227,32 +235,36 @@
     <!-- Resultados -->
     <div id="results"></div>
 
+    <!-- Status da Conexão -->
+    <div id="connection-status" style="position: fixed; top: 10px; right: 10px; font-size: 14px;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         const quizData = [
-            { gif: "gifs/local_gif1.gif", correctAnswer: "alegria" },
-            { gif: "gifs/local_gif2.gif", correctAnswer: "raiva" },
-            { gif: "gifs/local_gif3.gif", correctAnswer: "tristeza" },
-            { gif: "gifs/local_gif4.gif", correctAnswer: "surpresa" },
-            { gif: "gifs/local_gif5.gif", correctAnswer: "desprezo" },
-            { gif: "gifs/local_gif6.gif", correctAnswer: "medo" },
-            { gif: "gifs/local_gif7.gif", correctAnswer: "nojo" },
-            { gif: "gifs/local_gif8.gif", correctAnswer: "alegria" },
-            { gif: "gifs/local_gif9.gif", correctAnswer: "raiva" },
-            { gif: "gifs/local_gif10.gif", correctAnswer: "tristeza" },
-            { gif: "gifs/local_gif11.gif", correctAnswer: "surpresa" },
-            { gif: "gifs/local_gif12.gif", correctAnswer: "desprezo" },
-            { gif: "gifs/local_gif13.gif", correctAnswer: "medo" },
-            { gif: "gifs/local_gif14.gif", correctAnswer: "nojo" },
-            { gif: "gifs/local_gif15.gif", correctAnswer: "alegria" },
-            { gif: "gifs/local_gif16.gif", correctAnswer: "medo" },
-            { gif: "gifs/local_gif17.gif", correctAnswer: "raiva" },
-            { gif: "gifs/local_gif18.gif", correctAnswer: "nojo" },
-            { gif: "gifs/local_gif19.gif", correctAnswer: "desprezo" },
-            { gif: "gifs/local_gif20.gif", correctAnswer: "surpresa" },
-            { gif: "gifs/local_gif21.gif", correctAnswer: "nojo" },
-            { gif: "gifs/local_gif22.gif", correctAnswer: "alegria" },
-            { gif: "gifs/local_gif23.gif", correctAnswer: "nojo" },
-            { gif: "gifs/local_gif24.gif", correctAnswer: "desprezo" },
+            { video: "video/local_video1.mp4", correctAnswer: "alegria" },
+            { video: "video/local_video2.mp4", correctAnswer: "raiva" },
+            { video: "video/local_video3.mp4", correctAnswer: "tristeza" },
+            { video: "video/local_video4.mp4", correctAnswer: "surpresa" },
+            { video: "video/local_video5.mp4", correctAnswer: "desprezo" },
+            { video: "video/local_video6.mp4", correctAnswer: "medo" },
+            { video: "video/local_video7.mp4", correctAnswer: "nojo" },
+            { video: "video/local_video8.mp4", correctAnswer: "alegria" },
+            { video: "video/local_video9.mp4", correctAnswer: "raiva" },
+            { video: "video/local_video10.mp4", correctAnswer: "tristeza" },
+            { video: "video/local_video11.mp4", correctAnswer: "surpresa" },
+            { video: "video/local_video12.mp4", correctAnswer: "desprezo" },
+            { video: "video/local_video13.mp4", correctAnswer: "medo" },
+            { video: "video/local_video14.mp4", correctAnswer: "nojo" },
+            { video: "video/local_video15.mp4", correctAnswer: "alegria" },
+            { video: "video/local_video16.mp4", correctAnswer: "medo" },
+            { video: "video/local_video17.mp4", correctAnswer: "raiva" },
+            { video: "video/local_video18.mp4", correctAnswer: "nojo" },
+            { video: "video/local_video19.mp4", correctAnswer: "desprezo" },
+            { video: "video/local_video20.mp4", correctAnswer: "surpresa" },
+            { video: "video/local_video21.mp4", correctAnswer: "nojo" },
+            { video: "video/local_video22.mp4", correctAnswer: "alegria" },
+            { video: "video/local_video23.mp4", correctAnswer: "nojo" },
+            { video: "video/local_video24.mp4", correctAnswer: "desprezo" },
         ];
 
         let currentQuestionIndex = 0;
@@ -267,6 +279,7 @@
         const progressBar = document.getElementById('progress');
         const timerDisplay = document.getElementById('timer');
         const popup = document.getElementById('popup');
+        const connectionStatus = document.getElementById('connection-status');
 
         // Função para mostrar o pop-up
         function showPopup() {
@@ -276,12 +289,76 @@
             }, 5000);
         }
 
+        // Função para pré-carregar o próximo vídeo
+        function preloadNextVideo() {
+            if (currentQuestionIndex + 1 < quizData.length) {
+                const nextVideo = new Audio(quizData[currentQuestionIndex + 1].video);
+                nextVideo.preload = 'auto';
+            }
+        }
+
+        // Função para configurar streaming adaptativo com HLS.js
+        function setupAdaptiveStreaming(videoElement) {
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoElement.querySelector('source').src);
+                hls.attachMedia(videoElement);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    videoElement.play();
+                });
+            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+                videoElement.src = videoElement.querySelector('source').src;
+                videoElement.addEventListener('loadedmetadata', () => {
+                    videoElement.play();
+                });
+            }
+        }
+
+        // Função para verificar a velocidade da conexão
+        function checkConnectionSpeed() {
+            const startTime = Date.now();
+            fetch('/path/to/small/file')
+                .then(response => response.blob())
+                .then(data => {
+                    const endTime = Date.now();
+                    const duration = (endTime - startTime) / 1000;
+                    const bitsLoaded = data.size * 8;
+                    const speedMbps = ((bitsLoaded / duration) / 1024 / 1024).toFixed(2);
+                    if (speedMbps < 1) {
+                        connectionStatus.textContent = 'Conexão lenta';
+                        connectionStatus.style.color = 'red';
+                    } else if (speedMbps < 5) {
+                        connectionStatus.textContent = 'Conexão moderada';
+                        connectionStatus.style.color = 'orange';
+                    } else {
+                        connectionStatus.textContent = 'Conexão rápida';
+                        connectionStatus.style.color = 'green';
+                    }
+                });
+        }
+
+        // Função para configurar a barra de progresso do vídeo
+        function setupVideoProgress(videoElement) {
+            const progress = document.createElement('div');
+            progress.className = 'video-progress';
+            videoElement.parentElement.appendChild(progress);
+
+            videoElement.addEventListener('timeupdate', () => {
+                const percent = (videoElement.currentTime / videoElement.duration) * 100;
+                progress.style.width = `${percent}%`;
+            });
+        }
+
         // Função para carregar a pergunta atual
         function loadQuestion() {
             const questionData = quizData[currentQuestionIndex];
             quizContainer.innerHTML = `
                 <div class="video-container active">
-                    <img src="${questionData.gif}" alt="GIF de microexpressão">
+                    <div class="loader"></div>
+                    <video controls preload="auto" class="lazy" onloadeddata="hideLoader(this)">
+                        <source src="${questionData.video}" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
                     <div class="question">Qual emoção está sendo expressa?</div>
                     <div class="options">
                         <label><input type="radio" name="q" value="alegria"> Alegria</label>
@@ -294,9 +371,21 @@
                     </div>
                 </div>
             `;
+            const videoElement = quizContainer.querySelector('video');
+            setupAdaptiveStreaming(videoElement); // Configura streaming adaptativo
+            setupVideoProgress(videoElement); // Configura barra de progresso do vídeo
             nextButton.style.display = 'none';
             updateProgressBar();
             startTimer();
+            preloadNextVideo(); // Pré-carrega o próximo vídeo
+        }
+
+        // Função para ocultar o spinner quando o vídeo carregar
+        function hideLoader(videoElement) {
+            const loader = videoElement.previousElementSibling;
+            if (loader && loader.classList.contains('loader')) {
+                loader.style.display = 'none';
+            }
         }
 
         // Função para verificar a resposta
@@ -309,10 +398,10 @@
                 if (userAnswer === correctAnswer) {
                     score++;
                     resultsDiv.innerHTML = `<span style="color: #34C759;">Correto!</span>`;
-                    playSound('audios/seleção.mp3'); // Som de acerto
+                    playSound('ding');
                 } else {
                     resultsDiv.innerHTML = `<span style="color: #FF3B30;">Incorreto. A resposta correta era ${correctAnswer}.</span>`;
-                    playSound('audios/seleção.mp3'); // Som de erro
+                    playSound('buzz');
                 }
 
                 nextButton.style.display = 'block';
@@ -320,12 +409,6 @@
             } else {
                 alert("Por favor, selecione uma resposta antes de prosseguir.");
             }
-        }
-
-        // Função para tocar sons de feedback
-        function playSound(soundFile) {
-            const audio = new Audio(soundFile);
-            audio.play();
         }
 
         // Função para avançar para a próxima pergunta
@@ -372,14 +455,23 @@
             }, 1000);
         }
 
+        // Função para tocar sons de feedback
+        function playSound(type) {
+            const audio = new Audio(`audios/${type}.mp3`);
+            audio.play();
+        }
+
         // Inicializa o quiz
         loadQuestion();
 
         // Mostra o pop-up ao carregar a página
         showPopup();
 
+        // Verifica a velocidade da conexão
+        checkConnectionSpeed();
+
         // Adiciona evento de clique nas opções para verificar a resposta
         quizContainer.addEventListener('change', checkAnswer);
     </script>
 </body>
-</html>
+    </html>
