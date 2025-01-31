@@ -239,7 +239,7 @@
     <!-- Tela de Carregamento -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader"></div>
-        <span id="loadingProgress">0%</span>
+        <span id="loadingProgress">Preparando vídeos... 0%</span>
     </div>
 
     <!-- Pop-up -->
@@ -280,20 +280,6 @@
             { video: "video/local_video8.mp4", correctAnswer: "alegria" },
             { video: "video/local_video9.mp4", correctAnswer: "raiva" },
             { video: "video/local_video10.mp4", correctAnswer: "tristeza" },
-            { video: "video/local_video11.mp4", correctAnswer: "surpresa" },
-            { video: "video/local_video12.mp4", correctAnswer: "desprezo" },
-            { video: "video/local_video13.mp4", correctAnswer: "medo" },
-            { video: "video/local_video14.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video15.mp4", correctAnswer: "alegria" },
-            { video: "video/local_video16.mp4", correctAnswer: "medo" },
-            { video: "video/local_video17.mp4", correctAnswer: "raiva" },
-            { video: "video/local_video18.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video19.mp4", correctAnswer: "desprezo" },
-            { video: "video/local_video20.mp4", correctAnswer: "surpresa" },
-            { video: "video/local_video21.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video22.mp4", correctAnswer: "alegria" },
-            { video: "video/local_video23.mp4", correctAnswer: "nojo" },
-            { video: "video/local_video24.mp4", correctAnswer: "desprezo" },
         ];
 
         let currentQuestionIndex = 0;
@@ -316,13 +302,56 @@
             }, 5000);
         }
 
-        // Função para carregar a pergunta atual
-        function loadQuestion() {
+        // Função para baixar e armazenar os vídeos
+        async function cacheVideos() {
+            const cache = await caches.open('video-cache');
+            let progress = 0;
+
+            for (let i = 0; i < quizData.length; i++) {
+                const videoUrl = quizData[i].video;
+                try {
+                    await cache.add(videoUrl); // Baixa e armazena o vídeo no cache
+                    progress = ((i + 1) / quizData.length) * 100;
+                    loadingProgress.textContent = `Baixando vídeo ${i + 1} de ${quizData.length}... ${Math.round(progress)}%`;
+                } catch (error) {
+                    console.error(`Erro ao baixar o vídeo ${videoUrl}:`, error);
+                }
+            }
+
+            // Esconde a tela de carregamento quando terminar
+            loadingScreen.style.display = 'none';
+            alert("Todos os vídeos foram baixados! Agora você pode assistir offline.");
+        }
+
+        // Função para carregar um vídeo do cache
+        async function loadVideoFromCache(videoUrl) {
+            const cache = await caches.open('video-cache');
+            const response = await cache.match(videoUrl);
+            if (response) {
+                return URL.createObjectURL(await response.blob()); // Retorna uma URL para o vídeo armazenado
+            } else {
+                console.error("Vídeo não encontrado no cache.");
+                return videoUrl; // Fallback para o URL original
+            }
+        }
+
+        // Inicia o download dos vídeos ao carregar a página
+        window.addEventListener('load', () => {
+            cacheVideos().then(() => {
+                // Após o download, você pode carregar os vídeos do cache
+                loadQuestion(); // Carrega a primeira pergunta
+            });
+        });
+
+        // Função para carregar a pergunta atual (usando vídeos do cache)
+        async function loadQuestion() {
             const questionData = quizData[currentQuestionIndex];
+            const cachedVideoUrl = await loadVideoFromCache(questionData.video);
+
             quizContainer.innerHTML = `
                 <div class="video-container active">
                     <video id="player" playsinline controls>
-                        <source src="${questionData.video}" type="video/mp4" />
+                        <source src="${cachedVideoUrl}" type="video/mp4" />
                         Seu navegador não suporta o elemento de vídeo.
                     </video>
                     <div class="question">Qual emoção está sendo expressa?</div>
@@ -337,68 +366,9 @@
                     </div>
                 </div>
             `;
-            nextButton.style.display = 'none';
-            updateProgressBar();
 
-            // Inicializar o Plyr
-            const player = new Plyr('#player', {
-                controls: [
-                    'play-large', // Botão de play grande
-                    'play', // Botão de play/pause
-                    'progress', // Barra de progresso
-                    'current-time', // Tempo atual
-                    'duration', // Duração total
-                    'mute', // Botão de mudo
-                    'volume', // Controle de volume
-                    'settings', // Configurações (qualidade, velocidade, etc.)
-                    'pip', // Picture-in-Picture
-                    'airplay', // AirPlay (para dispositivos Apple)
-                    'fullscreen', // Tela cheia
-                ],
-                settings: ['quality', 'speed'], // Opções de configuração
-                ratio: '16:9', // Proporção do vídeo
-                autoplay: false, // Não autoplay por padrão
-                keyboard: { focused: true, global: true }, // Ativar controles de teclado
-            });
-
-            // Monitorar o progresso do carregamento do vídeo
-            const videoElement = document.querySelector('#player');
-            videoElement.addEventListener('progress', () => {
-                const buffered = videoElement.buffered;
-                if (buffered.length > 0) {
-                    const progress = (buffered.end(buffered.length - 1) / videoElement.duration) * 100;
-                    loadingProgress.textContent = `${Math.round(progress)}%`;
-                    if (progress >= 100) {
-                        loadingScreen.style.display = 'none';
-                    }
-                }
-            });
-
-            videoElement.addEventListener('waiting', () => {
-                loadingScreen.style.display = 'flex';
-            });
-
-            videoElement.addEventListener('playing', () => {
-                loadingScreen.style.display = 'none';
-            });
-
-            // Ajustar qualidade com base na velocidade da internet
-            function adjustQuality() {
-                const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-                if (connection) {
-                    const speed = connection.downlink; // Velocidade em Mbps
-                    if (speed < 1) {
-                        player.quality = 360; // Qualidade baixa
-                    } else if (speed < 2) {
-                        player.quality = 480; // Qualidade média
-                    } else {
-                        player.quality = 720; // Qualidade alta
-                    }
-                }
-            }
-
-            // Verificar a velocidade da internet periodicamente
-            setInterval(adjustQuality, 5000);
+            // Inicializa o Plyr para o vídeo carregado
+            const player = new Plyr('#player');
         }
 
         // Função para verificar a resposta
@@ -411,10 +381,8 @@
                 if (userAnswer === correctAnswer) {
                     score++;
                     resultsDiv.innerHTML = `<span style="color: #34C759;">Correto!</span>`;
-                    playSound('ding');
                 } else {
                     resultsDiv.innerHTML = `<span style="color: #FF3B30;">Incorreto. A resposta correta era ${correctAnswer}.</span>`;
-                    playSound('buzz');
                 }
 
                 nextButton.style.display = 'block';
@@ -453,12 +421,6 @@
             progressBar.style.width = `${progress}%`;
         }
 
-        // Função para tocar sons de feedback
-        function playSound(type) {
-            const audio = new Audio(`audios/${type}.mp3`);
-            audio.play();
-        }
-
         // Inicializa o quiz
         loadQuestion();
 
@@ -469,4 +431,4 @@
         quizContainer.addEventListener('change', checkAnswer);
     </script>
 </body>
-    </html>
+                                                                                                 </html>
