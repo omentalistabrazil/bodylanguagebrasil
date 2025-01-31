@@ -191,6 +191,15 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Barra de carregamento do vídeo */
+        .plyr__progress__buffer {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .plyr__progress__buffer--loading {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -300,6 +309,18 @@
             player.on('ready', () => {
                 const loader = document.querySelector('.loader');
                 if (loader) loader.style.display = 'none';
+            });
+
+            player.on('progress', () => {
+                const buffer = player.buffered;
+                if (buffer.length > 0) {
+                    const bufferedEnd = buffer.end(buffer.length - 1);
+                    const duration = player.duration;
+                    if (duration > 0) {
+                        const bufferedPercent = (bufferedEnd / duration) * 100;
+                        document.querySelector('.plyr__progress__buffer').style.width = `${bufferedPercent}%`;
+                    }
+                }
             });
 
             nextButton.style.display = 'none';
