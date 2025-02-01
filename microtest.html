@@ -6,6 +6,31 @@
     <title>Microexpressões Faciais</title>
     <!-- Plyr CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <!-- Pré-carregamento dos vídeos -->
+    <link rel="preload" href="video/local_video1.mp4" as="video">
+    <link rel="preload" href="video/local_video2.mp4" as="video">
+    <link rel="preload" href="video/local_video3.mp4" as="video">
+    <link rel="preload" href="video/local_video4.mp4" as="video">
+    <link rel="preload" href="video/local_video5.mp4" as="video">
+    <link rel="preload" href="video/local_video6.mp4" as="video">
+    <link rel="preload" href="video/local_video7.mp4" as="video">
+    <link rel="preload" href="video/local_video8.mp4" as="video">
+    <link rel="preload" href="video/local_video9.mp4" as="video">
+    <link rel="preload" href="video/local_video10.mp4" as="video">
+    <link rel="preload" href="video/local_video11.mp4" as="video">
+    <link rel="preload" href="video/local_video12.mp4" as="video">
+    <link rel="preload" href="video/local_video13.mp4" as="video">
+    <link rel="preload" href="video/local_video14.mp4" as="video">
+    <link rel="preload" href="video/local_video15.mp4" as="video">
+    <link rel="preload" href="video/local_video16.mp4" as="video">
+    <link rel="preload" href="video/local_video17.mp4" as="video">
+    <link rel="preload" href="video/local_video18.mp4" as="video">
+    <link rel="preload" href="video/local_video19.mp4" as="video">
+    <link rel="preload" href="video/local_video20.mp4" as="video">
+    <link rel="preload" href="video/local_video21.mp4" as="video">
+    <link rel="preload" href="video/local_video22.mp4" as="video">
+    <link rel="preload" href="video/local_video23.mp4" as="video">
+    <link rel="preload" href="video/local_video24.mp4" as="video">
     <style>
         /* Reset básico */
         * {
@@ -239,7 +264,7 @@
     <!-- Tela de Carregamento -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader"></div>
-        <span id="loadingProgress">Preparando vídeos... 0%</span>
+        <span id="loadingProgress">Preparando quiz...</span>
     </div>
 
     <!-- Pop-up -->
@@ -315,56 +340,14 @@
             }, 5000);
         }
 
-        // Função para baixar e armazenar os vídeos
-        async function cacheVideos() {
-            const cache = await caches.open('video-cache');
-            let progress = 0;
-
-            for (let i = 0; i < quizData.length; i++) {
-                const videoUrl = quizData[i].video;
-                try {
-                    await cache.add(videoUrl); // Baixa e armazena o vídeo no cache
-                    progress = ((i + 1) / quizData.length) * 100;
-                    loadingProgress.textContent = `Baixando vídeo ${i + 1} de ${quizData.length}... ${Math.round(progress)}%`;
-                } catch (error) {
-                    console.error(`Erro ao baixar o vídeo ${videoUrl}:`, error);
-                }
-            }
-
-            // Esconde a tela de carregamento quando terminar
-            loadingScreen.style.display = 'none';
-            alert("Todos os vídeos foram baixados! Agora você pode assistir offline.");
-        }
-
-        // Função para carregar um vídeo do cache
-        async function loadVideoFromCache(videoUrl) {
-            const cache = await caches.open('video-cache');
-            const response = await cache.match(videoUrl);
-            if (response) {
-                return URL.createObjectURL(await response.blob()); // Retorna uma URL para o vídeo armazenado
-            } else {
-                console.error("Vídeo não encontrado no cache.");
-                return videoUrl; // Fallback para o URL original
-            }
-        }
-
-        // Inicia o download dos vídeos ao carregar a página
-        window.addEventListener('load', () => {
-            cacheVideos().then(() => {
-                // Após o download, você pode carregar os vídeos do cache
-                loadQuestion(); // Carrega a primeira pergunta
-            });
-        });
-
-        // Função para carregar a pergunta atual (usando vídeos do cache)
-        async function loadQuestion() {
+        // Função para carregar a pergunta atual
+        function loadQuestion() {
             const questionData = quizData[currentQuestionIndex];
-            const cachedVideoUrl = await loadVideoFromCache(questionData.video);
 
             quizContainer.innerHTML = `
                 <div class="video-container active">
                     <video id="player" playsinline controls>
-                        <source src="${cachedVideoUrl}" type="video/mp4" />
+                        <source src="${questionData.video}" type="video/mp4" />
                         Seu navegador não suporta o elemento de vídeo.
                     </video>
                     <div class="question">Qual emoção está sendo expressa?</div>
@@ -435,13 +418,14 @@
         }
 
         // Inicializa o quiz
-        loadQuestion();
-
-        // Mostra o pop-up ao carregar a página
-        showPopup();
+        window.addEventListener('load', () => {
+            loadingScreen.style.display = 'none'; // Esconde a tela de carregamento
+            loadQuestion(); // Carrega a primeira pergunta
+            showPopup(); // Mostra o pop-up
+        });
 
         // Adiciona evento de clique nas opções para verificar a resposta
         quizContainer.addEventListener('change', checkAnswer);
     </script>
 </body>
-    </html>
+</html>
