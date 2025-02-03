@@ -42,7 +42,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             margin-bottom: 20px;
-            width: 105%;
+            width: 100%;
             max-width: 800px;
             display: none; /* Inicialmente oculto */
             transition: background-color 0.3s;
@@ -170,9 +170,9 @@
 
         /* Pop-up */
         .popup {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            position:center;
+            top: 5px;
+            right: 5px;
             background-color: #2c2c2e;
             color: #f5f5f7;
             padding: 16px;
@@ -235,22 +235,22 @@
         /* Indicador de Conexão */
         .connection-status {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 1px;
+            left: 200px;
             background-color: #2c2c2e;
             color: #f5f5f7;
-            padding: 8px 16px;
+            padding: 1px 6px;
             border-radius: 8px;
             font-size: 14px;
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 1px;
         }
 
         .connection-status .indicator {
-            width: 10px;
-            height: 10px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background-color: #34C759; /* Verde para boa conexão */
         }
@@ -303,6 +303,9 @@
     <!-- Resultados -->
     <div id="results"></div>
 
+    <!-- Áudio para o som de clique -->
+    <audio id="clickSound" src="audios/seleção.mp3"></audio>
+
     <!-- Plyr JavaScript -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
@@ -346,6 +349,7 @@
         const connectionStatus = document.getElementById('connectionStatus');
         const connectionIndicator = document.getElementById('connectionIndicator');
         const connectionText = document.getElementById('connectionText');
+        const clickSound = document.getElementById('clickSound');
 
         // Função para medir o ping
         async function checkConnection() {
@@ -424,6 +428,14 @@
             player.on('play', () => {
                 preloadNextVideo();
             });
+
+            // Adiciona evento de clique nas opções para reproduzir o áudio
+            const options = document.querySelectorAll('.options input[type="radio"]');
+            options.forEach(option => {
+                option.addEventListener('change', () => {
+                    clickSound.play();
+                });
+            });
         }
 
         // Função para verificar a resposta
@@ -452,11 +464,13 @@
             if (currentQuestionIndex < quizData.length) {
                 loadQuestion();
                 resultsDiv.innerHTML = '';
+                updateProgressBar(); // Atualiza a barra de progresso
             } else {
                 quizContainer.innerHTML = '';
                 nextButton.style.display = 'none';
                 restartButton.style.display = 'block';
                 resultsDiv.innerHTML = `Você acertou ${score} de ${quizData.length} perguntas.`;
+                updateProgressBar(); // Atualiza a barra de progresso para 100%
             }
         }
 
@@ -468,8 +482,10 @@
             resultsDiv.innerHTML = '';
             nextButton.style.display = 'none';
             restartButton.style.display = 'none';
+            updateProgressBar(); // Reseta a barra de progresso
         }
 
+       
         // Função para atualizar a barra de progresso
         function updateProgressBar() {
             const progress = (currentQuestionIndex / quizData.length) * 100;
@@ -482,9 +498,8 @@
             loadQuestion(); // Carrega a primeira pergunta
             showPopup(); // Mostra o pop-up
         });
-
-        // Adiciona evento de clique nas opções para verificar a resposta
+// Adiciona evento de clique nas opções para verificar a resposta
         quizContainer.addEventListener('change', checkAnswer);
     </script>
 </body>
-            </html>
+</html>
