@@ -657,3 +657,14 @@ musicButton.addEventListener('click', () => {
 window.onload = () => {
     introModal.style.display = 'flex';
 };
+// Verifica se o usuário já tem uma preferência de tema salva
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+}
+
+// Alterna o tema e salva a preferência
+document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-theme');
+    let theme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+});
