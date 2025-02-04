@@ -7,262 +7,336 @@
     <!-- Plyr CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* Reset básico */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        /* Tema Escuro (iCloud Style) */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #1c1c1e;
-            color: #f5f5f7;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    /* Tema Claro (iPhone Style) */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #f5f5f7;
-            animation: fadeIn 1s ease-out;
-        }
+    h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #000000;
+        animation: fadeIn 1s ease-out;
+    }
 
-        .video-container {
-            background-color: #2c2c2e;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 800px;
-            display: none; /* Inicialmente oculto */
-            transition: background-color 0.3s;
-            animation: fadeIn 0.5s ease-out;
-        }
+    .video-container {
+        background-color: rgba(242, 242, 247, 0.8); /* Efeito de vidro fosco */
+        border-radius: 14px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 800px;
+        display: none; /* Inicialmente oculto */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 0.5s ease-out;
+        backdrop-filter: blur(10px); /* Efeito de desfoque */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borda sutil */
+    }
 
-        .video-container.active {
-            display: block; /* Mostrar apenas o vídeo ativo */
-        }
+    .video-container.active {
+        display: block; /* Mostrar apenas o vídeo ativo */
+    }
 
-        .question {
-            font-size: 18px;
-            font-weight: 500;
-            margin: 16px;
-            text-align: center;
-            color: #f5f5f7;
-        }
+    .video-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
 
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 16px;
-        }
+    .question {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 16px;
+        text-align: center;
+        color: #000000;
+        animation: fadeIn 0.5s ease-out;
+    }
 
-        .options label {
-            display: flex;
-            align-items: center;
-            background-color: #2c2c2e;
-            border: 1px solid #3a3a3c;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            color: #f5f5f7;
-        }
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 16px;
+    }
 
-        .options label:hover {
-            background-color: #3a3a3c;
-        }
+    .options label {
+        display: flex;
+        align-items: center;
+        background-color: rgba(242, 242, 247, 0.8); /* Efeito de vidro fosco */
+        border: 1px solid rgba(209, 209, 214, 0.5); /* Borda sutil */
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        color: #000000;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px); /* Efeito de desfoque */
+    }
 
-        .options input[type="radio"] {
-            margin-right: 10px;
-            accent-color: #007aff;
-        }
+    .options label:hover {
+        background-color: rgba(229, 229, 234, 0.8); /* Efeito de vidro fosco ao passar o mouse */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        button {
-            background-color: #007aff;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-            display: none; /* Inicialmente oculto */
-            animation: fadeIn 0.5s ease-out;
-        }
+    .options label:active {
+        transform: scale(0.98); /* Efeito de clique */
+    }
 
-        button:hover {
-            background-color: #005bb5;
-        }
+    .options input[type="radio"] {
+        margin-right: 10px;
+        accent-color: #007aff;
+    }
 
-        #results {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: 500;
-            text-align: center;
-            color: #f5f5f7;
-            animation: fadeIn 0.5s ease-out;
-        }
+    button {
+        background-color: #007aff;
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        margin-top: 20px;
+        display: none; /* Inicialmente oculto */
+        animation: fadeIn 0.5s ease-out;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px); /* Efeito de desfoque */
+    }
 
-        /* Barra de Progresso */
-        #progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #3a3a3c;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
+    button:hover {
+        background-color: #005bb5;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        #progress {
-            height: 100%;
-            width: 0;
-            background-color: #007aff;
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
+    button:active {
+        transform: scale(0.98); /* Efeito de clique */
+    }
 
-        /* Tela de Carregamento */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 20%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: #fff;
-            font-size: 24px;
-            z-index: 1000;
-        }
+    #results {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: #000000;
+        animation: fadeIn 0.5s ease-out;
+    }
 
-        .loading-screen span {
-            margin-top: 10px;
-        }
+    /* Barra de Progresso */
+    #progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: rgba(229, 229, 234, 0.8); /* Efeito de vidro fosco */
+        border-radius: 4px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(10px); /* Efeito de desfoque */
+    }
 
-        /* Animação de fade-in */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    #progress {
+        height: 100%;
+        width: 0;
+        background-color: #007aff;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
 
-        /* Pop-up */
-        .popup {
-            position:center;
-            top: 5px;
-            right: 5px;
-            background-color: #2c2c2e;
-            color: #f5f5f7;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.5s ease-out;
-            display: none;
-        }
+    /* Tela de Carregamento */
+    .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #000000;
+        font-size: 24px;
+        z-index: 1000;
+        animation: fadeIn 0.5s ease-out;
+        backdrop-filter: blur(20px); /* Efeito de desfoque */
+    }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+    .loading-screen span {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #8e8e93;
+    }
 
-        .popup.show {
-            display: block;
+    /* Animação de fade-in */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-        /* Botão de Carregamento Personalizado */
-        .plyr__loading {
-            position: absolute;
-            top: 10%;
-            left: 60%;
-            transform: translate(+50%, +50%);
-            width: 60px;
-            height: 60px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+    /* Pop-up */
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9); /* Efeito de vidro fosco */
+        color: #000000;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        animation: popupIn 0.4s ease-out;
+        display: none;
+        z-index: 1001;
+        backdrop-filter: blur(20px); /* Efeito de desfoque */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borda sutil */
+    }
 
-        .plyr__loading::after {
-            content: "";
-            width: 40px;
-            height: 40px;
-            border: 4px solid #fff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+    @keyframes popupIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -60%);
         }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+    .popup.show {
+        display: block;
+    }
 
-        /* Indicador de Conexão */
-        .connection-status {
-            position: fixed;
-            top: 1px;
-            left: 200px;
-            background-color: #2c2c2e;
-            color: #f5f5f7;
-            padding: 1px 6px;
-            border-radius: 8px;
-            font-size: 14px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 1px;
-        }
+    /* Botão de Carregamento Personalizado */
+    .plyr__loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px); /* Efeito de desfoque */
+    }
 
-        .connection-status .indicator {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background-color: #34C759; /* Verde para boa conexão */
-        }
+    .plyr__loading::after {
+        content: "";
+        width: 40px;
+        height: 40px;
+        border: 4px solid #007aff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
 
-        .connection-status .indicator.medium {
-            background-color: #FFCC00; /* Amarelo para conexão média */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
         }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 
-        .connection-status .indicator.bad {
-            background-color: #FF3B30; /* Vermelho para conexão ruim */
-        }
-    </style>
+    /* Indicador de Conexão */
+    .connection-status {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.9); /* Efeito de vidro fosco */
+        color: #000000;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 14px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease-out;
+        backdrop-filter: blur(10px); /* Efeito de desfoque */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borda sutil */
+    }
+
+    .connection-status .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #34C759; /* Verde para boa conexão */
+    }
+
+    .connection-status .indicator.medium {
+        background-color: #FFCC00; /* Amarelo para conexão média */
+    }
+
+    .connection-status .indicator.bad {
+        background-color: #FF3B30; /* Vermelho para conexão ruim */
+    }
+
+    /* Efeito de clique nos botões e opções */
+    .options label::after,
+    button::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: radial-gradient(circle, rgba(0, 122, 255, 0.2), transparent);
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.5s ease;
+        pointer-events: none;
+    }
+
+    .options label:active::after,
+    button:active::after {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Efeito de vidro fosco para o fundo do body */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5); /* Fundo semi-transparente */
+        backdrop-filter: blur(20px); /* Efeito de desfoque */
+        z-index: -1;
+    }
+</style>
 </head>
 <body>
     <h1>Microexpressões Faciais</h1>
@@ -335,6 +409,18 @@
             { video: "video/local_video23.mp4", correctAnswer: "nojo" },
             { video: "video/local_video24.mp4", correctAnswer: "desprezo" },
         ];
+
+        // Função para embaralhar o array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Embaralha o array quizData
+        shuffleArray(quizData);
+
         let currentQuestionIndex = 0;
         let score = 0;
 
@@ -485,7 +571,6 @@
             updateProgressBar(); // Reseta a barra de progresso
         }
 
-       
         // Função para atualizar a barra de progresso
         function updateProgressBar() {
             const progress = (currentQuestionIndex / quizData.length) * 100;
@@ -498,7 +583,8 @@
             loadQuestion(); // Carrega a primeira pergunta
             showPopup(); // Mostra o pop-up
         });
-// Adiciona evento de clique nas opções para verificar a resposta
+
+        // Adiciona evento de clique nas opções para verificar a resposta
         quizContainer.addEventListener('change', checkAnswer);
     </script>
 </body>

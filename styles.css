@@ -1,0 +1,430 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #f5f5f7; /* Cor de fundo suave, típica do iOS */
+    color: #1d1d1f; /* Cor de texto escura */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: #ffffff; /* Fundo branco */
+    border-radius: 20px; /* Bordas arredondadas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra mais suave e difusa */
+    max-width: 500px;
+    width: 200%;
+    padding: 25px;
+    text-align: center;
+    overflow: hidden; /* Garante que nada ultrapasse as bordas arredondadas */
+}
+
+header h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    font-weight: 600; /* Fonte semibold, comum no iOS */
+    color: #1d1d1f; /* Cor escura */
+}
+
+header p {
+    font-size: 14px;
+    color: #6e6e73; /* Cor secundária, típica do iOS */
+    margin-bottom: 20px;
+}
+
+.question-card {
+    display: none;
+    background-color: #ffffff; /* Fundo branco */
+    border-radius: 15px; /* Bordas arredondadas */
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Borda sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.question-card.active {
+    display: block;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.question-card img {
+    width: 100%;
+    border-radius: 10px; /* Bordas arredondadas para imagens */
+    margin-bottom: 15px;
+}
+
+.question-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600; /* Fonte semibold */
+    color: #1d1d1f;
+}
+
+.question-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #007aff; /* Cor secundária */
+}
+
+.answer-button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 12px; /* Bordas mais arredondadas */
+    background-color: #007aff; /* Azul do iOS */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500; /* Fonte medium */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.answer-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+}
+
+.answer-button:hover {
+    background-color: #005bb5; /* Azul mais escuro ao passar o mouse */
+    transform: scale(1.02); /* Efeito de zoom leve */
+}
+
+.answer-button:active {
+    background-color: #004088; /* Azul ainda mais escuro ao clicar */
+    transform: scale(0.98); /* Efeito de pressionar */
+}
+
+.answer-button:active::after {
+    transform: translate(-50%, -50%) scale(1); /* Efeito de onda ao clicar */
+}
+
+.answer-button[data-correct="true"]:active {
+    background-color: #34c759; /* Verde do iOS para respostas corretas */
+}
+
+.answer-button[data-correct="false"]:active {
+    background-color: #ff3b30; /* Vermelho do iOS para respostas incorretas */
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px); /* Efeito de desfoque mais intenso */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 300px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #6e6e73; /* Cor secundária */
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #1d1d1f; /* Cor escura ao passar o mouse */
+}
+
+#start-button {
+    background-color: #007aff; /* Azul do iOS */
+    color: #ffffff;
+    border: none;
+    border-radius: 12px; /* Bordas arredondadas */
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 500; /* Fonte medium */
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#start-button:hover {
+    background-color: #005bb5; /* Azul mais escuro ao passar o mouse */
+    transform: scale(1.05); /* Efeito de zoom leve */
+}
+
+#start-button:active {
+    background-color: #004088; /* Azul ainda mais escuro ao clicar */
+    transform: scale(0.95); /* Efeito de pressionar */
+}
+
+/* Botão de música */
+#music-button {
+    background-color: #ddd; /* Azul do iOS */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Botão redondo */
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), /* Sombra externa */
+                inset 0 2px 4px rgba(255, 255, 255, 0.2); /* Sombra interna */
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 10px;
+    right: 280px;
+    outline: none;
+    /* Adicionando um emoji de música */
+    content: "🎵";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif; /* Garantindo que o emoji seja renderizado corretamente */
+}
+
+#music-button:hover {
+    background-color: #005bb5; /* Azul mais escuro ao passar o mouse */
+    transform: scale(1.1); /* Efeito de zoom */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), /* Sombra externa mais intensa */
+                inset 0 2px 4px rgba(255, 255, 255, 0.3); /* Sombra interna mais intensa */
+}
+
+#music-button:active {
+    background-color: #004088; /* Azul ainda mais escuro ao clicar */
+    transform: scale(0.9); /* Efeito de pressionar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), /* Sombra externa mais suave */
+                inset 0 1px 2px rgba(255, 255, 255, 0.1); /* Sombra interna mais suave */
+}
+
+/* Adicionando uma animação de pulsação para o botão */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#music-button.playing {
+    animation: pulse 1.5s infinite; /* Animação de pulsação quando a música está tocando */
+}
+
+/* Adicionando animações suaves */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container, .modal-content {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Efeito de hover para cards */
+.question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+/* Estilo para o menu de navegação */
+.main-nav {
+    margin-bottom: 40px;
+    padding: 15px 0;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)); /* Gradiente suave */
+    backdrop-filter: blur(15px); /* Efeito de desfoque no fundo */
+    border-radius: 20px; /* Bordas arredondadas */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Sombra mais intensa */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda sutil */
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+}
+
+.main-nav ul {
+    list-style: none; /* Remove os marcadores de lista */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Espaçamento entre os itens do menu */
+}
+
+.main-nav ul li {
+    display: inline-block;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: #007aff; /* Azul do iOS */
+    font-size: 16px;
+    font-weight: 500; /* Fonte medium */
+    padding: 12px 24px;
+    border-radius: 15px; /* Bordas arredondadas */
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05)); /* Gradiente suave */
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.1); /* Sombra azul suave */
+    transform-style: preserve-3d; /* Ativa o contexto 3D */
+    perspective: 1000px; /* Define a perspectiva para efeitos 3D */
+}
+
+/* Efeito de borda luminosa 3D */
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 17px; /* Bordas arredondadas */
+    background: linear-gradient(145deg, rgba(0, 122, 255, 0.3), rgba(0, 122, 255, 0.1)); /* Gradiente luminoso */
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateZ(-10px); /* Efeito 3D */
+}
+
+.main-nav ul li a:hover::after {
+    opacity: 1; /* Mostra a borda luminosa ao passar o mouse */
+    transform: translateZ(0); /* Efeito 3D */
+}
+
+/* Efeito de brilho ao passar o mouse */
+.main-nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+.main-nav ul li a:hover {
+    background: linear-gradient(145deg, rgba(0, 122, 255, 0.2), rgba(0, 122, 255, 0.1)); /* Gradiente mais intenso */
+    color: #005bb5; /* Azul mais escuro ao passar o mouse */
+    transform: translateY(-3px) translateZ(10px); /* Efeito de levantar 3D */
+    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.2); /* Sombra mais intensa */
+}
+
+.main-nav ul li a:active {
+    background: linear-gradient(145deg, rgba(0, 122, 255, 0.3), rgba(0, 122, 255, 0.2)); /* Gradiente mais escuro */
+    color: #004088; /* Azul ainda mais escuro ao clicar */
+    transform: translateY(0) translateZ(0); /* Efeito de pressionar */
+}
+
+.main-nav ul li a:active::before {
+    transform: translate(-50%, -50%) scale(1); /* Efeito de onda ao clicar */
+}
+
+/* Animação de brilho contínuo */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 122, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 122, 255, 0.2);
+    }
+}
+
+.main-nav ul li a:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 70%);
+    animation: glow 1.5s infinite; /* Animação de brilho */
+}
+
+/* Efeito de fundo dinâmico */
+.main-nav ul li a {
+    background: linear-gradient(145deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+    background-size: 200% 200%;
+    animation: background-shift 5s infinite alternate; /* Animação de fundo dinâmico */
+}
+
+@keyframes background-shift {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Efeito de iluminação dinâmica */
+.main-nav ul li a {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+.main-nav ul li a:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* Efeito de iluminação ao passar o mouse */
+}

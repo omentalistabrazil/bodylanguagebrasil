@@ -1,20 +1,3 @@
-// Áudios de feedback
-const correctSound = new Audio('audios/certa.mp3'); // Som de resposta certa
-const wrongSound = new Audio('audios/errada.mp3'); // Som de resposta errada
-
-// Variável global para o áudio da pergunta atual
-let currentQuestionAudio = null;
-
-// Função para reproduzir o som com base na resposta
-function playFeedbackSound(isCorrect) {
-    if (isCorrect) {
-        correctSound.play(); // Toca o som de resposta certa
-    } else {
-        wrongSound.play(); // Toca o som de resposta errada
-    }
-}
-
-// Dados do Quiz (suas perguntas)
 const quizData = {
     questions: [
     // Perguntas 1 a 26 (já existentes)
@@ -600,139 +583,77 @@ quizData.questions.push(
         correctAnswer: 2  // Resposta correta está na terceira opção
     }
 );
-
-
-
-// Funções do Quiz
 let currentQuestionIndex = 0;
+let score = 0;
 
-function loadQuestion() {
-    const question = quizData.questions[currentQuestionIndex];
-    document.getElementById('question-text').textContent = question.question;
-    document.getElementById('question-image').src = question.image;
-
-    const options = document.querySelectorAll('.option');
-    options.forEach((option, index) => {
-        option.textContent = question.options[index];
-        option.classList.remove('correct', 'incorrect'); // Remove classes de feedback
-        option.disabled = false; // Reabilita os botões
-    });
-
-    document.getElementById('result-container').style.display = 'none';
-
-    // Parar o áudio anterior, se estiver tocando
-    if (currentQuestionAudio) {
-        currentQuestionAudio.pause();
-        currentQuestionAudio.currentTime = 0; // Reinicia o áudio
-    }
-
-    // Reproduzir o áudio da pergunta atual, se disponível
-    if (question.audio) {
-        currentQuestionAudio = new Audio(question.audio); // Cria o objeto de áudio para a pergunta
-        currentQuestionAudio.play(); // Reproduz o áudio
-    }
-}
-
-function checkAnswer(selectedIndex) {
-    const question = quizData.questions[currentQuestionIndex];
-    const options = document.querySelectorAll('.option');
-    const resultText = document.getElementById('result-text');
-
-    // Desabilita todos os botões para evitar múltiplos cliques
-    options.forEach(option => option.disabled = true);
-
-    // Verifica se a resposta selecionada está correta
-    if (selectedIndex === question.correctAnswer) {
-        options[selectedIndex].classList.add('correct'); // Adiciona a classe 'correct' ao botão selecionado
-        resultText.textContent = "Resposta correta!";
-        playFeedbackSound(true); // Toca o som de resposta certa
-    } else {
-        options[selectedIndex].classList.add('incorrect'); // Adiciona a classe 'incorrect' ao botão selecionado
-        resultText.textContent = "Resposta errada!";
-        playFeedbackSound(false); // Toca o som de resposta errada
-    }
-
-    // Exibe o feedback e o botão "Próxima Pergunta"
-    document.getElementById('result-container').style.display = 'block';
-}
-
-function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizData.questions.length) {
-        loadQuestion(); // Carrega a próxima pergunta
-    } else {
-        // Parar o áudio ao finalizar o quiz
-        if (currentQuestionAudio) {
-            currentQuestionAudio.pause();
-            currentQuestionAudio.currentTime = 0;
-        }
-        alert("Você completou o quiz!");
-    }
-}
-
-function startQuiz() {
-    document.querySelector('.screen').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
-    loadQuestion();
-}
-
-// Música de fundo
-const music = document.getElementById('background-music');
+// Elementos do DOM
+const questionContainer = document.getElementById('question-container');
+const introModal = document.getElementById('intro-modal');
+const startButton = document.getElementById('start-button');
+const clickSound = document.getElementById('clickSound');
 const musicButton = document.getElementById('music-button');
+const audio = document.getElementById('background-music');
 
-function toggleMusic() {
-    if (music.paused) {
-        music.play();
-        musicButton.textContent = '🔊';
-    } else {
-        music.pause();
-        musicButton.textContent = '🔇';
+// Função para carregar a pergunta atual
+function loadQuestion() {
+    const questionData = quizData.questions[currentQuestionIndex];
+    questionContainer.innerHTML = `
+        <h2>Pergunta ${currentQuestionIndex + 1}</h2>
+        <img src="${questionData.image}" alt="Imagem da pergunta">
+        <p>${questionData.question}</p>
+        ${questionData.options.map((option, index) => `
+            <button class="answer-button" data-correct="${index === questionData.correctAnswer}">${option}</button>
+        `).join('')}
+    `;
+
+    // Reproduzir áudio, se disponível
+    if (questionData.audio) {
+        const audio = new Audio(questionData.audio);
+        audio.play();
     }
+
+    // Adicionar eventos aos botões de resposta
+    document.querySelectorAll('.answer-button').forEach(button => {
+        button.addEventListener('click', handleAnswer);
+    });
 }
 
-musicButton.addEventListener('click', toggleMusic);
+// Função para tratar a resposta do usuário
+function handleAnswer(event) {
+    const isCorrect = event.target.getAttribute('data-correct') === 'true';
+    event.target.style.backgroundColor = isCorrect ? '#34c759' : '#ff3b30';
 
-// Configurações de volume
-const musicVolume = document.getElementById('music-volume');
-const effectsVolume = document.getElementById('effects-volume');
+    // Reproduzir som de clique
+    clickSound.play();
 
-// Ajustar volume da música de fundo
-musicVolume.addEventListener('input', () => {
-    music.volume = musicVolume.value;
-});
-
-// Ajustar volume dos efeitos sonoros
-effectsVolume.addEventListener('input', () => {
-    correctSound.volume = effectsVolume.value;
-    wrongSound.volume = effectsVolume.value;
-});
-
-// Inicializa os volumes
-music.volume = musicVolume.value;
-correctSound.volume = effectsVolume.value;
-wrongSound.volume = effectsVolume.value;
-// Função para exibir as frases de mentalismo
-function showPhrases() {
-    const phrases = document.querySelectorAll('.phrases');
-    let index = 0;
-
-    // Exibe a primeira frase
-    phrases[index].style.display = 'block';
-
-    // Intervalo para trocar as frases
-    setInterval(() => {
-        // Esconde a frase atual
-        phrases[index].style.display = 'none';
-
-        // Avança para a próxima frase
-        index = (index + 1) % phrases.length;
-
-        // Exibe a próxima frase
-        phrases[index].style.display = 'block';
-    }, 5000); // Troca a cada 5 segundos
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.questions.length) {
+            loadQuestion();
+        } else {
+            alert(`Quiz concluído! Sua pontuação é ${score}/${quizData.questions.length}`);
+        }
+    }, 1000);
 }
 
-// Inicia a exibição das frases quando a página carrega
+// Iniciar o quiz
+startButton.addEventListener('click', () => {
+    introModal.style.display = 'none';
+    loadQuestion();
+});
+
+// Controle de música de fundo
+musicButton.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        musicButton.textContent = "🔊";
+    } else {
+        audio.pause();
+        musicButton.textContent = "🎵";
+    }
+});
+
+// Abrir o modal ao carregar a página
 window.onload = () => {
-    showPhrases();
+    introModal.style.display = 'flex';
 };
