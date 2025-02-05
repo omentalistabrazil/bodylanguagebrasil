@@ -1,7 +1,5 @@
 const quizData = {
     questions: [
-    // Perguntas 1 a 26 (já existentes)
-        
         {
             question: "Agarrar os joelhos e posicionar os pés em arranque indica que a pessoa está:",
             image: "imagens/imagem2.jpg",
@@ -14,8 +12,8 @@ const quizData = {
             ],
             correctAnswer: 0
         },
-        {
-            question: "O que significa quando alguém está com as pernas cruzadas em uma conversa?",
+       {
+question: "O que significa quando alguém está com as pernas cruzadas em uma conversa?",
             image: "imagens/imagem3.jpg",
               audio: "audios/audio2.mp3",
             options: [
@@ -586,6 +584,7 @@ quizData.questions.push(
 let currentQuestionIndex = 0;
 let score = 0;
 
+
 // Elementos do DOM
 const questionContainer = document.getElementById('question-container');
 const introModal = document.getElementById('intro-modal');
@@ -593,23 +592,30 @@ const startButton = document.getElementById('start-button');
 const clickSound = document.getElementById('clickSound');
 const musicButton = document.getElementById('music-button');
 const audio = document.getElementById('background-music');
+const restartButton = document.getElementById('restart-button'); // Botão de reiniciar
 
 // Função para carregar a pergunta atual
 function loadQuestion() {
     const questionData = quizData.questions[currentQuestionIndex];
+
+    if (!questionData) {
+        endQuiz();
+        return;
+    }
+
     questionContainer.innerHTML = `
         <h2>Pergunta ${currentQuestionIndex + 1}</h2>
         <img src="${questionData.image}" alt="Imagem da pergunta">
         <p>${questionData.question}</p>
         ${questionData.options.map((option, index) => `
-            <button class="answer-button" data-correct="${index === questionData.correctAnswer}">${option}</button>
+            <button class="answer-button" data-index="${index}">${option}</button>
         `).join('')}
     `;
 
-    // Reproduzir áudio, se disponível
+    // Reproduzir áudio da pergunta, se existir
     if (questionData.audio) {
-        const audio = new Audio(questionData.audio);
-        audio.play();
+        const questionAudio = new Audio(questionData.audio);
+        questionAudio.play();
     }
 
     // Adicionar eventos aos botões de resposta
@@ -620,8 +626,15 @@ function loadQuestion() {
 
 // Função para tratar a resposta do usuário
 function handleAnswer(event) {
-    const isCorrect = event.target.getAttribute('data-correct') === 'true';
-    event.target.style.backgroundColor = isCorrect ? '#34c759' : '#ff3b30';
+    const selectedIndex = parseInt(event.target.getAttribute('data-index'));
+    const isCorrect = selectedIndex === quizData.questions[currentQuestionIndex].correctAnswer;
+
+    if (isCorrect) {
+        score++;
+        event.target.style.backgroundColor = '#34c759';
+    } else {
+        event.target.style.backgroundColor = '#ff3b30';
+    }
 
     // Reproduzir som de clique
     clickSound.play();
@@ -631,9 +644,28 @@ function handleAnswer(event) {
         if (currentQuestionIndex < quizData.questions.length) {
             loadQuestion();
         } else {
-            alert(`Quiz concluído! Sua pontuação é ${score}/${quizData.questions.length}`);
+            endQuiz();
         }
     }, 1000);
+}
+
+// Função para finalizar o quiz e mostrar o botão de reinício
+function endQuiz() {
+    questionContainer.innerHTML = `
+        <h2>Quiz concluído!</h2>
+        <p>Sua pontuação: <strong>${score} / ${quizData.questions.length}</strong></p>
+        <button id="restart-button">Reiniciar Quiz</button>
+    `;
+
+    // Adicionar evento ao botão de reinício
+    document.getElementById('restart-button').addEventListener('click', restartQuiz);
+}
+
+// Função para reiniciar o quiz
+function restartQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    loadQuestion();
 }
 
 // Iniciar o quiz
@@ -642,29 +674,161 @@ startButton.addEventListener('click', () => {
     loadQuestion();
 });
 
-// Controle de música de fundo
-musicButton.addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play();
-        musicButton.textContent = "🔊";
-    } else {
-        audio.pause();
-        musicButton.textContent = "🎵";
-    }
-});
-
 // Abrir o modal ao carregar a página
 window.onload = () => {
     introModal.style.display = 'flex';
 };
+
+// Configurações de música e tema (mantendo as opções anteriores)
+
 // Verifica se o usuário já tem uma preferência de tema salva
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
 }
 
-// Alterna o tema e salva a preferência
-document.getElementById('theme-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('dark-theme');
-    let theme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-    localStorage.setItem('theme', theme);
+// Abrir modal de configurações
+document.getElementById('settings-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('settings-modal').style.display = 'block';
+});
+
+// Fechar modal de configurações
+document.querySelectorAll('.close-button').forEach(function(button) {
+    button.addEventListener('click', function() {
+        document.getElementById('settings-modal').style.display = 'none';
+    });
+});
+
+// Salvar configurações
+document.getElementById('settings-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const musicVolume = document.getElementById('music-volume').value;
+    document.getElementById('background-music').volume = musicVolume;
+    
+    const themePreference = document.getElementById('theme-preference').value;
+    document.body.className = themePreference === 'dark' ? 'dark-theme' : '';
+    
+    document.getElementById('settings-modal').style.display = 'none';
+});
+
+// Configurações de música
+const musicToggle = document.getElementById('music-toggle');
+const backgroundMusic = document.getElementById('background-music');
+const musicVolume = document.getElementById('music-volume');
+
+// Verificar se a música deve ser ativada ao carregar a página
+document.addEventListener('DOMContentLoaded', function () {
+    musicToggle.checked = true;
+    backgroundMusic.play();
+});
+
+// Ativar/desativar música de fundo
+musicToggle.addEventListener('change', function () {
+    if (musicToggle.checked) {
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+    }
+});
+
+// Ajustar volume da música
+musicVolume.addEventListener('input', function () {
+    backgroundMusic.volume = musicVolume.value;
+});
+
+// Salvar configurações no localStorage
+document.getElementById('settings-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    localStorage.setItem('musicEnabled', musicToggle.checked);
+    localStorage.setItem('musicVolume', musicVolume.value);
+    
+    const themePreference = document.getElementById('theme-preference').value;
+    localStorage.setItem('themePreference', themePreference);
+    document.body.className = themePreference === 'dark' ? 'dark-theme' : '';
+    
+    document.getElementById('settings-modal').style.display = 'none';
+});
+
+// Carregar configurações salvas ao abrir a página
+document.addEventListener('DOMContentLoaded', function () {
+    const musicEnabled = localStorage.getItem('musicEnabled') === 'true';
+    const savedVolume = parseFloat(localStorage.getItem('musicVolume')) || 0.5;
+    const savedTheme = localStorage.getItem('themePreference') || 'light';
+    
+    musicToggle.checked = musicEnabled;
+    musicVolume.value = savedVolume;
+    document.getElementById('theme-preference').value = savedTheme;
+    
+    document.body.className = savedTheme === 'dark' ? 'dark-theme' : '';
+    
+    if (musicEnabled) {
+        backgroundMusic.volume = savedVolume;
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+    }
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const profileImage = document.getElementById("profile-image");
+    const uploadImage = document.getElementById("upload-image");
+    const usernameInput = document.getElementById("username");
+    const saveNameButton = document.getElementById("save-name");
+    const resetProgressButton = document.getElementById("reset-progress");
+    const testsCompletedSpan = document.getElementById("tests-completed");
+    const accuracyRateSpan = document.getElementById("accuracy-rate");
+
+    // Recupera os dados salvos
+    profileImage.src = localStorage.getItem("profileImage") || "imagens/default-avatar.png";
+    usernameInput.value = localStorage.getItem("username") || "";
+    let testsCompleted = parseInt(localStorage.getItem("testsCompleted")) || 0;
+    let correctAnswers = parseInt(localStorage.getItem("correctAnswers")) || 0;
+
+    // Atualiza a exibição dos dados
+    testsCompletedSpan.textContent = testsCompleted;
+    accuracyRateSpan.textContent = testsCompleted > 0 
+        ? Math.round((correctAnswers / testsCompleted) * 100) + "%" 
+        : "0%";
+
+    // Troca da imagem de perfil
+    uploadImage.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profileImage.src = e.target.result;
+                localStorage.setItem("profileImage", e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Salvar nome
+    saveNameButton.addEventListener("click", function () {
+        localStorage.setItem("username", usernameInput.value);
+        alert("Nome salvo com sucesso!");
+    });
+
+    // Resetar progresso
+    resetProgressButton.addEventListener("click", function () {
+        localStorage.removeItem("profileImage");
+        localStorage.removeItem("username");
+        localStorage.removeItem("testsCompleted");
+        localStorage.removeItem("correctAnswers");
+        alert("Progresso reiniciado!");
+        location.reload();
+    });
+
+    // Simular a finalização de um teste (substituir isso pela lógica real do quiz)
+    window.registrarTeste = function (acertou) {
+        testsCompleted++;
+        if (acertou) correctAnswers++;
+
+        localStorage.setItem("testsCompleted", testsCompleted);
+        localStorage.setItem("correctAnswers", correctAnswers);
+
+        testsCompletedSpan.textContent = testsCompleted;
+        accuracyRateSpan.textContent = Math.round((correctAnswers / testsCompleted) * 100) + "%";
+    };
 });
