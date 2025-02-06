@@ -615,7 +615,7 @@ function loadQuestion() {
     // Reproduzir áudio da pergunta, se existir
     if (questionData.audio) {
         const questionAudio = new Audio(questionData.audio);
-        questionAudio.play();
+        
     }
 
     // Adicionar eventos aos botões de resposta
@@ -669,14 +669,13 @@ function restartQuiz() {
 }
 
 // Iniciar o quiz
-startButton.addEventListener('click', () => {
-    introModal.style.display = 'none';
+   
     loadQuestion();
-});
+
 
 // Abrir o modal ao carregar a página
 window.onload = () => {
-    introModal.style.display = 'flex';
+    
 };
 
 // Configurações de música e tema (mantendo as opções anteriores)
@@ -720,7 +719,7 @@ const musicVolume = document.getElementById('music-volume');
 // Verificar se a música deve ser ativada ao carregar a página
 document.addEventListener('DOMContentLoaded', function () {
     musicToggle.checked = true;
-    backgroundMusic.play();
+    
 });
 
 // Ativar/desativar música de fundo
@@ -765,70 +764,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
     if (musicEnabled) {
         backgroundMusic.volume = savedVolume;
-        backgroundMusic.play();
+        
     } else {
         backgroundMusic.pause();
     }
-});
-document.addEventListener("DOMContentLoaded", function () {
-    const profileImage = document.getElementById("profile-image");
-    const uploadImage = document.getElementById("upload-image");
-    const usernameInput = document.getElementById("username");
-    const saveNameButton = document.getElementById("save-name");
-    const resetProgressButton = document.getElementById("reset-progress");
-    const testsCompletedSpan = document.getElementById("tests-completed");
-    const accuracyRateSpan = document.getElementById("accuracy-rate");
-
-    // Recupera os dados salvos
-    profileImage.src = localStorage.getItem("profileImage") || "imagens/default-avatar.png";
-    usernameInput.value = localStorage.getItem("username") || "";
-    let testsCompleted = parseInt(localStorage.getItem("testsCompleted")) || 0;
-    let correctAnswers = parseInt(localStorage.getItem("correctAnswers")) || 0;
-
-    // Atualiza a exibição dos dados
-    testsCompletedSpan.textContent = testsCompleted;
-    accuracyRateSpan.textContent = testsCompleted > 0 
-        ? Math.round((correctAnswers / testsCompleted) * 100) + "%" 
-        : "0%";
-
-    // Troca da imagem de perfil
-    uploadImage.addEventListener("change", function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                profileImage.src = e.target.result;
-                localStorage.setItem("profileImage", e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Salvar nome
-    saveNameButton.addEventListener("click", function () {
-        localStorage.setItem("username", usernameInput.value);
-        alert("Nome salvo com sucesso!");
-    });
-
-    // Resetar progresso
-    resetProgressButton.addEventListener("click", function () {
-        localStorage.removeItem("profileImage");
-        localStorage.removeItem("username");
-        localStorage.removeItem("testsCompleted");
-        localStorage.removeItem("correctAnswers");
-        alert("Progresso reiniciado!");
-        location.reload();
-    });
-
-    // Simular a finalização de um teste (substituir isso pela lógica real do quiz)
-    window.registrarTeste = function (acertou) {
-        testsCompleted++;
-        if (acertou) correctAnswers++;
-
-        localStorage.setItem("testsCompleted", testsCompleted);
-        localStorage.setItem("correctAnswers", correctAnswers);
-
-        testsCompletedSpan.textContent = testsCompleted;
-        accuracyRateSpan.textContent = Math.round((correctAnswers / testsCompleted) * 100) + "%";
-    };
 });
