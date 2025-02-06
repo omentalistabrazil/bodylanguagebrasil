@@ -10,55 +10,47 @@
     <!-- Menu no estilo iPhone -->
     <nav class="iphone-menu">
         <a href="index.html">Início</a>
-        <a href="microtest.html">Micro Training</a>       
-       <a href="#" id="settings-link">Configurações</a>
+        <a href="microtest.html">E-Facials</a>       
+        <a href="#" id="settings-link">Configurações</a>
     </nav>
+    
     <div class="container">
         <!-- Modal de Configurações -->
-<div id="settings-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2>Configurações</h2>
-        <form id="settings-form">
-            <!-- Botão para ativar/desativar música -->
-            <label for="music-toggle">Ativar Música de Fundo:</label>
-            <input type="checkbox" id="music-toggle" name="music-toggle" checked>
-            
-            <!-- Controle de volume -->
-            <label for="music-volume">Volume da Música:</label>
-            <input type="range" id="music-volume" name="music-volume" min="0" max="1" step="0.1" value="0.5">
-            
-            <!-- Seleção de tema -->
-            <label for="theme-preference">Tema:</label>
-            <select id="theme-preference" name="theme-preference">
-                <option value="light">Claro</option>
-                <option value="dark">Escuro</option>
-            </select>
-            
-            <button type="submit">Salvar Configurações</button>
-        </form>
-    </div>
-</div>
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Configurações</h2>
+                <form id="settings-form">
+                    <!-- Botão para ativar/desativar música -->
+                    <label for="music-toggle">Ativar Música de Fundo:</label>
+                    <input type="checkbox" id="music-toggle" name="music-toggle" checked>
+                    
+                    <!-- Controle de volume -->
+                    <label for="music-volume">Volume da Música:</label>
+                    <input type="range" id="music-volume" name="music-volume" min="0" max="1" step="0.1" value="0.5">
+                    
+                    <!-- Seleção de tema -->
+                    <label for="theme-preference">Tema:</label>
+                    <select id="theme-preference" name="theme-preference">
+                        <option value="light">Claro</option>
+                        <option value="dark">Escuro</option>
+                    </select>
+                    
+                    <button type="submit">Salvar Configurações</button>
+                </form>
+            </div>
+        </div>
+
         <header>
-            <h1>Body Languagem</h1>
+            <h1>LiCo - Linguagem Corporal</h1>
             <p>Teste suas habilidades de interpretação!</p>
         </header>
-      <main>
+
+        <main>
             <div id="question-container" class="question-card active">
                 <!-- A pergunta, imagem e opções serão inseridas aqui via JavaScript -->
             </div>
         </main>
-    </div>
-
-    <!-- Modal de Introdução -->
-    <div id="intro-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Bem-vindo ao Teste de Linguagem Corporal!</h2>
-            <p>Este site desafia você a interpretar sinais não verbais. Responda às perguntas e veja o quão bom você é em ler a linguagem corporal.</p>
-            <button id="start-button">Começar</button>
-            
-        </div>
     </div>
 
     <!-- Áudio para o som de clique -->
@@ -66,7 +58,7 @@
 
     <!-- Música de fundo e controle -->
     <audio id="background-music" src="audios/musicdoquiz.mp3" loop></audio>
- 
+
     <!-- Inclua o arquivo JavaScript externo -->
     <script src="script.js"></script>
 </body>
