@@ -579,11 +579,118 @@ quizData.questions.push(
             "Falta de interesse na interação."
         ],
         correctAnswer: 2  // Resposta correta está na terceira opção
-    }
+    },
+    {
+    question: "Qual dos comportamentos a seguir pode indicar baixa autoconfiança ou tentativa de se esconder em público?",
+    image: "imagens/imagem52.jpg",
+    audio: "audios/audio52.mp3",
+    options: [
+        "Manter postura ereta e andar com os braços ativos",
+        "Levantar os ombros e abaixar a cabeça, como no 'efeito tartaruga'",
+        "Fazer contato visual constante e falar de forma assertiva",
+        "Ampliar os movimentos do corpo para chamar mais atenção"
+    ],
+    correctAnswer: 1
+   },
+   {
+    question: "Qual dos seguintes comportamentos pode indicar desconforto ou discordância em uma interação social?",
+    image: "imagens/imagem53.jpg",
+    audio: "audios/audio53.mp3",
+    options: [
+        "Inclinar-se para mais perto da outra pessoa",
+        "Manter o corpo relaxado e os pés voltados para a conversa",
+        "Colocar objetos no colo ou virar os pés na direção da saída",
+        "Manter contato visual e gesticular de forma aberta"
+    ],
+    correctAnswer: 2
+    },
+    {
+    question: "O que geralmente indica quando o pé de uma pessoa está apontado para cima?",
+    image: "imagens/imagem54.jpg",
+    audio: "audios/audio54.mp3",
+    options: [
+        "Que ela está desconfortável ou ansiosa",
+        "Que ela está de bom humor ou pensando em algo positivo",
+        "Que ela deseja sair rapidamente do local",
+        "Que ela está entediada e desinteressada na conversa"
+    ],
+    correctAnswer: 1
+    },
+    {
+    question: "O bloqueio ocular é uma demonstração muito poderosa de qual emoção ou reação?",
+    image: "imagens/imagem55.jpg",
+    audio: "audios/audio55.mp3",
+    options: [
+        "Felicidade e interesse",
+        "Consternação, descrença ou desacordo",
+        "Confiança e segurança",
+        "Surpresa e curiosidade"
+    ],
+    correctAnswer: 1
+    },
+    {
+        question: "O olhar desconfiado é um comportamento não verbal que expressa:",
+        image: "imagens/imagem56.jpg",  // Adicione a imagem correspondente
+        audio: "audios/audio56.mp3",    // Adicione o áudio correspondente
+        options: [
+            "Total concordância com o que está sendo dito",
+            "Suspeita ou questionamento sobre a validade do que é dito",
+            "Desinteresse absoluto na conversa",
+            "Apenas sarcasmo, sem outras interpretações possíveis"
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "Qual é o principal motivo da dilatação das pupilas quando somos surpreendidos?",
+        image: "imagens/imagem57.jpg",  // Adicione a imagem correspondente
+        audio: "audios/audio57.mp3",    // Adicione o áudio correspondente
+        options: [
+            "Para permitir a entrada de mais luz e capturar o máximo de informações visuais",
+            "Para mostrar às outras pessoas que estamos assustados",
+            "Para reduzir o estresse e acalmar o cérebro",
+            "Para melhorar a comunicação verbal durante a surpresa"
+        ],
+        correctAnswer: 0
+    },
+    {
+        question: "Qual é o principal significado do gesto de enfiar os polegares no cós da calça e 'emoldurar' a genitália?",
+        image: "imagens/imagem58.jpg",  // Adicione a imagem correspondente
+        audio: "audios/audio58.mp3",    // Adicione o áudio correspondente
+        options: [
+            "Um sinal inconsciente de dominância e virilidade",
+            "Um gesto de nervosismo ou insegurança",
+            "Um comportamento consciente para chamar a atenção para as mãos",
+            "Um movimento aleatório sem qualquer significado"
+        ],
+        correctAnswer: 0
+    },
+    {
+    question: "O que significa a postura conhecida como 'turtle effect', onde as mãos estão na altura do peito e os ombros tensionados?",
+    image: "imagens/imagem59.jpg",  // Adicione a imagem correspondente
+    audio: "audios/audio59.mp3",    // Adicione o áudio correspondente
+    options: [
+        "Um sinal de bloqueio ou proteção, geralmente associado ao medo",
+        "Uma postura de confiança e abertura",
+        "Um gesto de dominação e intimidação",
+        "Apenas um hábito corporal sem significado específico"
+    ],
+    correctAnswer: 0
+},
+{
+    question: "O que é a 'carranca urbana' e qual seu principal significado na comunicação não verbal?",
+    image: "imagens/imagem60.jpg",  // Adicione a imagem correspondente
+    audio: "audios/audio60.mp3",    // Adicione o áudio correspondente
+    options: [
+        "Uma expressão facial de seriedade ou neutralidade usada para evitar interações indesejadas",
+        "Um sinal inconsciente de extrema felicidade e abertura para socialização",
+        "Uma técnica de persuasão usada para intimidar o interlocutor",
+        "Uma expressão de surpresa e curiosidade ao encontrar alguém desconhecido"
+    ],
+    correctAnswer: 0
+}
 );
 let currentQuestionIndex = 0;
 let score = 0;
-
 
 // Elementos do DOM
 const questionContainer = document.getElementById('question-container');
@@ -594,6 +701,18 @@ const musicButton = document.getElementById('music-button');
 const audio = document.getElementById('background-music');
 const restartButton = document.getElementById('restart-button'); // Botão de reiniciar
 
+// Função para embaralhar um array usando o algoritmo de Fisher-Yates
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Embaralhar a lista de perguntas no início do quiz
+quizData.questions = shuffleArray(quizData.questions);
+
 // Função para carregar a pergunta atual
 function loadQuestion() {
     const questionData = quizData.questions[currentQuestionIndex];
@@ -603,12 +722,15 @@ function loadQuestion() {
         return;
     }
 
+    // Embaralhar as opções da pergunta atual
+    const shuffledOptions = shuffleArray([...questionData.options]);
+
     questionContainer.innerHTML = `
         <h2>Pergunta ${currentQuestionIndex + 1}</h2>
         <img src="${questionData.image}" alt="Imagem da pergunta">
         <p>${questionData.question}</p>
-        ${questionData.options.map((option, index) => `
-            <button class="answer-button" data-index="${index}">${option}</button>
+        ${shuffledOptions.map((option, index) => `
+            <button class="answer-button" data-index="${questionData.options.indexOf(option)}">${option}</button>
         `).join('')}
     `;
 
@@ -665,17 +787,16 @@ function endQuiz() {
 function restartQuiz() {
     currentQuestionIndex = 0;
     score = 0;
+    // Embaralhar novamente as perguntas ao reiniciar
+    quizData.questions = shuffleArray(quizData.questions);
     loadQuestion();
 }
 
 // Iniciar o quiz
-   
-    loadQuestion();
-
+loadQuestion();
 
 // Abrir o modal ao carregar a página
 window.onload = () => {
-    
 };
 
 // Configurações de música e tema (mantendo as opções anteriores)
@@ -703,7 +824,6 @@ document.getElementById('settings-form').addEventListener('submit', function(eve
     event.preventDefault();
     
     const musicVolume = document.getElementById('music-volume').value;
-    document.getElementById('background-music').volume = musicVolume;
     
     const themePreference = document.getElementById('theme-preference').value;
     document.body.className = themePreference === 'dark' ? 'dark-theme' : '';
@@ -719,7 +839,6 @@ const musicVolume = document.getElementById('music-volume');
 // Verificar se a música deve ser ativada ao carregar a página
 document.addEventListener('DOMContentLoaded', function () {
     musicToggle.checked = true;
-    
 });
 
 // Ativar/desativar música de fundo
@@ -731,9 +850,15 @@ musicToggle.addEventListener('change', function () {
     }
 });
 
-// Ajustar volume da música
-musicVolume.addEventListener('input', function () {
-    backgroundMusic.volume = musicVolume.value;
+document.addEventListener("DOMContentLoaded", function () {
+    let backgroundMusic = document.getElementById("background-music");
+    let musicVolume = document.getElementById("music-volume");
+
+    // Atualiza o volume ao mudar o controle deslizante
+    musicVolume.addEventListener("input", function () {
+        let volumeValue = parseFloat(musicVolume.value) / 100; // Converte 0-100 para 0.0-1.0
+        backgroundMusic.volume = volumeValue;
+    });
 });
 
 // Salvar configurações no localStorage
@@ -763,9 +888,41 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.className = savedTheme === 'dark' ? 'dark-theme' : '';
     
     if (musicEnabled) {
-        backgroundMusic.volume = savedVolume;
-        
+        if (!isNaN(savedVolume) && savedVolume >= 0 && savedVolume <= 1) {
+            backgroundMusic.volume = savedVolume;
+        }
     } else {
         backgroundMusic.pause();
     }
+});
+
+// Seleciona o modal e o formulário de configurações
+const settingsModal = document.getElementById("settings-modal");
+const settingsForm = document.getElementById("settings-form");
+const themePreference = document.getElementById("theme-preference");
+
+// Função para abrir o modal de configurações
+document.getElementById("settings-link").addEventListener("click", () => {
+    settingsModal.style.display = "block";
+});
+
+// Função para fechar o modal de configurações
+document.querySelector(".close-button").addEventListener("click", () => {
+    settingsModal.style.display = "none";
+});
+
+// Função para salvar as configurações
+settingsForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // Evita o recarregamento da página
+
+    // Aplica o tema selecionado
+    const selectedTheme = themePreference.value;
+    if (selectedTheme === "dark") {
+        document.body.classList.add("tema-noturno");
+    } else {
+        document.body.classList.remove("tema-noturno");
+    }
+
+    // Fecha o modal após salvar
+    settingsModal.style.display = "none";
 });

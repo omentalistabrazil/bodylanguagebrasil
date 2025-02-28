@@ -5,41 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adivinhação da Linguagem Corporal</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Menu no estilo iPhone -->
+    <!-- Menu no estilo iPhone com ícones -->
     <nav class="iphone-menu">
-        <a href="index.html">Início</a>
-        <a href="microtest.html">E-Facials</a>       
-        <a href="#" id="settings-link">Configurações</a>
+        <a href="index.html">
+            <i class="fas fa-home"></i> <!-- Ícone de casa -->
+            <span>Tela Inicial</span>
+        </a>
+        <a href="microtest.html">
+            <i class="fas fa-smile"></i> <!-- Ícone de rosto (E-Facials) -->
+            <span>E-Facials</span>
+        </a>       
+        <a href="#" id="settings-link">
+            <i class="fas fa-cog"></i> <!-- Ícone de engrenagem -->
+            <span>Configurações</span>
+        </a>
     </nav>
     
     <div class="container">
         <!-- Modal de Configurações -->
-        <div id="settings-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Configurações</h2>
-                <form id="settings-form">
-                    <!-- Botão para ativar/desativar música -->
-                    <label for="music-toggle">Ativar Música de Fundo:</label>
-                    <input type="checkbox" id="music-toggle" name="music-toggle" checked>
-                    
-                    <!-- Controle de volume -->
-                    <label for="music-volume">Volume da Música:</label>
-                    <input type="range" id="music-volume" name="music-volume" min="0" max="1" step="0.1" value="0.5">
-                    
-                    <!-- Seleção de tema -->
-                    <label for="theme-preference">Tema:</label>
-                    <select id="theme-preference" name="theme-preference">
-                        <option value="light">Claro</option>
-                        <option value="dark">Escuro</option>
-                    </select>
-                    
-                    <button type="submit">Salvar Configurações</button>
-                </form>
+       <div id="settings-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close-button">&times;</span>
+        <h2>Configurações</h2>
+        <form id="settings-form">
+            <!-- Botão para ativar/desativar música -->
+            <label for="music-toggle">Ativar Música de Fundo:</label>
+            <input type="checkbox" id="music-toggle" name="music-toggle" checked>
+            
+            <!-- Controle de volume -->
+            <label for="music-volume">Volume da Música:</label>
+            <input type="range" id="music-volume" name="music-volume" min="0" max="100" step="1" value="50">
+            
+            <!-- Seleção de tema -->
+            <label for="theme-preference">Tema:</label>
+            <select id="theme-preference" name="theme-preference">
+                <option value="light">Padrão</option>
+                <option value="dark">Escuro</option>
+            </select>
+            
+            <!-- Botões -->
+            <div class="modal-buttons">
+                <button type="submit" class="modal-button">Salvar Configurações</button>
+                <a href="https://www.instagram.com/seuinstagram/" target="_blank" class="modal-button">Contato</a>
             </div>
-        </div>
+        </form>
+    </div>
+</div>
 
         <header>
             <h1>LiCo - Linguagem Corporal</h1>
