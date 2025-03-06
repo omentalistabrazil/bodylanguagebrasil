@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adivinhação da Linguagem Corporal</title>
-    <link rel="stylesheet" href="styles.css">
+    <link id="theme-style" rel="stylesheet" href="tema_padrão.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -17,7 +17,11 @@
         <a href="microtest.html">
             <i class="fas fa-smile"></i> <!-- Ícone de rosto (E-Facials) -->
             <span>E-Facials</span>
-        </a>       
+        </a>   
+        <a href="manipulacao.html">
+            <i class="fas fa-brain"></i> <!-- Ícone de cérebro -->
+            <span>Manipulação</span>
+        </a>    
         <a href="#" id="settings-link">
             <i class="fas fa-cog"></i> <!-- Ícone de engrenagem -->
             <span>Configurações</span>
@@ -26,34 +30,40 @@
     
     <div class="container">
         <!-- Modal de Configurações -->
-       <div id="settings-modal" class="modal">
-    <div class="modal-content">
-        <span id="close-modal" class="close-button">&times;</span>
-        <h2>Configurações</h2>
-        <form id="settings-form">
-            <!-- Botão para ativar/desativar música -->
-            <label for="music-toggle">Ativar Música de Fundo:</label>
-            <input type="checkbox" id="music-toggle" name="music-toggle" checked>
-            
-            <!-- Controle de volume -->
-            <label for="music-volume">Volume da Música:</label>
-            <input type="range" id="music-volume" name="music-volume" min="0" max="100" step="1" value="50">
-            
-            <!-- Seleção de tema -->
-            <label for="theme-preference">Tema:</label>
-            <select id="theme-preference" name="theme-preference">
-                <option value="light">Padrão</option>
-                <option value="dark">Escuro</option>
-            </select>
-            
-            <!-- Botões -->
-            <div class="modal-buttons">
-                <button type="submit" class="modal-button">Salvar Configurações</button>
-                <a href="https://www.instagram.com/gabriel_wyo?igsh=N3o5NW1hNmh4OXN0" target="_blank" class="modal-button">Contato</a>
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span id="close-modal" class="close-button">&times;</span>
+                <h2>Configurações</h2>
+                <form id="settings-form">
+                    <!-- Botão para ativar/desativar música -->
+                    <label for="music-toggle">Ativar Música de Fundo:</label>
+                    <input type="checkbox" id="music-toggle" name="music-toggle" checked>
+                    
+                    <!-- Controle de volume -->
+                    <label for="music-volume">Volume da Música:</label>
+                    <input type="range" id="music-volume" name="music-volume" min="0" max="100" step="1" value="50">
+                    
+                    <!-- Seleção de tema -->
+                    <label for="theme-preference">Tema:</label>
+                    <select id="theme-preference" name="theme-preference">
+                        <option value="tema_padrão.css">Tema padrão</option>
+                        <option value="tema_elegante.css">Tema Elegante</option>
+                        <option value="tema_escuro_padrão.css">Padrão Escuro</option>
+                        <option value="tema_escuro_elegante.css">Elegante Escuro</option>
+                    </select>
+
+                    <!-- Alternar modo escuro -->
+                    <label for="dark-mode-toggle">Modo Escuro:</label>
+                    <input type="checkbox" id="dark-mode-toggle">
+                    
+                    <!-- Botões -->
+                    <div class="modal-buttons">
+                        <button type="submit" class="modal-button">Salvar Configurações</button>
+                        <a href="https://www.instagram.com/gabriel_wyo?igsh=N3o5NW1hNmh4OXN0" target="_blank" class="modal-button">Contato</a>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
         <header>
             <h1>LiCo - Linguagem Corporal</h1>
@@ -76,4 +86,4 @@
     <!-- Inclua o arquivo JavaScript externo -->
     <script src="script.js"></script>
 </body>
-                </html>
+</html>

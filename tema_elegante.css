@@ -1,0 +1,335 @@
+/* ===== Tema Padrão (Estilo iPhone 5 - Modo Claro) ===== */
+:root {
+  --color-background: #f2f2f2; /* Fundo claro */
+  --color-text: #000000; /* Texto preto */
+  --color-primary: #007aff; /* Azul iOS clássico */
+  --color-secondary: #5856d6; /* Roxo iOS para elementos secundários */
+  --color-card-background: #ffffff; /* Fundo branco para cartões */
+  --color-card-hover: #e5e5e5; /* Efeito hover cinza claro */
+  --color-error: #ff3b30; /* Vermelho para erros */
+  --color-success: #4cd964; /* Verde para sucesso */
+  --font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; /* Fonte do iOS */
+  --border-radius: 8px; /* Bordas arredondadas suaves */
+  --transition-speed: 0.2s; /* Transições rápidas */
+}
+
+/* ===== Tema Noturno (Estilo iPhone 5 - Modo Escuro) ===== */
+body.tema-noturno {
+  --color-background: #000000; /* Fundo preto */
+  --color-text: #ffffff; /* Texto branco */
+  --color-primary: #0a84ff; /* Azul mais claro para o modo noturno */
+  --color-secondary: #5e5ce6; /* Roxo mais vibrante */
+  --color-card-background: #1c1c1e; /* Fundo escuro para cartões */
+  --color-card-hover: #2c2c2e; /* Efeito hover cinza escuro */
+  --color-error: #ff453a; /* Vermelho mais vibrante */
+  --color-success: #30d158; /* Verde mais vibrante */
+}
+
+/* ===== Reset e Tipografia ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+/* ===== Menu de Navegação (Estilo iPhone 5) ===== */
+.iphone-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Altura um pouco maior */
+  background: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+  backdrop-filter: blur(20px); /* Efeito de vidro fosco */
+  -webkit-backdrop-filter: blur(20px); /* Suporte para Safari */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Borda sutil */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  padding: 0 10px;
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+/* Modo Noturno: Menu Escuro */
+body.tema-noturno .iphone-menu {
+  background: rgba(28, 28, 30, 0.9); /* Fundo escuro semi-transparente */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+}
+
+.iphone-menu a {
+  text-decoration: none;
+  color: var(--color-primary); /* Cor azul iOS */
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  padding: 8px 12px; /* Espaçamento maior */
+  border-radius: 20px; /* Bordas arredondadas */
+  transition: background-color var(--transition-speed) ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre ícone e texto */
+}
+
+.iphone-menu a:hover {
+  background-color: rgba(0, 122, 255, 0.1); /* Azul claro ao passar o mouse */
+}
+
+.iphone-menu a:active {
+  background-color: rgba(0, 122, 255, 0.2); /* Azul mais escuro ao clicar */
+  transform: scale(0.95); /* Efeito de clique */
+}
+
+/* Efeito de destaque no item ativo */
+.iphone-menu a.active {
+  background-color: rgba(0, 122, 255, 0.15); /* Azul claro */
+  color: var(--color-primary);
+}
+
+/* ===== Container Principal ===== */
+.container {
+  background: var(--color-card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 300px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  margin-top: 50px;
+  animation: fadeIn 0.5s ease-out;
+  transition: background var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* ===== Cartões de Pergunta ===== */
+.question-card {
+  display: none;
+  background: var(--color-card-background);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  margin: 12px 0;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Borda sutil */
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.question-card.active {
+  display: block;
+}
+
+.question-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.question-card h2 {
+  font-size: 1.125rem; /* 18px */
+  margin-bottom: 10px;
+}
+
+.question-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  max-height: 600px;
+  object-fit: cover;
+}
+
+/* ===== Botões de Resposta ===== */
+.answer-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease, transform 0.2s ease;
+}
+
+.answer-button:hover {
+  background: #0066cc; /* Azul mais escuro ao passar o mouse */
+  transform: scale(1.02);
+}
+
+.answer-button:active {
+  background: #0052a3; /* Azul mais escuro ao clicar */
+  transform: scale(0.98);
+}
+
+.answer-button[data-correct="true"]:active {
+  background: var(--color-success);
+}
+
+.answer-button[data-correct="false"]:active {
+  background: var(--color-error);
+}
+
+/* ===== Botão de Reiniciar ===== */
+#restart-button {
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 12px 24px;
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background var(--transition-speed) ease, transform 0.2s ease;
+}
+
+#restart-button:hover {
+  background: #0066cc;
+  transform: scale(1.05);
+}
+
+#restart-button:active {
+  background: #0052a3;
+  transform: scale(0.95);
+}
+
+/* ===== Modal de Configurações ===== */
+#settings-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#settings-modal .modal-content {
+  background: var(--color-card-background);
+  border-radius: var(--border-radius);
+  margin: 10% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  color: var(--color-text);
+  text-align: left;
+  transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+#settings-modal .close-button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 1.75rem; /* 28px */
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+#settings-modal form label {
+  display: block;
+  margin-top: 15px;
+  color: #8e8e93; /* Cinza iOS */
+}
+
+#settings-modal form input[type="range"],
+#settings-modal form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  background: var(--color-card-background);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--color-text);
+  border-radius: 8px;
+}
+
+#settings-modal form button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  transition: background var(--transition-speed) ease;
+}
+
+#settings-modal form button:hover {
+  background: #0066cc;
+}
+
+/* ===== Animações ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Estilo dos botões no modal */
+.modal-buttons {
+    display: flex;
+    gap: 5px; /* Espaço entre os botões */
+    margin-top: 10px;
+}
+
+.modal-button {
+    flex: 1; /* Faz os botões terem o mesmo tamanho */
+    padding: 30px 1px;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--color-primary);
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background var(--transition-speed) ease, transform 0.2s ease;
+}
+
+.modal-button:hover {
+    background: #0066cc;
+    transform: scale(1.02);
+}
+
+.modal-button:active {
+    background: #0052a3;
+    transform: scale(0.8);
+}
+.question-type-selector {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.question-type-selector label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.question-type-selector select {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Manipulação</title>
+    <link id="theme-style" rel="stylesheet" href="tema_padrão.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Menu no estilo iPhone -->
+    <nav class="iphone-menu">
+        <a href="index.html">
+            <i class="fas fa-home"></i>
+            <span>Voltar</span>
+        </a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Machiav (+) Manipulação</h1>
+            <p>Teste seus conhecimentos, São 96 Perguntas de Persuasão e Manipulação</p>
+        </header>
+
+        <main>
+            <div id="question-container" class="question-card active">
+                <!-- Perguntas serão carregadas via JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Áudio -->
+    <audio id="clickSound" src="audios/seleção.mp3"></audio>
+    <audio id="background-music" src="audios/musicdoquiz.mp3" loop></audio>
+
+    <!-- Scripts -->
+    <script src="manipulacao-quiz.js"></script>
+</body>
+</html>
